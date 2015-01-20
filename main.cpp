@@ -12,6 +12,8 @@ using namespace std;
 
 // global variables -------------------
 
+float width, height;
+
 // for moving rectangle
 float g_rectangle_pos_x = 0.0f;
 float g_rectangle_pos_y = 0.0f;
@@ -37,7 +39,7 @@ void Init()
 
 	// first image from file ----------------
 	g_img_name = new ILuint[3];
-	ilGenImages(2, &g_img_name[0]);
+	ilGenImages(3, &g_img_name[0]);
 	ilBindImage(g_img_name[0]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
 	if (!ilLoadImage((const wchar_t *) "example_sprite_00.png")) {
@@ -50,8 +52,8 @@ void Init()
 	ILenum img_type = ilGetInteger(IL_IMAGE_TYPE);
 	ILubyte *img_data = ilGetData();
 	//
-	g_image = new GLuint[2];
-	glGenTextures(2, &g_image[0]);
+	g_image = new GLuint[3];
+	glGenTextures(3, &g_image[0]);
 	glBindTexture(GL_TEXTURE_2D, g_image[0]);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, img_width,
 		img_height, 0, img_format, img_type,
@@ -95,6 +97,34 @@ void Init()
 
 
 
+
+	ilBindImage(g_img_name[2]);
+	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
+	if (!ilLoadImage((const wchar_t *) "background.jpg")) {
+		std::cout << "image file not loaded" << std::endl;
+		exit(1);
+	}
+	ILuint img2_width = ilGetInteger(IL_IMAGE_WIDTH);
+	ILuint img2_height = ilGetInteger(IL_IMAGE_HEIGHT);
+	ILenum img2_format = ilGetInteger(IL_IMAGE_FORMAT);
+	ILenum img2_type = ilGetInteger(IL_IMAGE_TYPE);
+	ILubyte *img2_data = ilGetData();
+	//
+	glBindTexture(GL_TEXTURE_2D, g_image[2]);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, img2_width,
+		img2_height, 0, img2_format, img2_type,
+		img2_data);
+	// ilDeleteImages(1, &g_img_name);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+        GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, 
+        GL_NEAREST);
+//	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
 }
@@ -130,17 +160,17 @@ void Draw2D()
 	glLineWidth(4.0);
 	glBegin(GL_LINES);
 		//glVertex2f(200.0f,640.0f);
-		glVertex2f(960.0f-200.0f,640.0f);
+		glVertex2f(1280.0f-250.0f,720.0f);
 		//glVertex2f(200.0f,0.0f);
-		glVertex2f(960.0f-200.0f,0.0f);
+		glVertex2f(1280.0f-250.0f,0.0f);
 	glEnd();
 
-	//glColor4f(1.0,0.0,0.0,0.5);
-	//glBegin(GL_TRIANGLES);
-		//glVertex2f(300.0f,300.0f);
-	//	glVertex2f(400.0f,300.0f);
-		//glVertex2f(400.0f,350.0f);
-	//glEnd();
+	glColor4f(1.0,0.0,0.0,0.5);
+	glBegin(GL_TRIANGLES);
+		glVertex2f(300.0f,300.0f);
+		glVertex2f(400.0f,300.0f);
+		glVertex2f(400.0f,350.0f);
+	glEnd();
 
 	// draw texture
 	glColor4f(1.0,1.0,1.0,0.8);
@@ -158,24 +188,37 @@ void Draw2D()
 	// draw texture
 	glColor4f(1.0,1.0,1.0,0.9);
 	glBindTexture(GL_TEXTURE_2D, g_image[1]); // choose which one before draw
-	//glBegin(GL_QUADS);
-		//glTexCoord2f(0.0, 0.0); glVertex2f(850.0,560.0);
-		//glTexCoord2f(0.0, 0.0); glVertex2f(100.0, 0.0);
-		//glTexCoord2f(0.0, 1.0); glVertex2f(100.0, 440.0);
-		//glTexCoord2f(1.0, 1.0); glVertex2f(760.0, 540.0);
-		//glTexCoord2f(1.0, 0.0); glVertex2f(860.0, 0.0);
-		//glTexCoord2f(0.0, 1.0); glVertex2f(850.0,600.0);
-		//glTexCoord2f(1.0, 1.0); glVertex2f(890.0,600.0);
-		//glTexCoord2f(1.0, 0.0); glVertex2f(890.0,560.0);
-	//glEnd();
+	glPushMatrix();
+		glBegin(GL_QUADS);
+			glTexCoord2f(0.0, 0.0); glVertex2f(850.0,550.0);
+			glTexCoord2f(0.0, 1.0); glVertex2f(850.0,600.0);
+			glTexCoord2f(1.0, 1.0); glVertex2f(900.0,600.0);
+			glTexCoord2f(1.0, 0.0); glVertex2f(900.0,550.0);
+			//glTexCoord2f(0.0, 0.0); glVertex2f(100.0, 0.0);
+			//glTexCoord2f(0.0, 1.0); glVertex2f(100.0, 440.0);
+			//glTexCoord2f(1.0, 1.0); glVertex2f(760.0, 540.0);
+			//glTexCoord2f(1.0, 0.0); glVertex2f(890.0,560.0);
+		glEnd();
+	glPopMatrix();
 
-	glColor4f(1.0,1.0,1.0,1.0);
-	glBegin(GL_TRIANGLES);
-		glTexCoord2f(0.0, 0.0); glVertex2f(100.0f,400.0f);
-		glTexCoord2f(1.0, 0.0); glVertex2f(500.0f,400.0f);
-		glTexCoord2f(1.0, 1.0); glVertex2f(500.0f,550.0f);
-		//glTexCoord2f(1.0, 0.0);
-	glEnd();
+	glColor4f(1.0,1.0,1.0,0.5);
+	glBindTexture(GL_TEXTURE_2D, g_image[2]);
+	glPushMatrix();
+		glBegin(GL_QUADS);
+			glTexCoord2f(0.0, 0.0); glVertex2f(0.0,0.0);
+			glTexCoord2f(0.0, 1.0); glVertex2f(0.0,720.0);
+			glTexCoord2f(1.0, 1.0); glVertex2f(1030.0,720.0);
+			glTexCoord2f(1.0, 0.0); glVertex2f(1030.0,0.0);
+		glEnd();
+	glPopMatrix();
+
+	//glColor4f(1.0,1.0,1.0,1.0);
+	//glBegin(GL_TRIANGLES);
+	//	glTexCoord2f(0.0, 0.0); glVertex2f(100.0f,400.0f);
+	//	glTexCoord2f(1.0, 0.0); glVertex2f(500.0f,400.0f);
+	//	glTexCoord2f(1.0, 1.0); glVertex2f(500.0f,550.0f);
+	//	//glTexCoord2f(1.0, 0.0);
+	//glEnd();
 
 
 
@@ -280,8 +323,8 @@ int main(int argc,char **argv)
 	glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
 	glutInitWindowSize(1280,720);
 	glutInitWindowPosition(200,100);
-	glutCreateWindow("2D_example_screen");
 
+	glutCreateWindow("2D_example_screen");
 	glutDisplayFunc(Draw);
 	glutReshapeFunc(Resize);
 	glutMouseFunc(OnMouseClick);
