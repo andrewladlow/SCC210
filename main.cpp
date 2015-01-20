@@ -2,8 +2,6 @@
 //#include <stdlib.h>
 //#include <stdio.h>
 
-#test
-
 #include <GL/glut.h>
 
 #include "IL/il.h"
