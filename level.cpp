@@ -1,6 +1,8 @@
 #include <iostream>
 //#include <stdlib.h>
 //#include <stdio.h>
+#include "menu.h"
+#include "level.h"
 
 #include <GL/glut.h>
 
@@ -12,22 +14,22 @@ using namespace std;
 
 // global variables -------------------
 
-float width, height;
-
-// for moving rectangle
-float g_rectangle_pos_x = 0.0f;
-float g_rectangle_pos_y = 0.0f;
+float g_rectangle_pos_x1 = 0.0f;
+float g_rectangle_pos_y1 = 0.0f;
 
 // is left mouse button (lmb) pressed or not
-bool g_lmb = false;
-float g_lmb_pos_x = 340.0f;
+bool g_lmb1 = false;
+float g_lmb1_pos_x = 0.0f;
+float g_lmb1_pos_y = 0.0f;
 
 // these are for textures
-ILuint *g_img_name;
-GLuint *g_image;
+ILuint *g_img_name1;
+GLuint *g_image1;
+
+
 
 // This function is called to initialise opengl
-void Init()
+void Init1()
 {
     glClearColor (1.0, 1.0, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
@@ -38,11 +40,11 @@ void Init()
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 	// first image from file ----------------
-	g_img_name = new ILuint[3];
-	ilGenImages(3, &g_img_name[0]);
-	ilBindImage(g_img_name[0]);
+	g_img_name1 = new ILuint[3];
+	ilGenImages(3, &g_img_name1[0]);
+	ilBindImage(g_img_name1[0]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
-	if (!ilLoadImage((const wchar_t *) "example_sprite_00.png")) {
+	if (!ilLoadImage((const wchar_t *) "images/example_sprite_00.png")) {
 		std::cout << "image file not loaded" << std::endl;
 		exit(1);
 	}
@@ -52,13 +54,13 @@ void Init()
 	ILenum img_type = ilGetInteger(IL_IMAGE_TYPE);
 	ILubyte *img_data = ilGetData();
 	//
-	g_image = new GLuint[3];
-	glGenTextures(3, &g_image[0]);
-	glBindTexture(GL_TEXTURE_2D, g_image[0]);
+	g_image1 = new GLuint[3];
+	glGenTextures(3, &g_image1[0]);
+	glBindTexture(GL_TEXTURE_2D, g_image1[0]);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, img_width,
 		img_height, 0, img_format, img_type,
 		img_data);
-	// ilDeleteImages(1, &g_img_name);
+	// ilDeleteImages(1, &g_img_name1);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
@@ -69,9 +71,9 @@ void Init()
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	// 2nd one just for test purposes ------------------------
-	ilBindImage(g_img_name[1]);
+	ilBindImage(g_img_name1[1]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
-	if (!ilLoadImage((const wchar_t *) "example_sprite_01.png")) {
+	if (!ilLoadImage((const wchar_t *) "images/example_sprite_01.png")) {
 		std::cout << "image file not loaded" << std::endl;
 		exit(1);
 	}
@@ -81,11 +83,11 @@ void Init()
 	ILenum img1_type = ilGetInteger(IL_IMAGE_TYPE);
 	ILubyte *img1_data = ilGetData();
 	//
-	glBindTexture(GL_TEXTURE_2D, g_image[1]);
+	glBindTexture(GL_TEXTURE_2D, g_image1[1]);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, img1_width,
 		img1_height, 0, img1_format, img1_type,
 		img1_data);
-	// ilDeleteImages(1, &g_img_name);
+	// ilDeleteImages(1, &g_img_name1);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
@@ -98,9 +100,9 @@ void Init()
 
 
 
-	ilBindImage(g_img_name[2]);
+	ilBindImage(g_img_name1[2]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
-	if (!ilLoadImage((const wchar_t *) "background.jpg")) {
+	if (!ilLoadImage((const wchar_t *) "images/background.jpg")) {
 		std::cout << "image file not loaded" << std::endl;
 		exit(1);
 	}
@@ -110,11 +112,11 @@ void Init()
 	ILenum img2_type = ilGetInteger(IL_IMAGE_TYPE);
 	ILubyte *img2_data = ilGetData();
 	//
-	glBindTexture(GL_TEXTURE_2D, g_image[2]);
+	glBindTexture(GL_TEXTURE_2D, g_image1[2]);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, img2_width,
 		img2_height, 0, img2_format, img2_type,
 		img2_data);
-	// ilDeleteImages(1, &g_img_name);
+	// ilDeleteImages(1, &g_img_name1);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
@@ -129,16 +131,16 @@ void Init()
     glShadeModel(GL_FLAT);
 }
 
-void Draw2D()
+void Draw2D1()
 {
-	glColor4f(0.5,0.5,0.5,0.8);
+	glColor4f(0.5,0.5,0.5,1.0);
 	glPointSize(8);
 	glBegin(GL_POINTS);
-		glVertex2f(g_lmb_pos_x,240.0f);
+		glVertex2f(g_lmb1_pos_x,240.0f);
 	glEnd();
 
-	glColor4f(0.2,0.8,0.2,0.5);
-	glPointSize(16);
+	glColor4f(0.2,0.8,0.2,1.0);
+	glPointSize(32);
 	glBegin(GL_POINTS);
 		glVertex2f(480.0f,240.0f);
 	glEnd();
@@ -146,7 +148,7 @@ void Draw2D()
 	glColor4f(0.0,0.0,0.0,1.0);
 	glLineWidth(2.0);
 	glPushMatrix();
-		//glTranslatef(g_rectangle_pos_x, g_rectangle_pos_y, 0.0f);
+		//glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
 		// there's also glRotatef() if needed
 		glBegin(GL_LINE_LOOP);
 			glVertex2f(300.0f, 200.0f);
@@ -165,7 +167,7 @@ void Draw2D()
 		glVertex2f(1280.0f-250.0f,0.0f);
 	glEnd();
 
-	glColor4f(1.0,0.0,0.0,0.5);
+	glColor4f(1.0,0.0,0.0,0.9);
 	glBegin(GL_TRIANGLES);
 		glVertex2f(300.0f,300.0f);
 		glVertex2f(400.0f,300.0f);
@@ -173,10 +175,10 @@ void Draw2D()
 	glEnd();
 
 	// draw texture
-	glColor4f(1.0,1.0,1.0,0.8);
-	glBindTexture(GL_TEXTURE_2D, g_image[0]); // choose which one before draw
+	glColor4f(1.0,1.0,1.0,1.0);
+	glBindTexture(GL_TEXTURE_2D, g_image1[0]); // choose which one before draw
 	glPushMatrix();
-		glTranslatef(g_rectangle_pos_x, g_rectangle_pos_y, 0.0f);
+		glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
 		glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0); glVertex2f(750.0,550.0);
 			glTexCoord2f(0.0, 1.0); glVertex2f(750.0,600.0);
@@ -186,8 +188,8 @@ void Draw2D()
 	glPopMatrix();
 
 	// draw texture
-	glColor4f(1.0,1.0,1.0,0.9);
-	glBindTexture(GL_TEXTURE_2D, g_image[1]); // choose which one before draw
+	glColor4f(1.0,1.0,1.0,1.0);
+	glBindTexture(GL_TEXTURE_2D, g_image1[1]); // choose which one before draw
 	glPushMatrix();
 		glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0); glVertex2f(850.0,550.0);
@@ -202,7 +204,7 @@ void Draw2D()
 	glPopMatrix();
 
 	glColor4f(1.0,1.0,1.0,0.5);
-	glBindTexture(GL_TEXTURE_2D, g_image[2]);
+	glBindTexture(GL_TEXTURE_2D, g_image1[2]);
 	glPushMatrix();
 		glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0); glVertex2f(0.0,0.0);
@@ -226,7 +228,7 @@ void Draw2D()
 
 // This is the main display callback function.
 // It sets up an orthographic projection and calls Draw2D().
-void Draw()
+void Draw1()
 {
 	// Clear the background
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -250,7 +252,7 @@ void Draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	Draw2D();
+	Draw2D1();
 
 	// Bring the back buffer to the front and vice-versa
 	glutSwapBuffers();
@@ -264,61 +266,21 @@ void Resize(int w, int h)
 }
 
 // This is called when the mouse is clicked.
-void OnMouseClick(int button,int state,int x,int y)
-{
-	if (button == GLUT_LEFT_BUTTON) {
-		if (state == GLUT_DOWN) {
-			std::cout << "mouse cursor is at " << x << " " << y << std::endl;
-			g_lmb = true;
-			g_lmb_pos_x = x;
-		} else { // GLUT_UP
-			g_lmb = false;
-		}
-	}
-
-	glutPostRedisplay();
-}
+void OnMouseClick(int button,int state,int x,int y);
 
 // This is called when the mouse is moved.
-void MouseMotion(int x, int y)
-{
-	if (g_lmb) {
-		g_lmb_pos_x = x;
-	}
-
-	glutPostRedisplay();
-}
+void MouseMotion(int x, int y);
 
 // This is called when keyboard presses are detected.
-void Keyboard(unsigned char Key,int x,int y)
+void Keyboard(unsigned char Key,int x,int y);
+
+//const char* Instructions = " a - move left\n d - move right\n";
+
+int main1(int argc,char **argv)
 {
-	if (Key == 'a') {
-		g_rectangle_pos_x -= 2.0f;
-	}
-	if (Key == 'd') {
-		g_rectangle_pos_x += 2.0f;
-	}
-	if (Key == 'w') {
-		g_rectangle_pos_y -= 2.0f;
-	}
-	if (Key == 's') {
-		g_rectangle_pos_y += 2.0f;
-	}
-
-	if (Key == 'p') {
-		std::cout << "print something on the screen..." << std::endl;
-	}
-
-	glutPostRedisplay();
-}
-
-const char* Instructions = " a - move left\n d - move right\n";
-
-int main(int argc,char **argv)
-{
-	printf(Instructions);
-
-	glutInit(&argc,argv);
+	//printf(Instructions);
+	printf("TEST");
+	//glutInit(&argc,argv);
 //	glutInitDisplayMode(GLUT_RGB|GLUT_DEPTH|GLUT_DOUBLE);
 	glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
 	glutInitWindowSize(1280,720);
@@ -332,7 +294,7 @@ int main(int argc,char **argv)
 	glutKeyboardFunc(Keyboard);
 
 	ilInit();
-	Init();
+	Init1();
 
 	glutMainLoop();
 	return 0;
