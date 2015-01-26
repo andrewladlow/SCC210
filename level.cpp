@@ -16,6 +16,7 @@ using namespace std;
 
 float g_rectangle_pos_x1 = 0.0f;
 float g_rectangle_pos_y1 = 0.0f;
+int counter = 0;
 
 // is left mouse button (lmb) pressed or not
 bool g_lmb1 = false;
@@ -40,8 +41,8 @@ void Init1()
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 	// first image from file ----------------
-	g_img_name1 = new ILuint[3];
-	ilGenImages(3, &g_img_name1[0]);
+	g_img_name1 = new ILuint[4];
+	ilGenImages(4, &g_img_name1[0]);
 	ilBindImage(g_img_name1[0]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
 	if (!ilLoadImage((const wchar_t *) "images/example_sprite_00.png")) {
@@ -54,7 +55,7 @@ void Init1()
 	ILenum img_type = ilGetInteger(IL_IMAGE_TYPE);
 	ILubyte *img_data = ilGetData();
 	//
-	g_image1 = new GLuint[3];
+	g_image1 = new GLuint[4];
 	glGenTextures(3, &g_image1[0]);
 	glBindTexture(GL_TEXTURE_2D, g_image1[0]);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, img_width,
@@ -98,8 +99,6 @@ void Init1()
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 
-
-
 	ilBindImage(g_img_name1[2]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
 	if (!ilLoadImage((const wchar_t *) "images/background.jpg")) {
@@ -126,6 +125,31 @@ void Init1()
 //	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
+	ilBindImage(g_img_name1[3]);
+	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
+	if (!ilLoadImage((const wchar_t *) "images/StartButton.png")) {
+		std::cout << "image file not loaded" << std::endl;
+		exit(1);
+	}
+	ILuint img3_width = ilGetInteger(IL_IMAGE_WIDTH);
+	ILuint img3_height = ilGetInteger(IL_IMAGE_HEIGHT);
+	ILenum img3_format = ilGetInteger(IL_IMAGE_FORMAT);
+	ILenum img3_type = ilGetInteger(IL_IMAGE_TYPE);
+	ILubyte *img3_data = ilGetData();
+	//
+	glBindTexture(GL_TEXTURE_2D, g_image1[3]);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, img3_width,
+		img3_height, 0, img3_format, img3_type,
+		img3_data);
+	// ilDeleteImages(1, &g_img_name1);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+        GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, 
+        GL_NEAREST);
+//	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
@@ -148,7 +172,7 @@ void Draw2D1()
 	glColor4f(0.0,0.0,0.0,1.0);
 	glLineWidth(2.0);
 	glPushMatrix();
-		//glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
+		//glTranslatef(g_rectangle_pos_x, g_rectangle_pos_y, 0.0f);
 		// there's also glRotatef() if needed
 		glBegin(GL_LINE_LOOP);
 			glVertex2f(300.0f, 200.0f);
@@ -180,10 +204,10 @@ void Draw2D1()
 	glPushMatrix();
 		glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
 		glBegin(GL_QUADS);
-			glTexCoord2f(0.0, 0.0); glVertex2f(750.0,550.0);
-			glTexCoord2f(0.0, 1.0); glVertex2f(750.0,600.0);
-			glTexCoord2f(1.0, 1.0); glVertex2f(800.0,600.0);
-			glTexCoord2f(1.0, 0.0); glVertex2f(800.0,550.0);
+			glTexCoord2f(0.0, 0.0); glVertex2f(0.0,300.0);
+			glTexCoord2f(0.0, 1.0); glVertex2f(0.0,350.0);
+			glTexCoord2f(1.0, 1.0); glVertex2f(50.0,350.0);
+			glTexCoord2f(1.0, 0.0); glVertex2f(50.0,300.0);
 		glEnd();
 	glPopMatrix();
 
@@ -222,8 +246,38 @@ void Draw2D1()
 	//	//glTexCoord2f(1.0, 0.0);
 	//glEnd();
 
+		// draw texture
+	glColor4f(1.0,1.0,1.0,1);
+	glBindTexture(GL_TEXTURE_2D, g_image1[3]); // choose which one before draw
+	glBegin(GL_QUADS);
+		glTexCoord2f(0.0, 0.0); glVertex2f(1040.0,520.0);
+		glTexCoord2f(0.0, 1.0); glVertex2f(1040.0,710.0);
+		glTexCoord2f(1.0, 1.0); glVertex2f(1270.0,710.0);
+		glTexCoord2f(1.0, 0.0); glVertex2f(1270.0,520.0);
+	glEnd();
+}
 
+void Pathing() {
+		// draw texture
+	glColor4f(1.0,1.0,1.0,1.0);
+	glBindTexture(GL_TEXTURE_2D, g_image1[3]); // choose which one before draw
+	glPushMatrix();
+		if (counter >= 5000) {
+			g_rectangle_pos_y1 += 0.2f;	
+		} else {
+			g_rectangle_pos_x1 += 0.2f;
+			counter++;
+		}
+		glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
+		glBegin(GL_QUADS);
+			glTexCoord2f(0.0, 0.0); glVertex2f(0.0,300.0);
+			glTexCoord2f(0.0, 1.0); glVertex2f(0.0,350.0);
+			glTexCoord2f(1.0, 1.0); glVertex2f(50.0,350.0);
+			glTexCoord2f(1.0, 0.0); glVertex2f(50.0,300.0);
+		glEnd();
+	glPopMatrix();
 
+	glutPostRedisplay();
 }
 
 // This is the main display callback function.
@@ -256,6 +310,8 @@ void Draw1()
 
 	// Bring the back buffer to the front and vice-versa
 	glutSwapBuffers();
+
+
 }
 
 // 	This function is called when the window is resized.
@@ -263,16 +319,67 @@ void Resize(int w, int h)
 {
 	// Allow drawing in full region of the screen
 	glViewport(0,0,w,h);
+
+	glutReshapeWindow(1280, 720);
 }
 
 // This is called when the mouse is clicked.
-void OnMouseClick(int button,int state,int x,int y);
+void OnMouseClick1(int button,int state,int x,int y)
+{
+	if (button == GLUT_LEFT_BUTTON) {
+		if (state == GLUT_DOWN) {
+			// Start button
+			if((x < 1270 && x > 1040) && (y < 710 && y > 520)){
+				std::cout << "Clicked start "<<std::endl;
+				Pathing();
+			}
+
+			g_lmb1 = true;
+			g_lmb1_pos_x = x;
+			g_lmb1_pos_y = y;
+		} else { // GLUT_UP
+			g_lmb1 = false;
+		}
+	}
+
+	glutPostRedisplay();
+}
+
 
 // This is called when the mouse is moved.
-void MouseMotion(int x, int y);
+void MouseMotion1(int x, int y)
+{
+	if (g_lmb1) {
+		g_lmb1_pos_x = x;
+		g_lmb1_pos_y = y;
+	}
+
+	glutPostRedisplay();
+}
 
 // This is called when keyboard presses are detected.
-void Keyboard(unsigned char Key,int x,int y);
+void Keyboard1(unsigned char Key,int x,int y)
+{
+	if (Key == 'a') {
+		g_rectangle_pos_x1 -= 2.0f;
+	}
+	if (Key == 'd') {
+		g_rectangle_pos_x1 += 2.0f;
+	}
+	if (Key == 'w') {
+		g_rectangle_pos_y1 -= 2.0f;
+	}
+	if (Key == 's') {
+		g_rectangle_pos_y1 += 2.0f;
+	}
+
+	if (Key == 'p') {
+		std::cout << "print something on the screen..." << std::endl;
+	}
+
+	glutPostRedisplay();
+}
+
 
 //const char* Instructions = " a - move left\n d - move right\n";
 
@@ -286,12 +393,12 @@ int main1(int argc,char **argv)
 	glutInitWindowSize(1280,720);
 	glutInitWindowPosition(200,100);
 
-	glutCreateWindow("2D_example_screen");
-	glutDisplayFunc(Draw);
+	//glutCreateWindow("2D_example_screen");
+	glutDisplayFunc(Draw1);
 	glutReshapeFunc(Resize);
-	glutMouseFunc(OnMouseClick);
-	glutMotionFunc(MouseMotion);
-	glutKeyboardFunc(Keyboard);
+	glutMouseFunc(OnMouseClick1);
+	glutMotionFunc(MouseMotion1);
+	glutKeyboardFunc(Keyboard1);
 
 	ilInit();
 	Init1();

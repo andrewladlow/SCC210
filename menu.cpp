@@ -74,7 +74,7 @@ void Init()
 // ------------------------------------Play Button --------------------------------------------------
 	ilBindImage(g_img_name[1]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
-	if (!ilLoadImage((const wchar_t *) "Images/playbut.png")) {
+	if (!ilLoadImage((const wchar_t *) "images/playbut.png")) {
 		std::cout << "image file not loaded" << std::endl;
 		exit(1);
 	}
@@ -101,7 +101,7 @@ void Init()
 	// --------------------------------------Exit button ------------------------
 	ilBindImage(g_img_name[2]);
 	// this is forcing the variable to become (const wchar_t *), which is just a hack for now?
-	if (!ilLoadImage((const wchar_t *) "Images/exitbut.png")) {
+	if (!ilLoadImage((const wchar_t *) "images/exitbut.png")) {
 		std::cout << "image file not loaded" << std::endl;
 		exit(1);
 	}
