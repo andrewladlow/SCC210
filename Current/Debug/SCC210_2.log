@@ -1,0 +1,17 @@
+﻿Build started 26/01/2015 13:47:33.
+     1>Project "\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\SCC210_2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\include /I"\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\include" /I"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\include" /I"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Pathing.cpp
+         Pathing.cpp
+     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(7): error C2059: syntax error : 'if'
+     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(7): error C2143: syntax error : missing ';' before '{'
+     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(7): error C2447: '{' : missing function header (old-style formal list?)
+     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(33): error C2059: syntax error : 'if'
+     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(33): error C2143: syntax error : missing ';' before '{'
+     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(33): error C2447: '{' : missing function header (old-style formal list?)
+     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(42): fatal error C1004: unexpected end-of-file found
+     1>Done Building Project "\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\SCC210_2.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.70
