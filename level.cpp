@@ -16,7 +16,9 @@ using namespace std;
 
 float g_rectangle_pos_x1 = 0.0f;
 float g_rectangle_pos_y1 = 0.0f;
-int counter = 0;
+int counter1 = 0;
+int counter2 = 0;
+bool flag = false;
 
 // is left mouse button (lmb) pressed or not
 bool g_lmb1 = false;
@@ -255,30 +257,35 @@ void Draw2D1()
 		glTexCoord2f(1.0, 1.0); glVertex2f(1270.0,710.0);
 		glTexCoord2f(1.0, 0.0); glVertex2f(1270.0,520.0);
 	glEnd();
+
+	if (flag) {
+		glColor4f(1.0,1.0,1.0,1.0);
+		glBindTexture(GL_TEXTURE_2D, g_image1[0]); // choose which one before draw
+		glPushMatrix();
+			if (counter2 >= 1000) {
+				g_rectangle_pos_x1 += 0.2f;
+			} else if (counter1 >= 1000) {
+				g_rectangle_pos_y1 += 0.2f;
+				counter2++;
+			} else {
+				g_rectangle_pos_x1 += 0.2f;
+				counter1++;
+			}
+			glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
+			//glBegin(GL_QUADS);
+			//	glTexCoord2f(0.0, 0.0); glVertex2f(0.0,300.0);
+			//	glTexCoord2f(0.0, 1.0); glVertex2f(0.0,350.0);
+			//	glTexCoord2f(1.0, 1.0); glVertex2f(50.0,350.0);
+			//	glTexCoord2f(1.0, 0.0); glVertex2f(50.0,300.0);
+			//glEnd();
+		glPopMatrix();
+
+		glutPostRedisplay();
+	}
+
 }
 
-void Pathing() {
-		// draw texture
-	glColor4f(1.0,1.0,1.0,1.0);
-	glBindTexture(GL_TEXTURE_2D, g_image1[3]); // choose which one before draw
-	glPushMatrix();
-		if (counter >= 5000) {
-			g_rectangle_pos_y1 += 0.2f;	
-		} else {
-			g_rectangle_pos_x1 += 0.2f;
-			counter++;
-		}
-		glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
-		glBegin(GL_QUADS);
-			glTexCoord2f(0.0, 0.0); glVertex2f(0.0,300.0);
-			glTexCoord2f(0.0, 1.0); glVertex2f(0.0,350.0);
-			glTexCoord2f(1.0, 1.0); glVertex2f(50.0,350.0);
-			glTexCoord2f(1.0, 0.0); glVertex2f(50.0,300.0);
-		glEnd();
-	glPopMatrix();
 
-	glutPostRedisplay();
-}
 
 // This is the main display callback function.
 // It sets up an orthographic projection and calls Draw2D().
@@ -331,7 +338,9 @@ void OnMouseClick1(int button,int state,int x,int y)
 			// Start button
 			if((x < 1270 && x > 1040) && (y < 710 && y > 520)){
 				std::cout << "Clicked start "<<std::endl;
-				Pathing();
+				counter1 = 0;
+				counter2 = 0;
+				flag = true;
 			}
 
 			g_lmb1 = true;
@@ -386,7 +395,7 @@ void Keyboard1(unsigned char Key,int x,int y)
 int main1(int argc,char **argv)
 {
 	//printf(Instructions);
-	printf("TEST");
+	printf("Entered level\n");
 	//glutInit(&argc,argv);
 //	glutInitDisplayMode(GLUT_RGB|GLUT_DEPTH|GLUT_DOUBLE);
 	glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
