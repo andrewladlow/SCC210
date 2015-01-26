@@ -258,10 +258,12 @@ void Draw2D1()
 		glTexCoord2f(1.0, 0.0); glVertex2f(1270.0,520.0);
 	glEnd();
 
+
+
 	if (flag) {
 		glColor4f(1.0,1.0,1.0,1.0);
-		glBindTexture(GL_TEXTURE_2D, g_image1[0]); // choose which one before draw
-		glPushMatrix();
+		//glBindTexture(GL_TEXTURE_2D, g_image1[0]); // choose which one before draw
+		//glPushMatrix();
 			if (counter2 >= 1000) {
 				g_rectangle_pos_x1 += 0.2f;
 			} else if (counter1 >= 1000) {
@@ -271,14 +273,14 @@ void Draw2D1()
 				g_rectangle_pos_x1 += 0.2f;
 				counter1++;
 			}
-			glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
+			//glTranslatef(g_rectangle_pos_x1, g_rectangle_pos_y1, 0.0f);
 			//glBegin(GL_QUADS);
 			//	glTexCoord2f(0.0, 0.0); glVertex2f(0.0,300.0);
 			//	glTexCoord2f(0.0, 1.0); glVertex2f(0.0,350.0);
 			//	glTexCoord2f(1.0, 1.0); glVertex2f(50.0,350.0);
 			//	glTexCoord2f(1.0, 0.0); glVertex2f(50.0,300.0);
 			//glEnd();
-		glPopMatrix();
+		//glPopMatrix();
 
 		glutPostRedisplay();
 	}
