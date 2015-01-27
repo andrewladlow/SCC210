@@ -45,7 +45,7 @@ void InitLevelSelect()
 	loadTexture(levelSelectImageFile, &levelsIluintArray[0], &levelsGluintArray[0]);
 
 	// Level 1 Image
-	levelSelectImageFile = (const wchar_t*)"Images/LevelSelect/Level1.png";
+	levelSelectImageFile = (const wchar_t*)"Images/LevelSelect/Level1.jpg";
 	loadTexture(levelSelectImageFile, &levelsIluintArray[1], &levelsGluintArray[1]);
 
 	// Level 2 Image

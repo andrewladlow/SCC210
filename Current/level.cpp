@@ -14,27 +14,33 @@
 using namespace std;
 
 // these are for textures
-ILuint *levelIluintArray = new ILuint[1];
-GLuint *levelGluintArray = new GLuint[1];
+ILuint *levelIluintArray = new ILuint[2];
+GLuint *levelGluintArray = new GLuint[2];
+
+int counter1 = 0;
+int counter2 = 0;
+bool flag = false;
+
 
 void InitLevel(int levelValue)
 {
     glClearColor (1.0, 1.0, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
-
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	const wchar_t* levelImageFile;
 	switch(levelValue)
 	{
 	case 1:
-		levelImageFile = (const wchar_t*)"Images/Levels/Level1.png";
+		levelImageFile = (const wchar_t*)"Images/Levels/Level1.jpg";
 		break;
 
 	case 2:
 		levelImageFile = (const wchar_t*)"Images/Levels/Level2.png";
 		break;
 	}
-	loadTexture(levelImageFile, &levelIluintArray[0], &levelGluintArray[0]);
+	loadTexture(levelImageFile, &levelIluintArray[0], &levelGluintArray[0]); //load level background
+	loadTexture((const wchar_t*)"images/Shared/startbut.png", &levelIluintArray[1], &levelGluintArray[1]); //load start button
+
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
@@ -60,7 +66,7 @@ void DrawLevel()
 	// Set the orthographic viewing transformation
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0,1280,720,0,-1,1);
+	glOrtho(0,1580,720,0,-1,1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -83,6 +89,23 @@ void DrawLevel2D()
 		glTexCoord2f(1.0, 0.0); glVertex2f(1280.0,0.0);
 	glEnd();
 
+	// draw screen | menu line
+	glColor4f(0.0,0.0,0.0,1.0);
+	glLineWidth(4.0);
+	glBegin(GL_LINES);
+		glVertex2f(1280.0f,720.0f);
+		glVertex2f(1280.0f,0.0f);
+	glEnd();
+
+	// draw start button
+	glColor4f(1.0,1.0,1.0,1);
+	glBindTexture(GL_TEXTURE_2D, levelGluintArray[1]); // choose which one before draw
+	glBegin(GL_QUADS);
+		glTexCoord2f(0.0, 0.0); glVertex2f(1290.0,570.0);
+		glTexCoord2f(0.0, 1.0); glVertex2f(1290.0,710.0);
+		glTexCoord2f(1.0, 1.0); glVertex2f(1570.0,710.0);
+		glTexCoord2f(1.0, 0.0); glVertex2f(1570.0,570.0);
+	glEnd();
 }
 
 // This is called when keyboard presses are detected.
@@ -94,11 +117,19 @@ void LevelKeyboard(unsigned char Key,int x,int y){
 
 // This is called when the mouse is clicked.
 void LevelOnMouseClick(int button,int state,int x,int y){
-
-	if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN)) {
-
-		//std::cout << "Clicked that mouse button "<<std::endl;
-
+	if (button == GLUT_LEFT_BUTTON) {
+		if (state == GLUT_DOWN) {
+			// Start button
+			if((x < 1570 && x > 1290) && (y < 710 && y > 570)){
+				std::cout << "Clicked start "<<std::endl;
+				counter1 = 0;
+				counter2 = 0;
+				flag = true;
+			}
+		} else { // GLUT_UP
+			;
+		}
 	}
+
 	glutPostRedisplay();
 }

@@ -1,17 +1,19 @@
-﻿Build started 26/01/2015 13:47:33.
-     1>Project "\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\SCC210_2.vcxproj" on node 2 (Build target(s)).
+﻿Build started 27/01/2015 13:38:58.
+     1>Project "H:\My Desktop\SCC210\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\include /I"\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\include" /I"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\include" /I"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Pathing.cpp
-         Pathing.cpp
-     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(7): error C2059: syntax error : 'if'
-     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(7): error C2143: syntax error : missing ';' before '{'
-     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(7): error C2447: '{' : missing function header (old-style formal list?)
-     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(33): error C2059: syntax error : 'if'
-     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(33): error C2143: syntax error : missing ';' before '{'
-     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(33): error C2447: '{' : missing function header (old-style formal list?)
-     1>\\lancs\homes\55\shawp\scc210\monday26jan\monday26jan\scc210master\pathing.cpp(42): fatal error C1004: unexpected end-of-file found
-     1>Done Building Project "\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\SCC210_2.vcxproj" (Build target(s)) -- FAILED.
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"H:\My Desktop\SCC210\Current\glut_files\include" /I"H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\include" /I\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\include /I"\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\include" /I"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\include" /I"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt level.cpp
+         level.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\My Desktop\SCC210\Current\Debug\SCC210_2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\lib" /LIBPATH:"H:\My Desktop\SCC210\Current\glut_files\lib" /LIBPATH:\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\lib /LIBPATH:"\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\lib" /LIBPATH:"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\lib" /LIBPATH:"C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\My Desktop\SCC210\Current\Debug\SCC210_2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\My Desktop\SCC210\Current\Debug\SCC210_2.lib" /MACHINE:X86 Debug\LevelSelect.obj
+         Debug\loadTexture.obj
+         Debug\menu.obj
+         Debug\level.obj
+         Debug\main.obj
+         Debug\Pathing.obj
+         Debug\window.obj
+         SCC210_2.vcxproj -> H:\My Desktop\SCC210\Current\Debug\SCC210_2.exe
+     1>Done Building Project "H:\My Desktop\SCC210\Current\SCC210_2.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.70
+Time Elapsed 00:00:03.28
