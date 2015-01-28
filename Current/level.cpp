@@ -14,8 +14,8 @@
 using namespace std;
 
 // these are for textures
-ILuint *levelIluintArray = new ILuint[2];
-GLuint *levelGluintArray = new GLuint[2];
+ILuint *levelIluintArray = new ILuint[3];
+GLuint *levelGluintArray = new GLuint[3];
 
 int counter1 = 0;
 int counter2 = 0;
@@ -39,7 +39,12 @@ void InitLevel(int levelValue)
 		break;
 	}
 	loadTexture(levelImageFile, &levelIluintArray[0], &levelGluintArray[0]); //load level background
-	loadTexture((const wchar_t*)"images/Shared/startbut.png", &levelIluintArray[1], &levelGluintArray[1]); //load start button
+
+	levelImageFile = (const wchar_t*)"images/Shared/startbut.png";
+	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[1]); //load start button
+
+	levelImageFile = (const wchar_t*)"Images/Levels/UI/LevelUI.png";
+	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[2]);
 
 
 	glEnable(GL_TEXTURE_2D);
@@ -66,7 +71,7 @@ void DrawLevel()
 	// Set the orthographic viewing transformation
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0,1580,720,0,-1,1);
+	glOrtho(0,1680,720,0,-1,1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -97,14 +102,14 @@ void DrawLevel2D()
 		glVertex2f(1280.0f,0.0f);
 	glEnd();
 
-	// draw start button
+	// draw UI
 	glColor4f(1.0,1.0,1.0,1);
-	glBindTexture(GL_TEXTURE_2D, levelGluintArray[1]); // choose which one before draw
+	glBindTexture(GL_TEXTURE_2D, levelGluintArray[2]); // choose which one before draw
 	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 0.0); glVertex2f(1290.0,570.0);
-		glTexCoord2f(0.0, 1.0); glVertex2f(1290.0,710.0);
-		glTexCoord2f(1.0, 1.0); glVertex2f(1570.0,710.0);
-		glTexCoord2f(1.0, 0.0); glVertex2f(1570.0,570.0);
+		glTexCoord2f(0.0, 0.0); glVertex2f(1280,0);
+		glTexCoord2f(0.0, 1.0); glVertex2f(1280,720);
+		glTexCoord2f(1.0, 1.0); glVertex2f(1680,720);
+		glTexCoord2f(1.0, 0.0); glVertex2f(1680,0);
 	glEnd();
 }
 
