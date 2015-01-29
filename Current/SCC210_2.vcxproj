@@ -52,12 +52,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\My Desktop\SCC210\Current\glut_files\include;H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\include;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\include;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\include;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\include;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Orcworm\Source\Repos\SCC210\Current\glut_files\include;C:\Users\Orcworm\Source\Repos\SCC210\Current\devil-sdk-x86-1.7.8\include;H:\My Desktop\SCC210\Current\glut_files\include;H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\include;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\include;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\include;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\include;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\lib;H:\My Desktop\SCC210\Current\glut_files\lib;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\lib;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\lib;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\lib;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Orcworm\Source\Repos\SCC210\Current\glut_files\lib;C:\Users\Orcworm\Source\Repos\SCC210\Current\devil-sdk-x86-1.7.8\lib;H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\lib;H:\My Desktop\SCC210\Current\glut_files\lib;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\lib;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\lib;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\lib;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,6 +89,7 @@
   <ItemGroup>
     <ClInclude Include="LevelSelect.h" />
     <ClInclude Include="loadTexture.h" />
+    <ClInclude Include="pathing.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="menu.h" />

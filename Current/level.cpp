@@ -5,7 +5,8 @@
 #include "level.h"
 #include "loadTexture.h"
 #include "window.h"
-
+#include "pathing.h"
+#include "LevelSelect.h"
 
 #include "IL/il.h"
 #pragma comment(lib,"DevIL.lib")
@@ -14,13 +15,14 @@
 using namespace std;
 
 // these are for textures
-ILuint *levelIluintArray = new ILuint[3];
-GLuint *levelGluintArray = new GLuint[3];
+ILuint *levelIluintArray = new ILuint[4];
+GLuint *levelGluintArray = new GLuint[4];
 
-int counter1 = 0;
-int counter2 = 0;
-bool flag = false;
+bool waveActive = false;
 
+float xPos = 0.0f;
+float yPos = 0.0f;
+int endLevel = 0;
 
 void InitLevel(int levelValue)
 {
@@ -46,6 +48,7 @@ void InitLevel(int levelValue)
 	levelImageFile = (const wchar_t*)"Images/Levels/UI/LevelUI.png";
 	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[2]);
 
+	loadTexture((const wchar_t*)"images/megaman.png", &levelIluintArray[3], &levelGluintArray[3]); // test enemy
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
@@ -111,6 +114,40 @@ void DrawLevel2D()
 		glTexCoord2f(1.0, 1.0); glVertex2f(1680,720);
 		glTexCoord2f(1.0, 0.0); glVertex2f(1680,0);
 	glEnd();
+
+	// draw start button
+	glColor4f(1.0,1.0,1.0,1);
+	glBindTexture(GL_TEXTURE_2D, levelGluintArray[1]); // choose which one before draw
+	glBegin(GL_QUADS);
+		glTexCoord2f(0.0, 0.0); glVertex2f(1290.0,10.0);
+		glTexCoord2f(0.0, 1.0); glVertex2f(1290.0,165.0);
+		glTexCoord2f(1.0, 1.0); glVertex2f(1670.0,165.0);
+		glTexCoord2f(1.0, 0.0); glVertex2f(1670.0,10.0);
+	glEnd();
+
+		// draw enemy
+	if (waveActive) {
+		glColor4f(1.0,1.0,1.0,1.0);
+		glBindTexture(GL_TEXTURE_2D, levelGluintArray[3]); // choose which one before draw
+		glPushMatrix();
+			glTranslatef(xPos, yPos, 0.0f);
+			glBegin(GL_QUADS);
+				glTexCoord2f(0.0, 0.0); glVertex2f(50.0,200.0);
+				glTexCoord2f(0.0, 1.0); glVertex2f(50.0,250.0);
+				glTexCoord2f(1.0, 1.0); glVertex2f(100.0,250.0);
+				glTexCoord2f(1.0, 0.0); glVertex2f(100.0,200.0);
+			glEnd();
+		glPopMatrix();
+
+		if (!endLevel) {
+			GenPath(currentLevel);
+
+			cout << "X:" << xPos << endl;
+			cout << "Y:" << yPos << endl;
+
+			glutPostRedisplay();
+		}
+	}
 }
 
 // This is called when keyboard presses are detected.
@@ -125,13 +162,12 @@ void LevelOnMouseClick(int button,int state,int x,int y){
 	if (button == GLUT_LEFT_BUTTON) {
 		if (state == GLUT_DOWN) {
 			// Start button
-			if((x < 1570 && x > 1290) && (y < 710 && y > 570)){
+			if((x < 1670 && x > 1290) && (y < 165 && y > 10)){
 				std::cout << "Clicked start "<<std::endl;
-				counter1 = 0;
-				counter2 = 0;
-				flag = true;
+				waveActive = true;
 			}
-		} else { // GLUT_UP
+		} 
+		else { // GLUT_UP
 			;
 		}
 	}

@@ -53,5 +53,8 @@
     <ClInclude Include="LevelSelect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pathing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
