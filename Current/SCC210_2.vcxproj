@@ -78,6 +78,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="collision.cpp" />
+    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="LevelSelect.cpp" />
     <ClCompile Include="loadTexture.cpp" />
     <ClCompile Include="menu.cpp" />
@@ -87,6 +90,9 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bullet.h" />
+    <ClInclude Include="collision.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="LevelSelect.h" />
     <ClInclude Include="loadTexture.h" />
     <ClInclude Include="pathing.h" />

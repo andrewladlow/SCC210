@@ -1,0 +1,1 @@
+bool collisionCheck(Enemy enemy, Bullet bullet);
