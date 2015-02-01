@@ -42,9 +42,6 @@ void InitLevel(int levelValue)
 	}
 	loadTexture(levelImageFile, &levelIluintArray[0], &levelGluintArray[0]); //load level background
 
-	levelImageFile = (const wchar_t*)"images/Shared/startbut.png";
-	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[1]); //load start button
-
 	levelImageFile = (const wchar_t*)"Images/Levels/UI/LevelUI.png";
 	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[2]);
 
@@ -115,16 +112,6 @@ void DrawLevel2D()
 		glTexCoord2f(1.0, 0.0); glVertex2f(1680,0);
 	glEnd();
 
-	// draw start button
-	glColor4f(1.0,1.0,1.0,1);
-	glBindTexture(GL_TEXTURE_2D, levelGluintArray[1]); // choose which one before draw
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 0.0); glVertex2f(1290.0,10.0);
-		glTexCoord2f(0.0, 1.0); glVertex2f(1290.0,165.0);
-		glTexCoord2f(1.0, 1.0); glVertex2f(1670.0,165.0);
-		glTexCoord2f(1.0, 0.0); glVertex2f(1670.0,10.0);
-	glEnd();
-
 		// draw enemy
 	if (waveActive) {
 		glColor4f(1.0,1.0,1.0,1.0);
@@ -162,7 +149,7 @@ void LevelOnMouseClick(int button,int state,int x,int y){
 	if (button == GLUT_LEFT_BUTTON) {
 		if (state == GLUT_DOWN) {
 			// Start button
-			if((x < 1670 && x > 1290) && (y < 165 && y > 10)){
+			if((x < 1460 && x > 1670) && (y < 161 && y > 101)){
 				std::cout << "Clicked start "<<std::endl;
 				waveActive = true;
 			}
