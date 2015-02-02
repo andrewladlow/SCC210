@@ -23,5 +23,6 @@ public:
 	int type;
 
 	Enemy(float xcoor, float ycoor, int hp, int t);
-	void draw();
+	void save(int arrayNum);
+	void draw(int arrayNum);
 };

@@ -7,7 +7,7 @@
 #include "window.h"
 #include "pathing.h"
 #include "LevelSelect.h"
-
+#include "enemy.h"
 #include "IL/il.h"
 #pragma comment(lib,"DevIL.lib")
 
@@ -23,6 +23,8 @@ bool waveActive = false;
 float xPos = 0.0f;
 float yPos = 0.0f;
 int endLevel = 0;
+
+Enemy* testMob;
 
 void InitLevel(int levelValue)
 {
@@ -45,7 +47,9 @@ void InitLevel(int levelValue)
 	levelImageFile = (const wchar_t*)"Images/Levels/UI/LevelUI.png";
 	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[2]);
 
-	loadTexture((const wchar_t*)"images/megaman.png", &levelIluintArray[3], &levelGluintArray[3]); // test enemy
+	//loadTexture((const wchar_t*)"images/megaman.png", &levelIluintArray[3], &levelGluintArray[3]); // test enemy
+	testMob = new Enemy(50, 200, 100, 0);
+	testMob->save(3);
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
@@ -114,17 +118,7 @@ void DrawLevel2D()
 
 		// draw enemy
 	if (waveActive) {
-		glColor4f(1.0,1.0,1.0,1.0);
-		glBindTexture(GL_TEXTURE_2D, levelGluintArray[3]); // choose which one before draw
-		glPushMatrix();
-			glTranslatef(xPos, yPos, 0.0f);
-			glBegin(GL_QUADS);
-				glTexCoord2f(0.0, 0.0); glVertex2f(50.0,200.0);
-				glTexCoord2f(0.0, 1.0); glVertex2f(50.0,250.0);
-				glTexCoord2f(1.0, 1.0); glVertex2f(100.0,250.0);
-				glTexCoord2f(1.0, 0.0); glVertex2f(100.0,200.0);
-			glEnd();
-		glPopMatrix();
+		testMob->draw(3);
 
 		if (!endLevel) {
 			GenPath(currentLevel);
@@ -149,9 +143,12 @@ void LevelOnMouseClick(int button,int state,int x,int y){
 	if (button == GLUT_LEFT_BUTTON) {
 		if (state == GLUT_DOWN) {
 			// Start button
-			if((x < 1460 && x > 1670) && (y < 161 && y > 101)){
+			if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
 				std::cout << "Clicked start "<<std::endl;
 				waveActive = true;
+			}
+			else if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
+				LevelSelectWindow();
 			}
 		} 
 		else { // GLUT_UP
