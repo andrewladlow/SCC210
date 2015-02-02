@@ -15,8 +15,8 @@ float g_lmb_pos_x = 0;
 float g_lmb_pos_y = 0;
 int desc;
 bool g_lmb;
-float square_pos_x = 500.0f;
-float square_pos_y = 500.0f;
+float square_pos_x = 1280.0f;
+float square_pos_y = 170.0f;
 
 
 
@@ -29,13 +29,6 @@ void ResizeLevel(int w, int h){
 	glutReshapeWindow(1680, 720);
 }
 
-// This is called when the mouse is moved.
-//void MouseMotion(int x, int y)
-//{
-//	g_lmb_pos_x = x;
-//	g_lmb_pos_y = y;
-//}
-
 void MouseMotion(int x, int y)
 {
 	if (g_lmb) {
@@ -43,7 +36,6 @@ void MouseMotion(int x, int y)
 		g_lmb_pos_y = y-50;
 		square_pos_x=g_lmb_pos_x;
 		square_pos_y=g_lmb_pos_y;
-
 	}
 
 	glutPostRedisplay();

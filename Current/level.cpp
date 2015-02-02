@@ -19,13 +19,11 @@ ILuint *levelIluintArray = new ILuint[5];
 GLuint *levelGluintArray = new GLuint[5];
 
 bool waveActive = false;
+bool towerActive = false;
 
 float xPos = 0.0f;
 float yPos = 0.0f;
 int endLevel = 0;
-
-
-
 
 
 
@@ -53,7 +51,6 @@ void InitLevel(int levelValue)
 	levelImageFile = (const wchar_t*)"Images/Levels/UI/LevelUI.png";
 	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[2]);
 
-	//loadTexture((const wchar_t*)"images/megaman.png", &levelIluintArray[3], &levelGluintArray[3]); // test enemy
 	testMob = new Enemy(50, 200, 100, 0);
 	testMob->save(3);
 
@@ -125,33 +122,18 @@ void DrawLevel2D()
 		glTexCoord2f(1.0, 0.0); glVertex2f(1680,0);
 	glEnd();
 
-
-	//glColor4f(1.0,1.0,1.0,1);
-	//glBindTexture(GL_TEXTURE_2D, levelGluintArray[4]); // choose which one before draw
-	//glBegin(GL_QUADS);
-	//	glTexCoord2f(0.0, 0.0); glVertex2f(square_pos_x,square_pos_y);
-	//	glTexCoord2f(0.0, 1.0); glVertex2f(square_pos_x,square_pos_y);
-	//	glTexCoord2f(1.0, 1.0); glVertex2f(square_pos_x,square_pos_y);
-	//	glTexCoord2f(1.0, 0.0); glVertex2f(square_pos_x,square_pos_y);
-	//glEnd();
-
-	glColor4f(1.0,1.0,1.0,1.0);
-	glBindTexture(GL_TEXTURE_2D, levelGluintArray[4]);
-		glPushMatrix();
-			glBegin(GL_QUADS);
-				glTexCoord2f(0.0, 0.0); glVertex2f(0.0+square_pos_x, 0.0+square_pos_y);
-				glTexCoord2f(0.0, 1.0); glVertex2f(0.0+square_pos_x, 100.0+square_pos_y);
-				glTexCoord2f(1.0, 1.0); glVertex2f(100.0+square_pos_x, 100.0+square_pos_y);
-				glTexCoord2f(1.0, 0.0); glVertex2f(100.0+square_pos_x, 0.0+square_pos_y);
-			glEnd();
-		glPopMatrix();
-
-	//glColor4f(1.0,1.0,1.0,1);
-	//glPointSize(16);
-	//glBegin(GL_POINTS);
-	//	glVertex2f(square_pos_x,square_pos_y);
-	//glEnd();
-
+	if (towerActive) {
+		glColor4f(1.0,1.0,1.0,1.0);
+		glBindTexture(GL_TEXTURE_2D, levelGluintArray[4]);
+			glPushMatrix();
+				glBegin(GL_QUADS);
+					glTexCoord2f(0.0, 0.0); glVertex2f(square_pos_x, square_pos_y);
+					glTexCoord2f(0.0, 1.0); glVertex2f(square_pos_x, 140.0+square_pos_y);
+					glTexCoord2f(1.0, 1.0); glVertex2f(130.0+square_pos_x, 140.0+square_pos_y);
+					glTexCoord2f(1.0, 0.0); glVertex2f(130.0+square_pos_x, square_pos_y);
+				glEnd();
+			glPopMatrix();
+	}
 
 		// draw enemy
 	if (waveActive) {
@@ -190,10 +172,6 @@ void LevelOnMouseClick(int button,int state,int x,int y){
 				square_pos_y=g_lmb_pos_y;
 			}
 
-
-
-
-
 			// Start button
 			if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
 				std::cout << "Clicked start "<<std::endl;
@@ -202,13 +180,14 @@ void LevelOnMouseClick(int button,int state,int x,int y){
 			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
 				LevelSelectWindow();
 			}
+			if((x < 1410 && x > 1280) && (y < 310 && y > 170)){
+				towerActive = true;
+			}
 		} 
 		else { // GLUT_UP
 			g_lmb = false;
 		}
 	}
-
-
 
 	glutPostRedisplay();
 }
