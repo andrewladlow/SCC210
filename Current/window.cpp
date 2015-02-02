@@ -11,9 +11,14 @@
 #include <vector>
 using namespace std;
 
-int g_lmb_pos_x = 0;
-int g_lmb_pos_y = 0;
-bool g_lmb = 0;
+float g_lmb_pos_x = 0;
+float g_lmb_pos_y = 0;
+int desc;
+bool g_lmb;
+float square_pos_x = 500.0f;
+float square_pos_y = 500.0f;
+
+
 
 // 	This function is called when the window is resized.
 void Resize(int w, int h){
@@ -25,11 +30,26 @@ void ResizeLevel(int w, int h){
 }
 
 // This is called when the mouse is moved.
+//void MouseMotion(int x, int y)
+//{
+//	g_lmb_pos_x = x;
+//	g_lmb_pos_y = y;
+//}
+
 void MouseMotion(int x, int y)
 {
-	g_lmb_pos_x = x;
-	g_lmb_pos_y = y;
+	if (g_lmb) {
+		g_lmb_pos_x = x-50;
+		g_lmb_pos_y = y-50;
+		square_pos_x=g_lmb_pos_x;
+		square_pos_y=g_lmb_pos_y;
+
+	}
+
+	glutPostRedisplay();
 }
+
+
 
 void initialiseWindow(int argc,char **argv){
 
@@ -42,7 +62,7 @@ void initialiseWindow(int argc,char **argv){
 	glutDisplayFunc(DrawMenu);
 	glutReshapeFunc(Resize);
 	glutMouseFunc(MenuOnMouseClick);
-	glutPassiveMotionFunc(MouseMotion);
+	glutMotionFunc(MouseMotion);
 	glutKeyboardFunc(MenuKeyboard);
 
 	ilInit();
