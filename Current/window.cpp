@@ -11,12 +11,9 @@
 #include <vector>
 using namespace std;
 
-float g_lmb_pos_x = 0;
-float g_lmb_pos_y = 0;
-int desc;
 bool g_lmb;
-float square_pos_x = 1280.0f;
-float square_pos_y = 170.0f;
+float towerX = 1280.0f;
+float towerY = 170.0f;
 
 
 
@@ -32,10 +29,8 @@ void ResizeLevel(int w, int h){
 void MouseMotion(int x, int y)
 {
 	if (g_lmb) {
-		g_lmb_pos_x = x-50;
-		g_lmb_pos_y = y-50;
-		square_pos_x=g_lmb_pos_x;
-		square_pos_y=g_lmb_pos_y;
+		towerX = x-50;
+		towerY = y-50;
 	}
 
 	glutPostRedisplay();

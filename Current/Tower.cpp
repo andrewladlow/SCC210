@@ -36,5 +36,3 @@ Tower::Tower(float theX, float theY, int theType)
 	}
 
 }
-
-void 

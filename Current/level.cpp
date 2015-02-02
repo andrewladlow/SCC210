@@ -53,12 +53,12 @@ void InitLevel(int levelValue)
 		break;
 	}
 	
-	loadTexture((const wchar_t*)"Images/Levels/UI/LevelUI.png", &levelIluintArray[1], &levelGluintArray[2]); // Side menu 
+	loadTexture((const wchar_t*)"Images/Levels/UI/LevelUI.png", &levelIluintArray[1], &levelGluintArray[1]); // Side menu 
+
+	loadTexture((const wchar_t*)"images/Towers/Basic tower/basicTowerFull.png", &levelIluintArray[2], &levelGluintArray[2]); // Test Tower
 
 	testMob = new Enemy(50, 200, 100, 0);
 	testMob->save(3);
-
-	loadTexture((const wchar_t*)"images/Towers/Basic tower/basicTowerFull.png", &levelIluintArray[4], &levelGluintArray[4]); // Test Tower
 
 
 	glEnable(GL_TEXTURE_2D);
@@ -118,7 +118,7 @@ void DrawLevel2D()
 
 	// draw UI
 	glColor4f(1.0,1.0,1.0,1);
-	glBindTexture(GL_TEXTURE_2D, levelGluintArray[2]); // choose which one before draw
+	glBindTexture(GL_TEXTURE_2D, levelGluintArray[1]); // choose which one before draw
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0); glVertex2f(1280,0);
 		glTexCoord2f(0.0, 1.0); glVertex2f(1280,720);
@@ -128,13 +128,13 @@ void DrawLevel2D()
 
 	if (towerActive) {
 		glColor4f(1.0,1.0,1.0,1.0);
-		glBindTexture(GL_TEXTURE_2D, levelGluintArray[4]);
+		glBindTexture(GL_TEXTURE_2D, levelGluintArray[2]);
 			glPushMatrix();
 				glBegin(GL_QUADS);
-					glTexCoord2f(0.0, 0.0); glVertex2f(square_pos_x, square_pos_y);
-					glTexCoord2f(0.0, 1.0); glVertex2f(square_pos_x, 140.0+square_pos_y);
-					glTexCoord2f(1.0, 1.0); glVertex2f(130.0+square_pos_x, 140.0+square_pos_y);
-					glTexCoord2f(1.0, 0.0); glVertex2f(130.0+square_pos_x, square_pos_y);
+					glTexCoord2f(0.0, 0.0); glVertex2f(towerX, towerY);
+					glTexCoord2f(0.0, 1.0); glVertex2f(towerX, 140.0+towerY);
+					glTexCoord2f(1.0, 1.0); glVertex2f(130.0+towerX, 140.0+towerY);
+					glTexCoord2f(1.0, 0.0); glVertex2f(130.0+towerX, towerY);
 				glEnd();
 			glPopMatrix();
 	}
@@ -165,15 +165,10 @@ void LevelKeyboard(unsigned char Key,int x,int y){
 void LevelOnMouseClick(int button,int state,int x,int y){
 	if (button == GLUT_LEFT_BUTTON) {
 		if (state == GLUT_DOWN) {
-
-			if(square_pos_x-x+50<50 && square_pos_x-x+50>-50 && square_pos_y-y+50<50 && square_pos_y-y+50>-50){
-				std::cout << " x" << square_pos_x-x <<std::endl;
-				std::cout << "y " << square_pos_y-y <<std::endl;
+			if(towerX-x+50<50 && towerX-x+50>-50 && towerY-y+50<50 && towerY-y+50>-50){
 				g_lmb = true;
-				g_lmb_pos_x = x-50;
-				g_lmb_pos_y = y-50;
-				square_pos_x=g_lmb_pos_x;
-				square_pos_y=g_lmb_pos_y;
+				towerX = x-50;
+				towerY = y-50;
 			}
 
 			// Start button
