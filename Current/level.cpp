@@ -8,15 +8,23 @@
 #include "pathing.h"
 #include "LevelSelect.h"
 #include "enemy.h"
+#include "bullet.h"
 #include "IL/il.h"
 #pragma comment(lib,"DevIL.lib")
 
 #include <vector>
 using namespace std;
 
-// these are for textures
+// UI stuff
 ILuint *levelIluintArray = new ILuint[5];
 GLuint *levelGluintArray = new GLuint[5];
+
+
+int towersPlaced = 0;
+
+// Enemies
+ILuint *enemyIluintArray = new ILuint[10];
+GLuint *enemyGluintArray = new GLuint[10];
 
 bool waveActive = false;
 bool towerActive = false;
@@ -25,9 +33,8 @@ float xPos = 0.0f;
 float yPos = 0.0f;
 int endLevel = 0;
 
-
-
 Enemy* testMob;
+Bullet* testBullet;
 
 void InitLevel(int levelValue)
 {
@@ -35,26 +42,23 @@ void InitLevel(int levelValue)
     glEnable(GL_DEPTH_TEST);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	const wchar_t* levelImageFile;
 	switch(levelValue)
 	{
 	case 1:
-		levelImageFile = (const wchar_t*)"Images/Levels/Level1.jpg";
+		loadTexture((const wchar_t*)"Images/Levels/Level1.jpg", &levelIluintArray[0], &levelGluintArray[0]); //level 1 map
 		break;
 
 	case 2:
-		levelImageFile = (const wchar_t*)"Images/Levels/Level2.png";
+		loadTexture((const wchar_t*)"Images/Levels/Level2.png", &levelIluintArray[0], &levelGluintArray[0]); //Level 2 map
 		break;
 	}
-	loadTexture(levelImageFile, &levelIluintArray[0], &levelGluintArray[0]); //load level background
-
-	levelImageFile = (const wchar_t*)"Images/Levels/UI/LevelUI.png";
-	loadTexture(levelImageFile, &levelIluintArray[1], &levelGluintArray[2]);
+	
+	loadTexture((const wchar_t*)"Images/Levels/UI/LevelUI.png", &levelIluintArray[1], &levelGluintArray[2]); // Side menu 
 
 	testMob = new Enemy(50, 200, 100, 0);
 	testMob->save(3);
 
-	loadTexture((const wchar_t*)"images/Towers/Basic tower/basicTowerFull.png", &levelIluintArray[4], &levelGluintArray[4]);
+	loadTexture((const wchar_t*)"images/Towers/Basic tower/basicTowerFull.png", &levelIluintArray[4], &levelGluintArray[4]); // Test Tower
 
 
 	glEnable(GL_TEXTURE_2D);

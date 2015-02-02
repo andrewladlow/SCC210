@@ -11,7 +11,6 @@ void loadTexture(const wchar_t* imageFile, ILuint* iluintArray, GLuint* gluintAr
 
 	if (!ilLoadImage(imageFile)) {
 		std::cout << "image file not loaded" << std::endl;
-		exit(1);
 	}
 	ILuint img_width = ilGetInteger(IL_IMAGE_WIDTH);
 	ILuint img_height = ilGetInteger(IL_IMAGE_HEIGHT);

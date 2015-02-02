@@ -16,11 +16,11 @@
 #include <vector>
 using namespace std;
 
-bool collisionCheck(Enemy enemy, Bullet bullet) {
+/*bool collisionCheck(Enemy enemy, Bullet bullet) {
 	if (enemy.x < bullet.x + 50 &&
 		enemy.x + 50 > bullet.x &&
 		enemy.y < bullet.y + 50 &&
 		enemy.y + 50 > bullet.y)
 		return true;
 	return false;
-}
+}*/

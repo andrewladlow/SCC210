@@ -12,33 +12,32 @@ using namespace std;
 class Bullet
 {
    public:
-      float x;
-      float y;
-	  int healthPoints;
-	  float speed;
-	  int type;
-	  Bullet(float, float, int);
+      float* originX;
+      float* originY;
+	  float* targetX;
+	  float* targetY;
+	  Bullet(float*, float*, float*, float*);
 	  void draw();
 };
 
-Bullet::Bullet(float xcoor, float ycoor, int t)
+Bullet::Bullet(float* theOriginX, float* theOriginY, float* theTargetX, float* theTargetY)
 {
-	x = xcoor;
-	y = ycoor;
-	type = t;
+	originX = theOriginX;
+	originY = theOriginY;
+	targetX = theTargetX;
+	targetY = theTargetY;
+
 }
 
 void Bullet::draw()
 {
 	glColor4f(1.0,0,0,1.0);
 
-	////we then draw the bullet at the given coords
-	//glPushMatrix();
-	//	glBegin(GL_QUADS);
-	//		glVertex2f(x, y);
-	//		glVertex2f(x, y + 50);
-	//		glVertex2f(x + 50, y + 50);
-	//		glVertex2f(x + 50, y);
-	//	glEnd();
-	//glPopMatrix();
+	//we then draw the bullet at the given coords
+	glPushMatrix();
+		glBegin(GL_LINES);
+			glVertex2f(*originX, *originY);
+			glVertex2f(*targetX, *targetY);
+		glEnd();
+	glPopMatrix();
 }

@@ -14,14 +14,11 @@
 using namespace std;
 
 class Bullet {
-
 public:
-	float x;
-	float y;
-	int healthPoints;
-	float speed;
-	int type;
-
-	Bullet(float xcoor, float ycoor, int t);
-	void draw();
+      float* originX;
+      float* originY;
+	  float* targetX;
+	  float* targetY;
+	  Bullet(float*, float*, float*, float*);
+	  void draw();
 };
