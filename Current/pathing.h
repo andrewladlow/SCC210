@@ -1,1 +1,3 @@
-void GenPath(int currentLevel);
+#include "enemy.h"
+
+void GenPath(Enemy *e, int currentLevel);

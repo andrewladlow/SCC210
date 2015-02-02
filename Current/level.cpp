@@ -10,6 +10,7 @@
 #include "enemy.h"
 #include "bullet.h"
 #include "IL/il.h"
+#include <Windows.h>
 #pragma comment(lib,"DevIL.lib")
 
 #include <vector>
@@ -29,11 +30,10 @@ GLuint *enemyGluintArray = new GLuint[10];
 bool waveActive = false;
 bool towerActive = false;
 
-float xPos = 0.0f;
-float yPos = 0.0f;
-int endLevel = 0;
+bool endLevel = false;
 
-Enemy* testMob;
+Enemy* testMob1;
+Enemy* testMob2;
 Bullet* testBullet;
 
 void InitLevel(int levelValue)
@@ -57,9 +57,8 @@ void InitLevel(int levelValue)
 
 	loadTexture((const wchar_t*)"images/Towers/Basic tower/basicTowerFull.png", &levelIluintArray[2], &levelGluintArray[2]); // Test Tower
 
-	testMob = new Enemy(50, 200, 100, 0);
-	testMob->save(3);
-
+	testMob1 = new Enemy(50, 200, 100, 0, 0);
+	testMob2 = new Enemy(50, 200, 100, 0, 1);
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
@@ -141,13 +140,14 @@ void DrawLevel2D()
 
 		// draw enemy
 	if (waveActive) {
-		testMob->draw(3);
+		testMob1->draw();
+		testMob2->draw();
+
+		//std::cout << testMob1->xPos <<std::endl;
+		//std::cout << testMob1->yPos <<std::endl;
 
 		if (!endLevel) {
-			GenPath(currentLevel);
-
-			cout << "X:" << xPos << endl;
-			cout << "Y:" << yPos << endl;
+			GenPath(testMob1, currentLevel);
 
 			glutPostRedisplay();
 		}

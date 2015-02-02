@@ -15,23 +15,24 @@ using namespace std;
 
 
 
-void GenPath(int currentLevel) {
+void GenPath(Enemy *e, int currentLevel) {
 
 	switch(currentLevel) {
 		case 1:
 			printf("Pathing 1\n");
-			if (xPos < 540) {
-				xPos += 2.0f;
+
+			if (e->xMod < 540) {
+				e->xMod += 2.0f;
 				break;
-			} else if (yPos < 270) {
-				yPos += 2.0f;
+			} else if (e->yMod < 270) {
+				e->yMod += 2.0f;
 				break;
-			} else if (xPos >= 540 && xPos < 1100) {
-				xPos += 2.0f;
+			} else if (e->xMod >= 540 && e->xMod < 1100) {
+				e->xMod += 2.0f;
 				break;
 			} else {
 				cout << "Enemy reached exit" << endl;
-				endLevel = 1;
+				endLevel = true;
 				break;
 			}
 		case 2:
