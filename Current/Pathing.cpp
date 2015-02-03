@@ -22,13 +22,13 @@ void GenPath(Enemy *e, int currentLevel) {
 			printf("Pathing 1\n");
 
 			if (e->xMod < 540) {
-				e->xMod += 2.0f;
+				e->xMod += 1.0f;
 				break;
 			} else if (e->yMod < 270) {
-				e->yMod += 2.0f;
+				e->yMod += 1.0f;
 				break;
 			} else if (e->xMod >= 540 && e->xMod < 1100) {
-				e->xMod += 2.0f;
+				e->xMod += 1.0f;
 				break;
 			} else {
 				cout << "Enemy reached exit" << endl;

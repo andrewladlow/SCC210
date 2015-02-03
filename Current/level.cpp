@@ -141,15 +141,24 @@ void DrawLevel2D()
 		// draw enemy
 	if (waveActive) {
 		testMob1->draw();
-		testMob2->draw();
-
 		//std::cout << testMob1->xPos <<std::endl;
 		//std::cout << testMob1->yPos <<std::endl;
 
 		if (!endLevel) {
 			GenPath(testMob1, currentLevel);
+			if (testMob1->xMod > 300) {
+				testMob2->draw();
+				GenPath(testMob2, currentLevel);
+			}
 
 			glutPostRedisplay();
+		} else {
+			delete testMob1;
+			delete testMob2;
+			endLevel = false;
+			waveActive = false;
+			Sleep(3000);
+			LevelSelectWindow();
 		}
 	}
 }
