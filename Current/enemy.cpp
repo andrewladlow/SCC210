@@ -5,7 +5,6 @@
 #include "loadTexture.h"
 #include "level.h"
 #include "IL/il.h"
-#include <Windows.h>
 #pragma comment(lib,"DevIL.lib")
 
 #include <vector>

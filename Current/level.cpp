@@ -151,7 +151,7 @@ void DrawLevel2D()
 		for (int i=0; i<10; i++) {
 			testMobArray[i]->draw();
 		}
-		if (!endLevel) {
+		if (!endLevel) { // keep enemies moving until one hits end
 			for (int i=0; i<10; i++) {
 				GenPath(testMobArray[i], currentLevel);
 
@@ -159,8 +159,9 @@ void DrawLevel2D()
 			glutPostRedisplay();
 		} 
 		else {
-			delete testMobArray[0];
-			delete testMobArray[1];
+			for (int i=0; i<10; i++) {
+				delete testMobArray[i];
+			}
 			endLevel = false;
 			waveActive = false;
 			Sleep(3000);
