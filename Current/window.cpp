@@ -18,11 +18,11 @@ float towerY = 170.0f;
 
 
 // 	This function is called when the window is resized.
-void Resize(int w, int h){
+void Resize(int w, int h) {
 	glutReshapeWindow(1280, 720);
 }
 
-void ResizeLevel(int w, int h){
+void ResizeLevel(int w, int h) {
 	glutReshapeWindow(1680, 720);
 }
 
@@ -38,7 +38,7 @@ void MouseMotion(int x, int y)
 
 
 
-void initialiseWindow(int argc,char **argv){
+void initialiseWindow(int argc,char **argv) {
 
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
@@ -59,7 +59,7 @@ void initialiseWindow(int argc,char **argv){
 
 }
 
-void MenuWindow(){
+void MenuWindow() {
 
 	glutDisplayFunc(DrawMenu);
 	glutMouseFunc(MenuOnMouseClick);
@@ -71,7 +71,7 @@ void MenuWindow(){
 
 }
 
-void LevelWindow(int levelSelected){
+void LevelWindow(int levelSelected) {
 	glutReshapeWindow(1680, 720);
 	glViewport(0, 0, (GLsizei)1680, (GLsizei)720);
 	glutDisplayFunc(DrawLevel);
@@ -83,7 +83,7 @@ void LevelWindow(int levelSelected){
 	glutPostRedisplay();
 }
 
-void LevelSelectWindow(){
+void LevelSelectWindow() {
 	glutReshapeWindow(1280, 720);
 	glViewport(0, 0, (GLsizei)1280, (GLsizei)720);
 	glutDisplayFunc(DrawLevelSelect);

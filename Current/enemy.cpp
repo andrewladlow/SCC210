@@ -5,7 +5,7 @@
 #include "loadTexture.h"
 #include "level.h"
 #include "IL/il.h"
-
+#include <Windows.h>
 #pragma comment(lib,"DevIL.lib")
 
 #include <vector>
@@ -14,16 +14,13 @@
 
 Enemy::Enemy(float xcoor, float ycoor, int hp, int t, int aN)
 {
-	xStart = xcoor;
-	yStart = ycoor;
-	xPos = 0.0f;
-	yPos = 0.0f;
-	xMod = 0.0f;
-	yMod = 0.0f;
+	xPos = xcoor;
+	yPos = ycoor;
 	healthPoints = hp;
 	type = t;
 	arrayNum = aN;
 	spawned = false;
+	end = false;
 
 	switch(type)
 	{
@@ -42,9 +39,7 @@ Enemy::Enemy(float xcoor, float ycoor, int hp, int t, int aN)
 
 void Enemy::draw() 
 {
-	spawned = true;
-	xPos = xStart + xMod;
-	yPos = yStart + yMod;
+
 
 	glColor4f(1.0,1.0,1.0,1.0);
 	glBindTexture(GL_TEXTURE_2D, enemyGluintArray[arrayNum]);

@@ -32,8 +32,13 @@ bool towerActive = false;
 
 bool endLevel = false;
 
-Enemy* testMob1;
-Enemy* testMob2;
+
+Enemy* testMobArray[10];
+
+//Enemy* testMob1;
+//Enemy* testMob2;
+
+
 Bullet* testBullet;
 
 void InitLevel(int levelValue)
@@ -57,8 +62,11 @@ void InitLevel(int levelValue)
 
 	loadTexture((const wchar_t*)"images/Towers/Basic tower/basicTowerFull.png", &levelIluintArray[2], &levelGluintArray[2]); // Test Tower
 
-	testMob1 = new Enemy(50, 200, 100, 0, 0);
-	testMob2 = new Enemy(50, 200, 100, 0, 1);
+	for (int i=0; i<10; i++) {
+		testMobArray[i] = new Enemy(50-(i*200), 200, 100, 0, i);
+	}
+	//testMob1 = new Enemy(50, 200, 100, 0, 0);
+	//testMob2 = new Enemy(50, 200, 100, 0, 1);
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
@@ -74,12 +82,12 @@ void DrawLevel()
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
 
-	glEnable(GL_TEXTURE_2D);
-    glShadeModel(GL_FLAT);
+	//glEnable(GL_TEXTURE_2D);
+ //   glShadeModel(GL_FLAT);
 
-	// for transparency
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//// for transparency
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Set the orthographic viewing transformation
 	glMatrixMode(GL_PROJECTION);
@@ -140,21 +148,19 @@ void DrawLevel2D()
 
 		// draw enemy
 	if (waveActive) {
-		testMob1->draw();
-		//std::cout << testMob1->xPos <<std::endl;
-		//std::cout << testMob1->yPos <<std::endl;
-
+		for (int i=0; i<10; i++) {
+			testMobArray[i]->draw();
+		}
 		if (!endLevel) {
-			GenPath(testMob1, currentLevel);
-			if (testMob1->xMod > 300) {
-				testMob2->draw();
-				GenPath(testMob2, currentLevel);
-			}
+			for (int i=0; i<10; i++) {
+				GenPath(testMobArray[i], currentLevel);
 
+			} 
 			glutPostRedisplay();
-		} else {
-			delete testMob1;
-			delete testMob2;
+		} 
+		else {
+			delete testMobArray[0];
+			delete testMobArray[1];
 			endLevel = false;
 			waveActive = false;
 			Sleep(3000);
@@ -167,6 +173,8 @@ void DrawLevel2D()
 void LevelKeyboard(unsigned char Key,int x,int y){
 	if (Key == 27) {
 		LevelSelectWindow();
+		endLevel = false;
+		waveActive = false;
 	}
 }
 
@@ -185,9 +193,13 @@ void LevelOnMouseClick(int button,int state,int x,int y){
 				std::cout << "Clicked start "<<std::endl;
 				waveActive = true;
 			}
+			// quit button
 			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
+				endLevel = false;
+				waveActive = false;
 				LevelSelectWindow();
 			}
+			// tower 1 button
 			if((x < 1410 && x > 1280) && (y < 310 && y > 170)){
 				towerActive = true;
 			}
