@@ -9,6 +9,7 @@
 #include "LevelSelect.h"
 #include "enemy.h"
 #include "bullet.h"
+#include "tower.h"
 #include "IL/il.h"
 #include <Windows.h>
 #pragma comment(lib,"DevIL.lib")
@@ -27,17 +28,19 @@ int towersPlaced = 0;
 ILuint *enemyIluintArray = new ILuint[10];
 GLuint *enemyGluintArray = new GLuint[10];
 
+bool g_lmb;
+float towerX = 1280.0f;
+float towerY = 170.0f;
+
 bool waveActive = false;
 bool towerActive = false;
 
 bool endLevel = false;
-
+bool clicked = false;
+bool towerPlaced = false;
 
 Enemy* testMobArray[10];
-
-//Enemy* testMob1;
-//Enemy* testMob2;
-
+Tower* testTower;
 
 Bullet* testBullet;
 
@@ -65,8 +68,7 @@ void InitLevel(int levelValue)
 	for (int i=0; i<10; i++) {
 		testMobArray[i] = new Enemy(50-(i*200), 200, 100, 0, i);
 	}
-	//testMob1 = new Enemy(50, 200, 100, 0, 0);
-	//testMob2 = new Enemy(50, 200, 100, 0, 1);
+	testTower = new Tower(0, 0, 1);
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
@@ -154,7 +156,6 @@ void DrawLevel2D()
 		if (!endLevel) { // keep enemies moving until one hits end
 			for (int i=0; i<10; i++) {
 				GenPath(testMobArray[i], currentLevel);
-
 			} 
 			glutPostRedisplay();
 		} 
@@ -181,36 +182,46 @@ void LevelKeyboard(unsigned char Key,int x,int y){
 
 // This is called when the mouse is clicked.
 void LevelOnMouseClick(int button,int state,int x,int y){
-	if (button == GLUT_LEFT_BUTTON) {
-		if (state == GLUT_DOWN) {
-			if(towerX-x+50<50 && towerX-x+50>-50 && towerY-y+50<50 && towerY-y+50>-50){
-				g_lmb = true;
-				towerX = x-50;
-				towerY = y-50;
-			}
-
-			// Start button
-			if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
-				std::cout << "Clicked start "<<std::endl;
-				waveActive = true;
-			}
-			// quit button
-			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
-				endLevel = false;
-				waveActive = false;
-				LevelSelectWindow();
-			}
-			// tower 1 button
-			if((x < 1410 && x > 1280) && (y < 310 && y > 170)){
-				towerActive = true;
-			}
-		} 
-		else { // GLUT_UP
-			g_lmb = false;
+	if (button == GLUT_LEFT_BUTTON && !clicked) {
+		// tower 1 button
+		if((x < 1410 && x > 1280) && (y < 310 && y > 170)){
+			clicked = true;
+			towerActive = true;
 		}
+		if(towerX-x+50<50 && towerX-x+50>-50 && towerY-y+50<50 && towerY-y+50>-50 && !towerPlaced){
+			towerX = x-50;
+			towerY = y-50;
+		}
+
+		// Start button
+		if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
+			std::cout << "Clicked start "<<std::endl;
+			waveActive = true;
+		}
+		// quit button
+		if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
+			endLevel = false;
+			waveActive = false;
+			LevelSelectWindow();
+		}
+	}
+	if (button == GLUT_RIGHT_BUTTON && clicked) {
+		towersPlaced++;
+		clicked = false;
+		towerPlaced = true;
 	}
 
 	glutPostRedisplay();
 }
 
-void MouseMotion(int x, int y);
+void LevelMouseMotion(int x, int y) {
+	glutPostRedisplay();
+}
+
+void LevelPassiveMouseMotion(int x, int y) {
+	if (clicked && !towerPlaced) {
+		towerX = x-50;
+		towerY = y-50;
+	}
+	glutPostRedisplay();
+}

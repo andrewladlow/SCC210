@@ -11,12 +11,6 @@
 #include <vector>
 using namespace std;
 
-bool g_lmb;
-float towerX = 1280.0f;
-float towerY = 170.0f;
-
-
-
 // 	This function is called when the window is resized.
 void Resize(int w, int h) {
 	glutReshapeWindow(1280, 720);
@@ -28,15 +22,8 @@ void ResizeLevel(int w, int h) {
 
 void MouseMotion(int x, int y)
 {
-	if (g_lmb) {
-		towerX = x-50;
-		towerY = y-50;
-	}
-
 	glutPostRedisplay();
 }
-
-
 
 void initialiseWindow(int argc,char **argv) {
 
@@ -50,6 +37,7 @@ void initialiseWindow(int argc,char **argv) {
 	glutReshapeFunc(Resize);
 	glutMouseFunc(MenuOnMouseClick);
 	glutMotionFunc(MouseMotion);
+
 	glutKeyboardFunc(MenuKeyboard);
 
 	ilInit();
@@ -76,6 +64,8 @@ void LevelWindow(int levelSelected) {
 	glViewport(0, 0, (GLsizei)1680, (GLsizei)720);
 	glutDisplayFunc(DrawLevel);
 	glutMouseFunc(LevelOnMouseClick);
+	glutMotionFunc(LevelMouseMotion);
+	glutPassiveMotionFunc(LevelPassiveMouseMotion);
 	glutKeyboardFunc(LevelKeyboard);
 
 	InitLevel(levelSelected);
@@ -89,6 +79,7 @@ void LevelSelectWindow() {
 	glutDisplayFunc(DrawLevelSelect);
 	glutMouseFunc(LevelSelectOnMouseClick);
 	glutKeyboardFunc(LevelSelectKeyboard);
+	glutMotionFunc(LevelMouseMotion);
 
 	InitLevelSelect();
 

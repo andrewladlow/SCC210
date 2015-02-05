@@ -31,7 +31,7 @@ Tower::Tower(float theX, float theY, int theType)
 	{
 	case 1:
 		loadTexture((const wchar_t*)"Images/Towers/Basic tower/basicTowerBase.png", &towerIluintArray[0], &towerGluintArray[0]);
-		loadTexture((const wchar_t*)"Images/Towers/Basic tower/basicTowerTop.png", &towerIluintArray[0], &towerGluintArray[0]);
+		loadTexture((const wchar_t*)"Images/Towers/Basic tower/basicTowerTop.png", &towerIluintArray[1], &towerGluintArray[1]);
 		break;
 	}
 
