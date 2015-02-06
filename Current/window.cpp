@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 #include "menu.h"
 #include "level.h"
 #include "LevelSelect.h"
@@ -67,6 +69,7 @@ void LevelWindow(int levelSelected) {
 	glutMotionFunc(LevelMouseMotion);
 	glutPassiveMotionFunc(LevelPassiveMouseMotion);
 	glutKeyboardFunc(LevelKeyboard);
+	glutIdleFunc(LevelIdle);
 
 	InitLevel(levelSelected);
 
@@ -86,6 +89,13 @@ void LevelSelectWindow() {
 	glutPostRedisplay();
 }
 
+// displays string on screen
+void renderBitmapString(float x, float y, void *font, string str) {
+  glRasterPos2f(x,y);
+  for (string::iterator c = (&str)->begin(); c != (&str)->end(); ++c) {
+    glutBitmapCharacter(font, *c);
+  }
+}
 
 
 

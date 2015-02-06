@@ -47,14 +47,7 @@ Bullet* testBullet;
 int frame=0;
 int time;
 int timebase=0;
-char s[256];
-
-void renderBitmapString(float x, float y, void *font, string str) {
-  glRasterPos2f(x,y);
-  for (string::iterator c = (&str)->begin(); c != (&str)->end(); ++c) {
-    glutBitmapCharacter(font, *c);
-  }
-}
+char buffer[256];
 
 void InitLevel(int levelValue)
 {
@@ -186,17 +179,16 @@ void DrawLevel2D()
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
 	if (time - timebase > 1000) {
-		sprintf_s(s,"FPS:%4.2f",
+		sprintf_s(buffer,"FPS:%4.2f",
 			frame*1000.0/(time-timebase));
 		timebase = time;
 		frame = 0;
 	}
 
 	glColor3f(0.0f,0.0f,0.0f);
-
 	glPushMatrix();
 		glLoadIdentity();
-		renderBitmapString(30,35,GLUT_BITMAP_TIMES_ROMAN_24,s);
+		renderBitmapString(30,35,GLUT_BITMAP_TIMES_ROMAN_24,buffer);
 	glPopMatrix();
 }
 
@@ -239,7 +231,6 @@ void LevelOnMouseClick(int button,int state,int x,int y){
 		clicked = false;
 		towerPlaced = true;
 	}
-
 	glutPostRedisplay();
 }
 
@@ -252,5 +243,10 @@ void LevelPassiveMouseMotion(int x, int y) {
 		towerX = x-50;
 		towerY = y-50;
 	}
+	glutPostRedisplay();
+}
+
+// forces screen redraw
+void LevelIdle() {
 	glutPostRedisplay();
 }
