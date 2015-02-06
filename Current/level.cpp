@@ -38,6 +38,7 @@ int towersPlaced = 0;
 int frame=0, time, timebase=0;
 int healthAmount = 100;
 int currencyAmount = 1000;
+int mobAmount = 10;
 
 char fpsBuffer[256];
 char healthBuffer[256];
@@ -87,7 +88,7 @@ void DrawLevel()
 	glDisable(GL_LIGHTING);
 
 	//glEnable(GL_TEXTURE_2D);
- //   glShadeModel(GL_FLAT);
+	//glShadeModel(GL_FLAT);
 
 	//// for transparency
 	//glEnable(GL_BLEND);
@@ -153,22 +154,34 @@ void DrawLevel2D()
 
 	// draw enemies
 	if (waveActive) {
-		for (int i=0; i<10; i++) {
-			testMobArray[i]->draw();
+		for (int i=0; i<mobAmount; i++) {
+			testMobArray[i]->draw(i);
 		}
-		if (!endLevel) { // keep enemies moving until one hits end
-			for (int i=0; i<10; i++) {
+		if (healthAmount != 0) { // keep enemies moving until health = 0
+			for (int i=0; i<mobAmount; i++) {
 				GenPath(testMobArray[i], currentLevel);
-			} 
+				if (testMobArray[i]->end) {
+					healthAmount -= 10;
+					//delete testMobArray[i];
+					mobAmount--;
+					for (int i=0; i<mobAmount; i++) {
+						testMobArray[i] = testMobArray[i+1];
+					}
+					glutPostRedisplay();
+				}
+			}
+
 			glutPostRedisplay();
 		} 
 		else {
-			for (int i=0; i<10; i++) {
+			/*for (int i=0; i<10; i++) {
 				delete testMobArray[i];
-			}
+			}*/
 
 			endLevel = false;
 			waveActive = false;
+			healthAmount = 100;
+			mobAmount = 10;
 
 			Sleep(2000);
 			LevelSelectWindow();

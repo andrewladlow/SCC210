@@ -101,7 +101,3 @@ void renderBitmapString(float x, float y, void *font, string str) {
     glutBitmapCharacter(font, *c);
   }
 }
-
-
-
-

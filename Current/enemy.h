@@ -12,7 +12,7 @@ class Enemy {
 	  bool spawned;
 	  bool end;
 	  Enemy(float, float, int, int, int);
-	  void draw();
+	  void draw(int);
 };
 
 #endif

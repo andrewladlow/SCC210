@@ -36,12 +36,12 @@ Enemy::Enemy(float xcoor, float ycoor, int hp, int t, int aN)
 	}
 }
 
-void Enemy::draw() 
+void Enemy::draw(int aN) 
 {
 
 
 	glColor4f(1.0,1.0,1.0,1.0);
-	glBindTexture(GL_TEXTURE_2D, enemyGluintArray[arrayNum]);
+	glBindTexture(GL_TEXTURE_2D, enemyGluintArray[aN]);
 		glPushMatrix();
 			//glTranslatef(xPos, yPos, 0.0f);
 			glBegin(GL_QUADS);
