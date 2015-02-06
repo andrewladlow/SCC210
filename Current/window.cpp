@@ -7,7 +7,6 @@
 #include "wglext.h"
 #include <GL/glut.h>
 #include "IL/il.h"
-#include "window.h"
 #pragma comment(lib,"DevIL.lib")
 
 #include <vector>

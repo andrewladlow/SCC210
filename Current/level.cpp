@@ -25,24 +25,27 @@ GLuint *levelGluintArray = new GLuint[5];
 ILuint *enemyIluintArray = new ILuint[10];
 GLuint *enemyGluintArray = new GLuint[10];
 
-bool g_lmb;
 float towerX = 1280.0f;
 float towerY = 170.0f;
 
 bool waveActive = false;
 bool towerActive = false;
-
 bool endLevel = false;
 bool clicked = false;
 bool towerPlaced = false;
+
 int towersPlaced = 0;
+int frame=0, time, timebase=0;
+int healthAmount = 100;
+int currencyAmount = 1000;
+
+char fpsBuffer[256];
+char healthBuffer[256];
+char currencyBuffer[256];
 
 Enemy* testMobArray[10];
 Tower* testTower;
 Bullet* testBullet;
-
-int frame=0, time, timebase=0;
-char buffer[256];
 
 void InitLevel(int levelValue)
 {
@@ -167,7 +170,7 @@ void DrawLevel2D()
 			endLevel = false;
 			waveActive = false;
 
-			Sleep(3000);
+			Sleep(2000);
 			LevelSelectWindow();
 		}
 	}
@@ -176,7 +179,7 @@ void DrawLevel2D()
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
 	if (time - timebase > 1000) {
-		sprintf_s(buffer,"FPS:%4.2f",
+		sprintf_s(fpsBuffer,"FPS:%4.2f",
 			frame*1000.0/(time-timebase));
 		timebase = time;
 		frame = 0;
@@ -185,8 +188,18 @@ void DrawLevel2D()
 	glColor3f(0.0f,0.0f,0.0f);
 	glPushMatrix();
 		glLoadIdentity();
-		renderBitmapString(30,35,GLUT_BITMAP_TIMES_ROMAN_24,buffer);
+		renderBitmapString(30,35,GLUT_BITMAP_TIMES_ROMAN_24,fpsBuffer);
 	glPopMatrix();
+
+	// draw health
+	glColor3f(0.0f,0.0f,0.0f);
+	sprintf_s(healthBuffer,"%d",healthAmount);
+	renderBitmapString(1450,32.5,GLUT_BITMAP_TIMES_ROMAN_24,healthBuffer);
+
+	// draw currency
+	glColor3f(0.0f,0.0f,0.0f);
+	sprintf_s(currencyBuffer,"%d",currencyAmount);
+	renderBitmapString(1450,70,GLUT_BITMAP_TIMES_ROMAN_24,currencyBuffer);
 }
 
 // This is called when keyboard presses are detected.
