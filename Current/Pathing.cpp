@@ -22,15 +22,15 @@ void GenPath(Enemy *e, int currentLevel) {
 			printf("Pathing 1\n");
 
 			if (e->xPos < 590) {
-				e->xPos += 2.0f;
+				e->xPos += 3.0f;
 				break;
 			} 
 			else if (e->yPos < 470) {
-				e->yPos += 2.0f;
+				e->yPos += 3.0f;
 				break;
 			} 
 			else if (e->xPos >= 590 && e->xPos < 1100) {
-				e->xPos += 2.0f;
+				e->xPos += 3.0f;
 				break;
 			} 
 			else {

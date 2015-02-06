@@ -4,10 +4,10 @@
 #include "menu.h"
 #include "level.h"
 #include "LevelSelect.h"
-
+#include "wglext.h"
 #include <GL/glut.h>
-
 #include "IL/il.h"
+#include "window.h"
 #pragma comment(lib,"DevIL.lib")
 
 #include <vector>
@@ -28,12 +28,18 @@ void MouseMotion(int x, int y)
 }
 
 void initialiseWindow(int argc,char **argv) {
-
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
 	glutInitWindowSize(1280,720);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("Space Tower Defence");
+
+	PFNWGLSWAPINTERVALEXTPROC       wglSwapIntervalEXT = NULL;
+	PFNWGLGETSWAPINTERVALEXTPROC    wglGetSwapIntervalEXT = NULL;
+
+	// init pointers
+	wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
+	wglSwapIntervalEXT (1);
 
 	glutDisplayFunc(DrawMenu);
 	glutReshapeFunc(Resize);

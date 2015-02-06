@@ -98,6 +98,7 @@
     <ClInclude Include="loadTexture.h" />
     <ClInclude Include="pathing.h" />
     <ClInclude Include="tower.h" />
+    <ClInclude Include="wglext.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="menu.h" />

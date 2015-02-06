@@ -21,9 +21,6 @@ using namespace std;
 ILuint *levelIluintArray = new ILuint[5];
 GLuint *levelGluintArray = new GLuint[5];
 
-
-int towersPlaced = 0;
-
 // Enemies
 ILuint *enemyIluintArray = new ILuint[10];
 GLuint *enemyGluintArray = new GLuint[10];
@@ -38,15 +35,13 @@ bool towerActive = false;
 bool endLevel = false;
 bool clicked = false;
 bool towerPlaced = false;
+int towersPlaced = 0;
 
 Enemy* testMobArray[10];
 Tower* testTower;
-
 Bullet* testBullet;
 
-int frame=0;
-int time;
-int timebase=0;
+int frame=0, time, timebase=0;
 char buffer[256];
 
 void InitLevel(int levelValue)
@@ -106,7 +101,6 @@ void DrawLevel()
 
 	// Bring the back buffer to the front and vice-versa
 	glutSwapBuffers();
-
 }
 
 void DrawLevel2D()
@@ -140,6 +134,7 @@ void DrawLevel2D()
 		glTexCoord2f(1.0, 0.0); glVertex2f(1680,0);
 	glEnd();
 
+	// draw tower
 	if (towerActive) {
 		glColor4f(1.0,1.0,1.0,1.0);
 		glBindTexture(GL_TEXTURE_2D, levelGluintArray[2]);
@@ -153,7 +148,7 @@ void DrawLevel2D()
 			glPopMatrix();
 	}
 
-		// draw enemy
+	// draw enemies
 	if (waveActive) {
 		for (int i=0; i<10; i++) {
 			testMobArray[i]->draw();
@@ -168,14 +163,16 @@ void DrawLevel2D()
 			for (int i=0; i<10; i++) {
 				delete testMobArray[i];
 			}
+
 			endLevel = false;
 			waveActive = false;
+
 			Sleep(3000);
 			LevelSelectWindow();
 		}
 	}
 
-	// display fps
+	// draw fps
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
 	if (time - timebase > 1000) {
