@@ -44,6 +44,18 @@ Tower* testTower;
 
 Bullet* testBullet;
 
+int frame=0;
+int time;
+int timebase=0;
+char s[256];
+
+void renderBitmapString(float x, float y, void *font, string str) {
+  glRasterPos2f(x,y);
+  for (string::iterator c = (&str)->begin(); c != (&str)->end(); ++c) {
+    glutBitmapCharacter(font, *c);
+  }
+}
+
 void InitLevel(int levelValue)
 {
     glClearColor (1.0, 1.0, 1.0, 0.0);
@@ -72,7 +84,6 @@ void InitLevel(int levelValue)
 
 	glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
-
 }
 
 void DrawLevel()
@@ -107,6 +118,7 @@ void DrawLevel()
 
 void DrawLevel2D()
 {
+
 	// draw background
 	glColor4f(1.0,1.0,1.0,1);
 	glBindTexture(GL_TEXTURE_2D, levelGluintArray[0]); // choose which one before draw
@@ -169,6 +181,23 @@ void DrawLevel2D()
 			LevelSelectWindow();
 		}
 	}
+
+	// display fps
+	frame++;
+	time=glutGet(GLUT_ELAPSED_TIME);
+	if (time - timebase > 1000) {
+		sprintf_s(s,"FPS:%4.2f",
+			frame*1000.0/(time-timebase));
+		timebase = time;
+		frame = 0;
+	}
+
+	glColor3f(0.0f,0.0f,0.0f);
+
+	glPushMatrix();
+		glLoadIdentity();
+		renderBitmapString(30,35,GLUT_BITMAP_TIMES_ROMAN_24,s);
+	glPopMatrix();
 }
 
 // This is called when keyboard presses are detected.
