@@ -105,7 +105,7 @@ void DrawLevel()
 
 	// Bring the back buffer to the front and vice-versa
 	glutSwapBuffers();
-}
+} 
 
 void DrawLevel2D()
 {
@@ -152,6 +152,8 @@ void DrawLevel2D()
 			glPopMatrix();
 	}
 
+
+
 	// draw enemies
 	if (waveActive) {
 		for (int i=0; i<mobAmount; i++) {
@@ -180,9 +182,12 @@ void DrawLevel2D()
 
 			endLevel = false;
 			waveActive = false;
+			towerActive = false;
+			towerPlaced = false;
+			towerX = 1280.0f;
+			towerY = 170.0f;
 			healthAmount = 100;
 			mobAmount = 10;
-
 			Sleep(2000);
 			LevelSelectWindow();
 		}
