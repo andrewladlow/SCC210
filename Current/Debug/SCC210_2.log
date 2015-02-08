@@ -1,20 +1,8 @@
-﻿Build started 08/02/2015 15:23:36.
+﻿Build started 08/02/2015 19:57:15.
      1>Project "C:\Users\Jack\Desktop\SCC210-master\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Software\Visual Studio\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Pathing.cpp bullet.cpp collision.cpp enemy.cpp level.cpp main.cpp window.cpp
-         level.cpp
-     1>c:\users\jack\desktop\scc210-master\current\level.cpp(117): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jack\desktop\scc210-master\current\level.cpp(118): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jack\desktop\scc210-master\current\level.cpp(142): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jack\desktop\scc210-master\current\level.cpp(143): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-         Generating Code...
-         Compiling...
+         D:\Software\Visual Studio\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp window.cpp
          window.cpp
-         enemy.cpp
-         collision.cpp
-         bullet.cpp
-     1>c:\users\jack\desktop\scc210-master\current\bullet.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Pathing.cpp
          Generating Code...
          Skipping... (no relevant changes detected)
          main.cpp
@@ -34,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.49
+Time Elapsed 00:00:01.25

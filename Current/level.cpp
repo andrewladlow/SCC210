@@ -7,20 +7,27 @@
 #include "LevelSelect.h"
 #include "enemy.h"
 #include "bullet.h"
+#include "Tower.h"
 
 //#include <vector>
 using namespace std;
 
-int towersPlaced = 0;
-
 bool waveActive = false;
 bool towerActive = false;
 bool tower_being_moved = false;
-
 bool endLevel = false;
+bool clicked = false;
+bool towerPlaced = false;
+
+int towersPlaced = 0;
+//int frame=0, time, timebase=0;
+int healthAmount = 100;
+int currencyAmount = 1000;
+int mobAmount = 10;
 
 Enemy* testMob1;
-Enemy* testMob2;
+Enemy* testMobArray[10];
+Tower* testTower;
 Bullet* testBullet;
 sf::Texture sideMenuTexture;
 sf::Texture levelBackgroundTexture;
@@ -35,7 +42,10 @@ void InitLevel(int levelValue)
 	basicTowerTexture.loadFromFile("images/Towers/Basic tower/basicTowerFull.png");
 
 	testMob1 = new Enemy(50, 200, 100, 0, 0);
-	testMob2 = new Enemy(50, 200, 100, 0, 1);
+	for (int i=0; i<10; i++) {
+		testMobArray[i] = new Enemy(50-(i*200), 200, 100, 0, i);
+	}
+	testTower = new Tower(0, 0, 1);
 }
 
 void DrawLevel2D()
@@ -72,21 +82,39 @@ void DrawLevel2D()
 	}
 	// draw enemy
 	if (waveActive) {
-		testMob1->draw();
-		std::cout << testMob1->xPos <<std::endl;
-		std::cout << testMob1->yPos <<std::endl;
-
-		if (!endLevel) {
-			GenPath(testMob1, currentLevel);
-			if (testMob1->xMod > 300) {
-				testMob2->draw();
-				GenPath(testMob2, currentLevel);
+		for (int i=0; i<mobAmount; i++) {
+			testMobArray[i]->draw();
+		}
+		if (healthAmount != 0) { // keep enemies moving until health = 0
+			for (int i=0; i<mobAmount; i++) {
+				GenPath(testMobArray[i], currentLevel);
+				if (testMobArray[i]->end) {
+					healthAmount -= 10;
+					//delete testMobArray[i];
+					mobAmount--;
+					for (int i=0; i<mobAmount; i++) {
+						testMobArray[i] = testMobArray[i+1];
+					}
+				}
 			}
-		} else {
-			delete testMob1;
-			delete testMob2;
+		} 
+		else {
+			/*for (int i=0; i<10; i++) {
+				delete testMobArray[i];
+			}*/
+
 			endLevel = false;
 			waveActive = false;
+			towerActive = false;
+			towerPlaced = false;
+			towerX = 1280.0f;
+			towerY = 170.0f;
+			healthAmount = 100;
+			mobAmount = 10;
+			window.close();
+			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
+			window.setFramerateLimit(60);
+			switchToLevelSelect();
 		}
 	}
 }

@@ -3,23 +3,17 @@
 Enemy::Enemy(float xcoor, float ycoor, int hp, int t, int aN)
 {
 		sf::RectangleShape enemyRect; 
-		xStart = xcoor;
-		yStart = ycoor;
-		xPos = 0.0f;
-		yPos = 0.0f;
-		xMod = 0.0f;
-		yMod = 0.0f;
+		xPos = xcoor;
+		yPos = ycoor;
 		healthPoints = hp;
 		type = t;
 		arrayNum = aN;
 		spawned = false;
+		end = false;
 }
 //
 void Enemy::draw() 
 {
-	spawned = true;
-	xPos = xStart + xMod;
-	yPos = yStart + yMod;
 	enemyRect.setTexture(&enemyTexture[type]);
 	enemyRect.setSize(sf::Vector2f(50, 50));
 	enemyRect.setPosition(xPos, yPos);

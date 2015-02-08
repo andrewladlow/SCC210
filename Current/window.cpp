@@ -11,7 +11,6 @@ float towerX = 1280.0f;
 float towerY = 170.0f;
 int screen = 0;
 
-
 //we call this function when switching screens, it will initialise whatever screen we are calling
 void switchToMenu()
 {

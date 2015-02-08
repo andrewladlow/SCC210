@@ -96,6 +96,7 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="LevelSelect.h" />
     <ClInclude Include="pathing.h" />
+    <ClInclude Include="Tower.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="menu.h" />

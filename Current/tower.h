@@ -7,10 +7,6 @@ class Tower {
       float y;
 	  float direction;
 	  int type;
-
-	  ILuint *towerIluintArray;
-	  GLuint *towerGluintArray;
-
 	  Tower(float, float, int);
 };
 
