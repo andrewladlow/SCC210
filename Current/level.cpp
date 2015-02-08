@@ -33,6 +33,7 @@ sf::Texture sideMenuTexture;
 sf::Texture levelBackgroundTexture;
 sf::Texture enemyTexture[3];
 sf::Texture basicTowerTexture;
+sf::Font font;
 
 void InitLevel(int levelValue)
 {
@@ -46,10 +47,13 @@ void InitLevel(int levelValue)
 		testMobArray[i] = new Enemy(50-(i*200), 200, 100, 0, i);
 	}
 	testTower = new Tower(0, 0, 1);
+
+	font.loadFromFile("SPACEMAN.ttf");
 }
 
 void DrawLevel2D()
-{
+{	
+
 	sf::RectangleShape background(sf::Vector2f(1680, 720));
 	background.setFillColor(sf::Color(255, 255, 255));
 	window.draw(background);
@@ -117,6 +121,23 @@ void DrawLevel2D()
 			switchToLevelSelect();
 		}
 	}
+
+	//draw health amount
+	sf::Text healthText(std::to_string(healthAmount), font);
+	healthText.setPosition(1450, 10);
+	healthText.setCharacterSize(20);
+	healthText.setStyle(sf::Text::Regular);
+	healthText.setColor(sf::Color::Black);
+	window.draw(healthText);
+
+	//draw currency
+	sf::Text currencyText(std::to_string(currencyAmount), font);
+	currencyText.setPosition(1450, 50);
+	currencyText.setCharacterSize(20);
+	currencyText.setStyle(sf::Text::Regular);
+	currencyText.setColor(sf::Color::Black);
+	window.draw(currencyText);
+
 }
 //
 //// This is called when keyboard presses are detected.

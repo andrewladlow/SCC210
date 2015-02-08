@@ -1,8 +1,13 @@
-﻿Build started 08/02/2015 19:57:15.
+﻿Build started 08/02/2015 20:13:22.
      1>Project "C:\Users\Jack\Desktop\SCC210-master\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Software\Visual Studio\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp window.cpp
-         window.cpp
+         D:\Software\Visual Studio\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt level.cpp main.cpp
+         level.cpp
+     1>c:\users\jack\desktop\scc210-master\current\level.cpp(47): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\jack\desktop\scc210-master\current\level.cpp(166): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\jack\desktop\scc210-master\current\level.cpp(167): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\jack\desktop\scc210-master\current\level.cpp(191): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\jack\desktop\scc210-master\current\level.cpp(192): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
          Generating Code...
          Skipping... (no relevant changes detected)
          main.cpp
@@ -22,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.25
+Time Elapsed 00:00:01.04
