@@ -1,19 +1,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-#include <GL/glut.h>
-#include "level.h"
-#include "loadTexture.h"
-#include "window.h"
-#include "Pathing.h"
-#include "LevelSelect.h"
-#include "IL/il.h"
-#pragma comment(lib,"DevIL.lib")
-
+#include "pathing.h"
 #include <vector>
 using namespace std;
-
-
 
 void GenPath(Enemy *e, int currentLevel) {
 
@@ -21,21 +11,18 @@ void GenPath(Enemy *e, int currentLevel) {
 		case 1:
 			printf("Pathing 1\n");
 
-			if (e->xPos < 590) {
-				e->xPos += 10.0f;
+			if (e->xMod < 540) {
+				e->xMod += 1.0f;
 				break;
-			} 
-			else if (e->yPos < 470) {
-				e->yPos += 10.0f;
+			} else if (e->yMod < 270) {
+				e->yMod += 1.0f;
 				break;
-			} 
-			else if (e->xPos >= 590 && e->xPos < 1100) {
-				e->xPos += 10.0f;
+			} else if (e->xMod >= 540 && e->xMod < 1100) {
+				e->xMod += 1.0f;
 				break;
-			} 
-			else {
+			} else {
 				cout << "Enemy reached exit" << endl;
-				e->end = true;
+				//endLevel = true;
 				break;
 			}
 		case 2:

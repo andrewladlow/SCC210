@@ -1,9 +1,12 @@
-using namespace std;
-
-void Resize(int w, int h);
-void MouseMotion(int x, int y);
+#include <SFML/Graphics.hpp>
 void initialiseWindow(int argc,char **argv);
 void MenuWindow();
 void LevelWindow(int levelSelected);
 void LevelSelectWindow();
-void renderBitmapString(float x, float y, void *font, string str);
+void switchToMenu();
+void switchToLevelSelect();
+void switchToLevel();
+
+extern float towerX;
+extern float towerY;
+extern sf::RenderWindow window;

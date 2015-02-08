@@ -1,103 +1,120 @@
 #include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
 #include "menu.h"
 #include "level.h"
 #include "LevelSelect.h"
-#include "wglext.h"
-#include <GL/glut.h>
-#include "IL/il.h"
-#pragma comment(lib,"DevIL.lib")
+#include <SFML/Graphics.hpp>
 
 #include <vector>
 using namespace std;
+sf::RenderWindow window(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
+float towerX = 1280.0f;
+float towerY = 170.0f;
+int screen = 0;
 
-// 	This function is called when the window is resized.
-void Resize(int w, int h) {
-	glutReshapeWindow(1280, 720);
-}
 
-void ResizeLevel(int w, int h) {
-	glutReshapeWindow(1680, 720);
-}
-
-void MouseMotion(int x, int y)
+//we call this function when switching screens, it will initialise whatever screen we are calling
+void switchToMenu()
 {
-	glutPostRedisplay();
-}
-
-void initialiseWindow(int argc,char **argv) {
-	glutInit(&argc,argv);
-	glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
-	glutInitWindowSize(1280,720);
-	glutInitWindowPosition(100,100);
-	glutCreateWindow("Space Tower Defence");
-
-	PFNWGLSWAPINTERVALEXTPROC       wglSwapIntervalEXT = NULL;
-	PFNWGLGETSWAPINTERVALEXTPROC    wglGetSwapIntervalEXT = NULL;
-
-	// init pointers
-	wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
-	wglSwapIntervalEXT (1);
-
-	glutDisplayFunc(DrawMenu);
-	glutReshapeFunc(Resize);
-	glutMouseFunc(MenuOnMouseClick);
-	glutMotionFunc(MouseMotion);
-
-	glutKeyboardFunc(MenuKeyboard);
-
-	ilInit();
 	InitMenu();
-
-	glutMainLoop();
-
+	screen = 0;
 }
-
-void MenuWindow() {
-
-	glutDisplayFunc(DrawMenu);
-	glutMouseFunc(MenuOnMouseClick);
-	glutKeyboardFunc(MenuKeyboard);
-
-	InitMenu();
-
-	glutPostRedisplay();
-
-}
-
-void LevelWindow(int levelSelected) {
-	glutReshapeWindow(1680, 720);
-	glViewport(0, 0, (GLsizei)1680, (GLsizei)720);
-	glutDisplayFunc(DrawLevel);
-	glutMouseFunc(LevelOnMouseClick);
-	glutMotionFunc(LevelMouseMotion);
-	glutPassiveMotionFunc(LevelPassiveMouseMotion);
-	glutKeyboardFunc(LevelKeyboard);
-	glutIdleFunc(LevelIdle);
-
-	InitLevel(levelSelected);
-
-	glutPostRedisplay();
-}
-
-void LevelSelectWindow() {
-	glutReshapeWindow(1280, 720);
-	glViewport(0, 0, (GLsizei)1280, (GLsizei)720);
-	glutDisplayFunc(DrawLevelSelect);
-	glutMouseFunc(LevelSelectOnMouseClick);
-	glutKeyboardFunc(LevelSelectKeyboard);
-	glutMotionFunc(LevelMouseMotion);
-
+void switchToLevelSelect()
+{
 	InitLevelSelect();
-
-	glutPostRedisplay();
+	screen = 1;
+}
+void switchToLevel()
+{
+	InitLevel(0);
+	window.close();
+	window.create(sf::VideoMode(1680, 720), "Space Tower Defence", sf::Style::Close);
+	window.setFramerateLimit(60);
+	screen = 2;
 }
 
-// displays string on screen
-void renderBitmapString(float x, float y, void *font, string str) {
-  glRasterPos2f(x,y);
-  for (string::iterator c = (&str)->begin(); c != (&str)->end(); ++c) {
-    glutBitmapCharacter(font, *c);
-  }
+
+void MenuWindow(){
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		switch(event.type)
+		{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::MouseButtonPressed:
+				MenuOnMouseClick(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
+				break;
+		}
+	}
+	window.clear();
+	DrawMenu2D();
+}
+void LevelWindow(){
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		switch(event.type)
+		{			
+			case sf::Event::KeyPressed:
+				LevelKeyboard(event.key.code);
+				break;
+			case sf::Event::MouseMoved:
+				MouseMotion(event.mouseMove.x, event.mouseMove.y);
+				break;
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::MouseButtonPressed:
+				LevelOnMouseClick(event.mouseButton.button, event.type, event.mouseButton.x, event.mouseButton.y);
+				break;
+		}
+	}
+	window.clear();
+	DrawLevel2D();
+}
+
+void LevelSelectWindow(){
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		switch(event.type)
+		{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::KeyPressed:
+				LevelSelectKeyboard(event.key.code);
+				break;
+			case sf::Event::MouseButtonPressed:
+				LevelSelectOnMouseClick(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
+				break;
+		}
+	}
+	window.clear();
+	DrawLevelSelect2D();
+}
+
+void initialiseWindow(int argc,char **argv){
+	window.setFramerateLimit(60);
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
+	switchToMenu();
+    while (window.isOpen())
+    {
+		//we need to do the logic for the current part of the game that the user is in
+		switch(screen)
+		{
+			case 0:
+				MenuWindow();
+				break;
+			case 1:
+				LevelSelectWindow();
+				break;
+			case 2:
+				LevelWindow();
+				break;
+		}
+		window.display();
+    }
 }

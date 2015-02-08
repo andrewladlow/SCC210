@@ -1,20 +1,10 @@
-#include <GL/glut.h>
-#include "IL/il.h"
-#pragma comment(lib,"DevIL.lib")
-
+#include <SFML/Graphics.hpp>
+#include "window.h"
 void InitLevel(int levelValue);
-void DrawLevel();
 void DrawLevel2D();
-void LevelKeyboard(unsigned char Key,int x,int y);
-void LevelOnMouseClick(int button,int state,int x,int y);
-void LevelMouseMotion(int x, int y);
-void LevelPassiveMouseMotion(int x, int y);
-void LevelIdle();
+void LevelKeyboard(int Key);
+void MouseMotion(int x, int y);
+void LevelOnMouseClick(int button,int type,int x,int y);
 
 extern bool endLevel;
-
-extern ILuint *levelIluintArray;
-extern GLuint *levelGluintArray;
-
-extern ILuint *enemyIluintArray;
-extern GLuint *enemyGluintArray;
+extern sf::Texture enemyTexture[3];

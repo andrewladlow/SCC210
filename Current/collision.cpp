@@ -1,26 +1,9 @@
-#include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
-#include <GL/glut.h>
-#include "level.h"
-#include "loadTexture.h"
-#include "window.h"
-#include "pathing.h"
-#include "LevelSelect.h"
-#include "enemy.h"
-#include "bullet.h"
-
-#include "IL/il.h"
-#pragma comment(lib,"DevIL.lib")
-
-#include <vector>
-using namespace std;
-
-/*bool collisionCheck(Enemy enemy, Bullet bullet) {
-	if (enemy.x < bullet.x + 50 &&
-		enemy.x + 50 > bullet.x &&
-		enemy.y < bullet.y + 50 &&
-		enemy.y + 50 > bullet.y)
+#include "collision.h"
+bool collisionCheck(Enemy enemy, Bullet bullet) {
+	if (enemy.xPos < bullet.xPos + 50 &&
+		enemy.xPos + 50 > bullet.xPos &&
+		enemy.yPos < bullet.yPos + 50 &&
+		enemy.yPos + 50 > bullet.yPos)
 		return true;
 	return false;
-}*/
+}

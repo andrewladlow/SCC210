@@ -52,12 +52,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Orcworm\Source\Repos\SCC210\Current\glut_files\include;C:\Users\Orcworm\Source\Repos\SCC210\Current\devil-sdk-x86-1.7.8\include;H:\My Desktop\SCC210\Current\glut_files\include;H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\include;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\include;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\include;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\include;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SFML-2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Orcworm\Source\Repos\SCC210\Current\glut_files\lib;C:\Users\Orcworm\Source\Repos\SCC210\Current\devil-sdk-x86-1.7.8\lib;H:\My Desktop\SCC210\Current\devil-sdk-x86-1.7.8\lib;H:\My Desktop\SCC210\Current\glut_files\lib;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\glut_files\lib;\\lancs\homes\55\shawp\SCC210\Monday26Jan\Monday26Jan\scc210master\devil-sdk-x86-1.7.8\lib;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\DevIL-SDK-x86-1.7.8\lib;C:\Users\Munkys\Documents\Visual Studio 2012\Projects\scc210master\glut_files\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>SFML-2.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,10 +83,9 @@
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="LevelSelect.cpp" />
-    <ClCompile Include="loadTexture.cpp" />
-    <ClCompile Include="menu.cpp" />
     <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="Pathing.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="window.cpp" />
@@ -95,10 +95,7 @@
     <ClInclude Include="collision.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="LevelSelect.h" />
-    <ClInclude Include="loadTexture.h" />
     <ClInclude Include="pathing.h" />
-    <ClInclude Include="tower.h" />
-    <ClInclude Include="wglext.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="menu.h" />
