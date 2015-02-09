@@ -20,7 +20,6 @@ bool clicked = false;
 bool towerPlaced = false;
 
 int towersPlaced = 0;
-//int frame=0, time, timebase=0;
 int healthAmount = 100;
 int currencyAmount = 1000;
 int mobAmount = 10;
@@ -34,6 +33,12 @@ sf::Texture levelBackgroundTexture;
 sf::Texture enemyTexture[3];
 sf::Texture basicTowerTexture;
 sf::Font font;
+sf::Clock clocking;
+
+
+float lastTime = 0;
+float currentTime;
+float fps;
 
 void InitLevel(int levelValue)
 {
@@ -43,7 +48,7 @@ void InitLevel(int levelValue)
 	basicTowerTexture.loadFromFile("images/Towers/Basic tower/basicTowerFull.png");
 
 	testMob1 = new Enemy(50, 200, 100, 0, 0);
-	for (int i=0; i<10; i++) {
+	for (int i=0; i<mobAmount; i++) {
 		testMobArray[i] = new Enemy(50-(i*200), 200, 100, 0, i);
 	}
 	testTower = new Tower(0, 0, 1);
@@ -93,7 +98,7 @@ void DrawLevel2D()
 			for (int i=0; i<mobAmount; i++) {
 				GenPath(testMobArray[i], currentLevel);
 				if (testMobArray[i]->end) {
-					healthAmount -= 10;
+					healthAmount -= 5;
 					//delete testMobArray[i];
 					mobAmount--;
 					for (int i=0; i<mobAmount; i++) {
@@ -121,6 +126,17 @@ void DrawLevel2D()
 			switchToLevelSelect();
 		}
 	}
+
+	//update and draw fps
+	currentTime = clocking.restart().asSeconds();
+    fps = 1.f / currentTime;
+
+	sf::Text fpsText(std::to_string(fps), font);
+	fpsText.setPosition(30, 35);
+	fpsText.setCharacterSize(20);
+	fpsText.setStyle(sf::Text::Regular);
+	fpsText.setColor(sf::Color::Black);
+	window.draw(fpsText);
 
 	//draw health amount
 	sf::Text healthText(std::to_string(healthAmount), font);

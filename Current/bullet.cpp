@@ -1,4 +1,4 @@
-#include "bullet.h";
+#include "bullet.h"
 
 Bullet::Bullet(float* originX, float* originY, float* targetX, float* targetY)
 {
