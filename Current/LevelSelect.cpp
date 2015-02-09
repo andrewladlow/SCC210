@@ -50,11 +50,17 @@ void DrawLevelSelect2D()
 
 	sf::CircleShape leftArrow(50, 3);
 	leftArrow.setPosition(sf::Vector2f(300, 450));
+	leftArrow.setOutlineColor(sf::Color::Black);
+	leftArrow.setOutlineThickness(3);
+	leftArrow.setFillColor(sf::Color::Green);
 	leftArrow.rotate(-90);
 	window.draw(leftArrow);
 
 	sf::CircleShape rightArrow(50, 3);
 	rightArrow.setPosition(sf::Vector2f(940, 350));
+	rightArrow.setOutlineColor(sf::Color::Black);
+	rightArrow.setOutlineThickness(3);
+	rightArrow.setFillColor(sf::Color::Green);
 	rightArrow.rotate(90);
 	window.draw(rightArrow);
 }
