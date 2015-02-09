@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-Enemy::Enemy(float xcoor, float ycoor, int healthPoints, int type, int arrayNum)
+Enemy::Enemy(float xPos, float yPos, int healthPoints, int type, int arrayNum)
 {
 		sf::RectangleShape enemyRect; 
 		this->xPos = xPos;
