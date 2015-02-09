@@ -1,15 +1,4 @@
-
-class Tower
-{
-   public:
-      float x;
-      float y;
-	  float direction;
-	  int type;
-
-	  // Towers
-	  Tower(float, float, int);
-};
+#include "tower.h"
 
 Tower::Tower(float x, float y, int type)
 {

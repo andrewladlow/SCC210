@@ -1,13 +1,13 @@
 #include "enemy.h"
 
-Enemy::Enemy(float xcoor, float ycoor, int hp, int t, int aN)
+Enemy::Enemy(float xcoor, float ycoor, int healthPoints, int type, int arrayNum)
 {
 		sf::RectangleShape enemyRect; 
-		xPos = xcoor;
-		yPos = ycoor;
-		healthPoints = hp;
-		type = t;
-		arrayNum = aN;
+		this->xPos = xPos;
+		this->yPos = yPos;
+		this->healthPoints = healthPoints;
+		this->type = type;
+		this->arrayNum = arrayNum;
 		spawned = false;
 		end = false;
 }

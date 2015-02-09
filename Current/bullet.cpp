@@ -1,15 +1,19 @@
 #include "bullet.h";
 
-Bullet::Bullet(float* theOriginX, float* theOriginY, float* theTargetX, float* theTargetY)
+Bullet::Bullet(float* originX, float* originY, float* targetX, float* targetY)
 {
-	originX = theOriginX;
-	originY = theOriginY;
-	targetX = theTargetX;
-	targetY = theTargetY;
+	this->originX = originX;
+	this->originY = originY;
+	this->targetX = targetX;
+	this->targetY = targetY;
 
 }
 
 void Bullet::draw()
 {
-	//TODO
+	//Bullet sprite and bullet textures need sorting in the actual level
+	//bulletSprite.setTexture(&bulletTexture[type]);
+	//bulletSprite.setSize(sf::Vector2f(50, 50));
+	//bulletSprite.setPosition(xPos, yPos);
+	//window.draw(bulletSprite);
 }
