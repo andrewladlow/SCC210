@@ -31,21 +31,12 @@ int currentTower = 0;
 bool pickedUpTower = false;
 
 Bullet* testBullet;
-sf::Texture sideMenuTexture;
-sf::Texture levelBackgroundTexture;
-sf::Texture enemyTexture[3];
-sf::Texture basicTowerTexture[2];
-sf::Font font;
+
 
 void InitLevel(int levelValue)
 {
 	cout << currentLevel << std::endl;
-	sideMenuTexture.loadFromFile("Images/Levels/UI/LevelUI.png");
-	levelBackgroundTexture.loadFromFile("Images/LevelSelect/Level" + std::to_string(currentLevel) + ".png");
-	enemyTexture[0].loadFromFile("Images/megaman.png");
-	enemyTexture[1].loadFromFile("Images/Blank.png");
-	basicTowerTexture[0].loadFromFile("images/Towers/Basic tower/basicTowerBase.png");
-	basicTowerTexture[1].loadFromFile("images/Towers/Basic tower/basicTowerTop.png");
+
 
 	//testMob1 = new Enemy(50, 200, 100, 0, 0);
 	for (int i=0; i<10; i++) {
@@ -72,8 +63,6 @@ void InitLevel(int levelValue)
 	}
 
 	//testTower = new Tower(0, 0, 1);
-
-	font.loadFromFile("SPACEMAN.ttf");
 }
 
 void DrawLevel2D()
@@ -85,7 +74,7 @@ void DrawLevel2D()
 
 	sf::RectangleShape levelBackgroundSprite(sf::Vector2f(1280, 720));
 
-	levelBackgroundSprite.setTexture(&levelBackgroundTexture);
+	levelBackgroundSprite.setTexture(&levelsTextures[currentLevel]);
 	window.draw(levelBackgroundSprite);
 
 	// draw screen | menu line

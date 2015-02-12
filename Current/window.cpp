@@ -10,6 +10,18 @@ sf::RenderWindow window(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Sty
 float towerX = 1280.0f;
 float towerY = 170.0f;
 int screen = 0;
+//
+sf::Texture exitButtonLSTexture;
+sf::Texture levelSelectBackgroundTexture;
+sf::Texture levelsTextures[13];
+sf::Font font;
+sf::Texture menubackTexture;
+sf::Texture playButtonTexture;
+sf::Texture exitButtonTexture;
+sf::Texture sideMenuTexture;
+sf::Texture levelBackgroundTexture;
+sf::Texture enemyTexture[3];
+sf::Texture basicTowerTexture[2];
 
 //we call this function when switching screens, it will initialise whatever screen we are calling
 void switchToMenu()
@@ -93,10 +105,24 @@ void LevelSelectWindow(){
 	DrawLevelSelect2D();
 }
 
+void loadResources()
+{
+	playButtonTexture.loadFromFile("images/Shared/playbut.png");
+	exitButtonTexture.loadFromFile("images/Shared/exitbut.png");
+	levelSelectBackgroundTexture.loadFromFile("Images/LevelSelect/background.png");
+	exitButtonLSTexture.loadFromFile("images/Shared/exitbut.png");
+	for(int i = 0; i < 12; i++)
+		levelsTextures[i].loadFromFile("Images/LevelSelect/Level" + std::to_string(i) + ".png");
+	sideMenuTexture.loadFromFile("Images/Levels/UI/LevelUI.png");
+	//levelBackgroundTexture.loadFromFile("Images/LevelSelect/Level" + std::to_string(currentLevel) + ".png");
+	enemyTexture[0].loadFromFile("Images/megaman.png");
+	enemyTexture[1].loadFromFile("Images/Blank.png");
+	basicTowerTexture[0].loadFromFile("images/Towers/Basic tower/basicTowerBase.png");
+	basicTowerTexture[1].loadFromFile("images/Towers/Basic tower/basicTowerTop.png");
+}
+
 void initialiseWindow(int argc,char **argv){
 	window.setFramerateLimit(60);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
 	switchToMenu();
     while (window.isOpen())
     {

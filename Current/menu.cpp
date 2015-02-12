@@ -6,10 +6,6 @@
 #include <filesystem>
 #include <Windows.h>
 #include <cstdio>
-sf::Texture menubackTexture;
-sf::Texture playButtonTexture;
-sf::Texture exitButtonTexture;
-sf::Font fontMenu;
 using namespace std;
 
 string profileList[5];
@@ -18,6 +14,7 @@ int currentProfile = 0;
 int creatingProfileNumber = -1; 
 string creatingNewProfileString = "";
 int deletePressed = 0;
+bool rescourcesLoaded = false;
 
 bool newProfile(string name){
 	ofstream newProfileFile ("saves/" + name + ".towerdefence");
@@ -131,11 +128,28 @@ void enteringText(sf::Event e){
 
 void InitMenu()
 {
-	menubackTexture.loadFromFile("images/Menu/menu.png");
-	playButtonTexture.loadFromFile("images/Shared/playbut.png");
-	exitButtonTexture.loadFromFile("images/Shared/exitbut.png");
-	fontMenu.loadFromFile("SPACEMAN.ttf");
-	//newProfile("Jack");
+	//newProfile("Jack");#
+	if(!rescourcesLoaded)
+	{
+			font.loadFromFile("SPACEMAN.ttf");
+		menubackTexture.loadFromFile("images/Menu/menu.png");
+	
+		sf::Sprite menuBackSprite;
+		menuBackSprite.setTexture(menubackTexture);
+		window.draw(menuBackSprite);
+
+		sf::Text loadingText("loading game...", font);
+		loadingText.setCharacterSize(80);
+		loadingText.setStyle(sf::Text::Regular);
+		loadingText.setColor(sf::Color::White);
+		sf::FloatRect textRect = loadingText.getLocalBounds();
+		loadingText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top  + textRect.height / 2.0f);
+		loadingText.setPosition(sf::Vector2f(1280 / 2.0f, 720 / 2.0f));
+		window.draw(loadingText);
+		window.display();
+		loadResources();
+		rescourcesLoaded = true;
+	}
 	loadProfiles();
 }
 
@@ -156,7 +170,7 @@ void DrawMenu2D()
 	exitButtonSprite.setPosition(sf::Vector2f(740, 350));
 	window.draw(exitButtonSprite);
 
-	sf::Text profileTitle("Select A Profile:", fontMenu);
+	sf::Text profileTitle("Select A Profile:", font);
 	profileTitle.setCharacterSize(20);
 	profileTitle.setStyle(sf::Text::Regular);
 	profileTitle.setColor(sf::Color::White);
@@ -167,7 +181,7 @@ void DrawMenu2D()
 
 	for(int i = 0; i < 5; i++)
 	{
-		profileName[i].setFont(fontMenu);
+		profileName[i].setFont(font);
 		profileName[i].setStyle(sf::Text::Regular);
 		if(currentProfile != i)
 		{
@@ -197,7 +211,7 @@ void DrawMenu2D()
 	}
 	if(creatingProfileNumber != -1)
 	{
-		sf::Text profileInstructions("Press enter to finish creating a new profile:", fontMenu);
+		sf::Text profileInstructions("Press enter to finish creating a new profile:", font);
 		profileInstructions.setCharacterSize(15);
 		profileInstructions.setStyle(sf::Text::Regular);
 		profileInstructions.setColor(sf::Color::White);
@@ -208,7 +222,7 @@ void DrawMenu2D()
 	}
 	else if(profileList[currentProfile] == "null")
 	{
-		sf::Text profileInstructions("Start typing to create a new profile:", fontMenu);
+		sf::Text profileInstructions("Start typing to create a new profile:", font);
 		profileInstructions.setCharacterSize(15);
 		profileInstructions.setStyle(sf::Text::Regular);
 		profileInstructions.setColor(sf::Color::White);
@@ -219,7 +233,7 @@ void DrawMenu2D()
 	}
 	else if(deletePressed == 1)
 	{
-		sf::Text profileInstructions("Press delete again to delete the profile \"" + profileList[currentProfile] + "\":", fontMenu);
+		sf::Text profileInstructions("Press delete again to delete the profile \"" + profileList[currentProfile] + "\":", font);
 		profileInstructions.setCharacterSize(15);
 		profileInstructions.setStyle(sf::Text::Regular);
 		profileInstructions.setColor(sf::Color::White);

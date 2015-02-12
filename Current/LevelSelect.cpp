@@ -12,21 +12,11 @@ int currentLevel = 1;
 
 //string * highScores[10][10][2];
 string highScores[10][10][2];
-sf::Texture levelSelectBackgroundTexture;
-sf::Texture exitButtonLSTexture;
-sf::Texture levelsTextures[13];
-sf::Font fontLevelSelect;
 
 //int highScoreCount[10]; //we use this to store the number of highscore that were loaded for each level
 
 void InitLevelSelect()
 {
-	levelSelectBackgroundTexture.loadFromFile("Images/LevelSelect/background.png");
-	exitButtonLSTexture.loadFromFile("images/Shared/exitbut.png");
-	for(int i = 0; i < 12; i++)
-		levelsTextures[i].loadFromFile("Images/LevelSelect/Level" + std::to_string(i) + ".png");
-	fontLevelSelect.loadFromFile("SPACEMAN.ttf");
-
 	 getHighScores();
 }
 
@@ -84,7 +74,7 @@ void DrawLevelSelect2D()
 	//Highscores Drawing Stuff
 	//draw currency
 
-	sf::Text levelTitle("Level" + std::to_string(currentLevel), fontLevelSelect);;
+	sf::Text levelTitle("Level" + std::to_string(currentLevel), font);;
 	levelTitle.setCharacterSize(40);
 	levelTitle.setStyle(sf::Text::Regular);
 	levelTitle.setColor(sf::Color::White);
@@ -94,7 +84,7 @@ void DrawLevelSelect2D()
 	window.draw(levelTitle);
 
 
-	sf::Text highScoreTitle("Highscores", fontLevelSelect);
+	sf::Text highScoreTitle("Highscores", font);
 	highScoreTitle.setCharacterSize(20);
 	highScoreTitle.setStyle(sf::Text::Regular);
 	highScoreTitle.setColor(sf::Color::White);
@@ -104,7 +94,7 @@ void DrawLevelSelect2D()
 	window.draw(highScoreTitle);
 
 	sf::Text highScoreText;
-	highScoreText.setFont(fontLevelSelect);
+	highScoreText.setFont(font);
 	highScoreText.setCharacterSize(20);
 	highScoreText.setStyle(sf::Text::Regular);
 	highScoreText.setColor(sf::Color::White);
