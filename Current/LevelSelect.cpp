@@ -14,7 +14,7 @@ int currentLevel = 1;
 string highScores[10][10][2];
 sf::Texture levelSelectBackgroundTexture;
 sf::Texture exitButtonLSTexture;
-sf::Texture levelsTextures[3];
+sf::Texture levelsTextures[13];
 sf::Font fontLevelSelect;
 
 //int highScoreCount[10]; //we use this to store the number of highscore that were loaded for each level
@@ -23,7 +23,7 @@ void InitLevelSelect()
 {
 	levelSelectBackgroundTexture.loadFromFile("Images/LevelSelect/background.png");
 	exitButtonLSTexture.loadFromFile("images/Shared/exitbut.png");
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < 12; i++)
 		levelsTextures[i].loadFromFile("Images/LevelSelect/Level" + std::to_string(i) + ".png");
 	fontLevelSelect.loadFromFile("SPACEMAN.ttf");
 
@@ -145,7 +145,7 @@ void LevelSelectOnMouseClick(int button,int x,int y){
 
 		// Right arrow
 		if((x < 947 && x > 847) && (y < 500 && y > 300)){
-			if(currentLevel < 2){currentLevel++;}
+			if(currentLevel < 10){currentLevel++;}
 		}
 
 		// Left arrow
