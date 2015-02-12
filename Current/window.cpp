@@ -36,15 +36,14 @@ void MenuWindow(){
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		switch(event.type)
-		{
-			case sf::Event::Closed:
+			if (event.type == sf::Event::Closed)
 				window.close();
-				break;
-			case sf::Event::MouseButtonPressed:
+			else if(event.type == sf::Event::MouseButtonPressed)
 				MenuOnMouseClick(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
-				break;
-		}
+			else if(event.type == sf::Event::TextEntered)
+				enteringText(event);
+			else if(event.type == sf::Event::KeyPressed)
+				MenuKeyboard(event);
 	}
 	window.clear();
 	DrawMenu2D();

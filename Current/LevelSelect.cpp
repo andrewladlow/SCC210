@@ -1,15 +1,23 @@
 #include <iostream>
+#include <string>
 #include <stdlib.h>
 #include <stdio.h>
 #include "levelSelect.h"
 #include "window.h"
 #include <vector>
+#include <SFML/Network.hpp>
+#include "highscore.h"
 using namespace std;
 int currentLevel = 1;
 
+Highscore highScoreInfo;
 sf::Texture levelSelectBackgroundTexture;
 sf::Texture exitButtonLSTexture;
 sf::Texture levelsTextures[3];
+sf::Font fontLevelSelect;
+
+//string highScores[10][10][2];
+//int highScoreCount[10]; //we use this to store the number of highscore that were loaded for each level
 
 void InitLevelSelect()
 {
@@ -17,7 +25,12 @@ void InitLevelSelect()
 	exitButtonLSTexture.loadFromFile("images/Shared/exitbut.png");
 	for(int i = 0; i < 3; i++)
 		levelsTextures[i].loadFromFile("Images/LevelSelect/Level" + std::to_string(i) + ".png");
+	fontLevelSelect.loadFromFile("SPACEMAN.ttf");
+
+	highScoreInfo = getHighScores();
 }
+
+
 void DrawLevelSelect2D()
 {
 	sf::Sprite levelSelectBackgroundSprite;
@@ -30,26 +43,30 @@ void DrawLevelSelect2D()
 	window.draw(exitButtonSprite);
 
 	//Current Level
+
+
 	sf::RectangleShape levelSprites[3];
 	levelSprites[0].setSize(sf::Vector2f(427, 240));
-	levelSprites[0].setPosition(410, 280);
+	sf::FloatRect spritesRect = levelSprites[0].getLocalBounds();
+	levelSprites[0].setOrigin(spritesRect.left + spritesRect.width / 2.0f, spritesRect.top  + spritesRect.height / 2.0f);
+	levelSprites[0].setPosition(sf::Vector2f(1280 / 2.0f, 390));
 	levelSprites[0].setTexture(&levelsTextures[currentLevel]);
 	window.draw(levelSprites[0]);
 
 	//Previous Level
 	levelSprites[1].setSize(sf::Vector2f(160, 95));
-	levelSprites[1].setPosition(120, 355);
+	levelSprites[1].setPosition(140, 355);
 	levelSprites[1].setTexture(&levelsTextures[currentLevel-1]);
 	window.draw(levelSprites[1]);
 
 	// Next level 
 	levelSprites[2].setSize(sf::Vector2f(160, 95));
-	levelSprites[2].setPosition(957, 355);
+	levelSprites[2].setPosition(977, 355);
 	levelSprites[2].setTexture(&levelsTextures[currentLevel+1]);
 	window.draw(levelSprites[2]);
 
 	sf::CircleShape leftArrow(50, 3);
-	leftArrow.setPosition(sf::Vector2f(300, 450));
+	leftArrow.setPosition(sf::Vector2f(320, 450));
 	leftArrow.setOutlineColor(sf::Color::Black);
 	leftArrow.setOutlineThickness(3);
 	leftArrow.setFillColor(sf::Color::Green);
@@ -57,12 +74,52 @@ void DrawLevelSelect2D()
 	window.draw(leftArrow);
 
 	sf::CircleShape rightArrow(50, 3);
-	rightArrow.setPosition(sf::Vector2f(940, 350));
+	rightArrow.setPosition(sf::Vector2f(960, 350));
 	rightArrow.setOutlineColor(sf::Color::Black);
 	rightArrow.setOutlineThickness(3);
 	rightArrow.setFillColor(sf::Color::Green);
 	rightArrow.rotate(90);
 	window.draw(rightArrow);
+
+	//Highscores Drawing Stuff
+	//draw currency
+
+	sf::Text levelTitle("Level" + std::to_string(currentLevel), fontLevelSelect);;
+	levelTitle.setCharacterSize(40);
+	levelTitle.setStyle(sf::Text::Regular);
+	levelTitle.setColor(sf::Color::White);
+	sf::FloatRect textRect = levelTitle.getLocalBounds();
+	levelTitle.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top  + textRect.height / 2.0f);
+	levelTitle.setPosition(sf::Vector2f(1280 / 2.0f, 50));
+	window.draw(levelTitle);
+
+
+	sf::Text highScoreTitle("Highscores", fontLevelSelect);
+	highScoreTitle.setCharacterSize(20);
+	highScoreTitle.setStyle(sf::Text::Regular);
+	highScoreTitle.setColor(sf::Color::White);
+	textRect = highScoreTitle.getLocalBounds();
+	highScoreTitle.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top  + textRect.height / 2.0f);
+	highScoreTitle.setPosition(sf::Vector2f(1280 / 2.0f, 100));
+	window.draw(highScoreTitle);
+
+	sf::Text highScoreText;
+	highScoreText.setFont(fontLevelSelect);
+	highScoreText.setCharacterSize(20);
+	highScoreText.setStyle(sf::Text::Regular);
+	highScoreText.setColor(sf::Color::White);
+	for(int i = 0; i < 5; i++)
+	{
+		if (atoi(highScoreInfo.highScores[currentLevel-1][i][0].c_str()) == 0)
+			break;
+		highScoreText.setString(highScoreInfo.highScores[currentLevel-1][i][0] + "  " + highScoreInfo.highScores[currentLevel-1][i][1]);
+		textRect = highScoreText.getLocalBounds();
+		highScoreText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top  + textRect.height / 2.0f);
+		highScoreText.setPosition(sf::Vector2f(1280 / 2.0f, 130 + (i * 20)));
+		window.draw(highScoreText);
+	}
+
+	//submitScore(0, 9999, "Jack");
 }
 
 // This is called when keyboard presses are detected.

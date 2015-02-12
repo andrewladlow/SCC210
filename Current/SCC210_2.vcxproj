@@ -58,7 +58,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>SFML-2.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-network-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,11 +82,13 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="highscore.cpp" />
     <ClCompile Include="LevelSelect.cpp" />
     <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="Pathing.cpp" />
+    <ClCompile Include="profile.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
@@ -94,6 +96,7 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="highscore.h" />
     <ClInclude Include="LevelSelect.h" />
     <ClInclude Include="pathing.h" />
     <ClInclude Include="Tower.h" />
