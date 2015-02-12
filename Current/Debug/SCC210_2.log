@@ -1,19 +1,35 @@
-﻿Build started 12/02/2015 16:34:44.
+﻿Build started 12/02/2015 16:57:17.
      1>Project "H:\My Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt LevelSelect.cpp highscore.cpp level.cpp window.cpp
-         window.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Pathing.cpp Tower.cpp bullet.cpp collision.cpp enemy.cpp level.cpp window.cpp
          level.cpp
-     1>h:\my documents\github\scc210\current\level.cpp(52): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>h:\my documents\github\scc210\current\level.cpp(182): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>h:\my documents\github\scc210\current\level.cpp(183): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>h:\my documents\github\scc210\current\level.cpp(207): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>h:\my documents\github\scc210\current\level.cpp(208): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-         LevelSelect.cpp
-     1>h:\my documents\github\scc210\current\levelselect.cpp(118): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(53): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(55): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(59): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(61): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(63): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(65): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(67): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(69): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(71): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(313): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(314): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         enemy.cpp
+         Tower.cpp
+     1>h:\my documents\github\scc210\current\tower.cpp(29): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>h:\my documents\github\scc210\current\tower.cpp(32): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>h:\my documents\github\scc210\current\tower.cpp(35): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>h:\my documents\github\scc210\current\tower.cpp(39): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\tower.cpp(126): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>h:\my documents\github\scc210\current\tower.cpp(128): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>h:\my documents\github\scc210\current\tower.cpp(129): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         Pathing.cpp
          Generating Code...
          Compiling...
-         highscore.cpp
+         window.cpp
+         collision.cpp
+         bullet.cpp
          Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"SFML-2.2\lib" "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.lib" /MACHINE:X86 Debug\bullet.obj
@@ -28,9 +44,10 @@
          Debug\profile.obj
          Debug\Tower.obj
          Debug\window.obj
+         LINK : H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe not found or not built by the last incremental link; performing full link
          SCC210_2.vcxproj -> H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe
      1>Done Building Project "H:\My Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:14.77
+Time Elapsed 00:00:20.36

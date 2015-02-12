@@ -14,6 +14,7 @@ class Enemy {
 	  bool end;
 	  sf::RectangleShape enemyRect;
 	  Enemy(float, float, int, int, int);
+
 	  void draw();
 };
 #endif

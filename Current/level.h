@@ -8,3 +8,4 @@ void LevelOnMouseClick(int button,int type,int x,int y);
 
 extern bool endLevel;
 extern sf::Texture enemyTexture[3];
+extern sf::Texture basicTowerTexture[2];

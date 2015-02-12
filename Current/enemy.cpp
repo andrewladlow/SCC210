@@ -14,9 +14,8 @@ Enemy::Enemy(float xPos, float yPos, int healthPoints, int type, int arrayNum)
 //
 void Enemy::draw() 
 {
-	enemyRect.setTexture(&enemyTexture[type]);
-	enemyRect.setSize(sf::Vector2f(50, 50));
-	enemyRect.setPosition(xPos, yPos);
-	window.draw(enemyRect);
+		enemyRect.setTexture(&enemyTexture[this->type], true);
+		enemyRect.setSize(sf::Vector2f(50, 50));
+		enemyRect.setPosition(xPos, yPos);
+		window.draw(enemyRect);
 }
-

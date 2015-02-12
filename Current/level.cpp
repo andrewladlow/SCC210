@@ -19,39 +19,59 @@ bool endLevel = false;
 bool clicked = false;
 bool towerPlaced = false;
 
-int towersPlaced = 0;
 int healthAmount = 100;
 int currencyAmount = 1000;
 int mobAmount = 10;
 
 Enemy* testMob1;
 Enemy* testMobArray[10];
-Tower* testTower;
+
+Tower* createdTowers[30];
+int currentTower = 0;
+bool pickedUpTower = false;
+
 Bullet* testBullet;
 sf::Texture sideMenuTexture;
 sf::Texture levelBackgroundTexture;
 sf::Texture enemyTexture[3];
-sf::Texture basicTowerTexture;
+sf::Texture basicTowerTexture[2];
 sf::Font font;
-sf::Clock clocking;
-
-
-float lastTime = 0;
-float currentTime;
-float fps;
 
 void InitLevel(int levelValue)
 {
+	cout << currentLevel << std::endl;
 	sideMenuTexture.loadFromFile("Images/Levels/UI/LevelUI.png");
 	levelBackgroundTexture.loadFromFile("Images/LevelSelect/Level" + std::to_string(currentLevel) + ".png");
 	enemyTexture[0].loadFromFile("Images/megaman.png");
-	basicTowerTexture.loadFromFile("images/Towers/Basic tower/basicTowerFull.png");
+	enemyTexture[1].loadFromFile("Images/Blank.png");
+	basicTowerTexture[0].loadFromFile("images/Towers/Basic tower/basicTowerBase.png");
+	basicTowerTexture[1].loadFromFile("images/Towers/Basic tower/basicTowerTop.png");
 
-	testMob1 = new Enemy(50, 200, 100, 0, 0);
-	for (int i=0; i<mobAmount; i++) {
-		testMobArray[i] = new Enemy(50-(i*200), 200, 100, 0, i);
+	//testMob1 = new Enemy(50, 200, 100, 0, 0);
+	for (int i=0; i<10; i++) {
+		if (currentLevel == 1)
+			testMobArray[i] = new Enemy(0-(i*200), 190, 150, 0, i);
+		else if (currentLevel == 2)
+			testMobArray[i] = new Enemy(150, 0-(i*200), 150, 0, i);
+		else if (currentLevel == 3)
+			testMobArray[i] = new Enemy(0-(i*200), 220, 150, 0, i);
+		else if (currentLevel == 4)
+			testMobArray[i] = new Enemy(0-(i*200), 220, 150, 0, i);
+		else if (currentLevel == 5)
+			testMobArray[i] = new Enemy(280-(i*200), 360, 150, 1, i);
+		else if (currentLevel == 6)
+			testMobArray[i] = new Enemy(1280+(i*200), 80, 150, 1, i);
+		else if (currentLevel == 7)
+			testMobArray[i] = new Enemy(1280+(i*200), 150, 150, 1, i);
+		else if (currentLevel == 8)
+			testMobArray[i] = new Enemy(80, 0-(i*200), 150, 0, i);
+		else if (currentLevel == 9)
+			testMobArray[i] = new Enemy(720, 720+(i*200), 150, 0, i);
+		else if (currentLevel == 10)
+			testMobArray[i] = new Enemy(220, 0-(i*200), 150, 0, i);
 	}
-	testTower = new Tower(0, 0, 1);
+
+	//testTower = new Tower(0, 0, 1);
 
 	font.loadFromFile("SPACEMAN.ttf");
 }
@@ -80,44 +100,125 @@ void DrawLevel2D()
 	sideMenu.setTexture(sideMenuTexture);
 	sideMenu.setPosition(1280, 0);
 	window.draw(sideMenu);
-	testMob1->draw();
+	//testMob1->draw();
 
-	if (towerActive) {
-		sf::RectangleShape tower(sf::Vector2f(towerX, towerY));
-		tower.setPosition(towerX, towerY);
-		tower.setTexture(&basicTowerTexture);
-		tower.setSize(sf::Vector2f(130, 140));
-		window.draw(tower);
+	// Follow mouse is tower picked up
+	if(pickedUpTower){
+		createdTowers[currentTower]->setPos(towerX,towerY);
 	}
+
+
+	// draw towers
+	for(int i=0; i<30; i++){
+		if(createdTowers[i] != NULL){
+			createdTowers[i]->DrawTower();
+		}
+	}
+
+	if (currentLevel == 5) {
+		for (int i=0; i<mobAmount; i++) {
+			if(testMobArray[i] != NULL) {
+				if (testMobArray[i]->xPos == 280 && testMobArray[i]->yPos == 360 && testMobArray[i]->type == 1) {
+					testMobArray[i]->type = 0;
+					testMobArray[i]->draw();
+				}
+			}
+		}
+	}
+
+	if (currentLevel == 6) {
+		for (int i=0; i<mobAmount; i++) {
+			if(testMobArray[i] != NULL) {
+				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 80 && testMobArray[i]->type == 1) {
+					testMobArray[i]->type = 0;
+					testMobArray[i]->draw();
+				}
+			}
+		}
+	}
+
+	if (currentLevel == 7) {
+		for (int i=0; i<mobAmount; i++) {
+			if(testMobArray[i] != NULL) {
+				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 150 && testMobArray[i]->type == 1) {
+					testMobArray[i]->type = 0;
+					testMobArray[i]->draw();
+				}
+			}
+		}
+	}
+
+	if (currentLevel == 8) {
+		for (int i=0; i<mobAmount; i++) {
+			if(testMobArray[i] != NULL) {
+				if (testMobArray[i]->xPos == 80 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 1) {
+					testMobArray[i]->type = 0;
+					testMobArray[i]->draw();
+				}
+			}
+		}
+	}
+
+	if (currentLevel == 9) {
+		for (int i=0; i<mobAmount; i++) {
+			if(testMobArray[i] != NULL) {
+				if (testMobArray[i]->xPos == 720 && testMobArray[i]->yPos == 720 && testMobArray[i]->type == 1) {
+					testMobArray[i]->type = 0;
+					testMobArray[i]->draw();
+				}
+			}
+		}
+	}
+
+	if (currentLevel == 10) {
+		for (int i=0; i<mobAmount; i++) {
+			if(testMobArray[i] != NULL) {
+				if (testMobArray[i]->xPos == 220 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 1) {
+					testMobArray[i]->type = 0;
+					testMobArray[i]->draw();
+				}
+			}
+		}
+	}
+
 	// draw enemy
 	if (waveActive) {
 		for (int i=0; i<mobAmount; i++) {
-			testMobArray[i]->draw();
+			if(testMobArray[i] != NULL){
+				testMobArray[i]->draw();
+				for(int j=0; j<30; j++){
+					if(createdTowers[j] != NULL){
+						createdTowers[j]->enemyInRange(testMobArray[i]);
+					}
+				}
+				if(testMobArray[i]->healthPoints < 1){
+							testMobArray[i] = NULL;					
+				}
+			}
 		}
 		if (healthAmount != 0) { // keep enemies moving until health = 0
 			for (int i=0; i<mobAmount; i++) {
-				GenPath(testMobArray[i], currentLevel);
-				if (testMobArray[i]->end) {
-					healthAmount -= 5;
-					//delete testMobArray[i];
-					mobAmount--;
-					for (int i=0; i<mobAmount; i++) {
-						testMobArray[i] = testMobArray[i+1];
+				if(testMobArray[i] != NULL){
+					GenPath(testMobArray[i], currentLevel);
+					if (testMobArray[i]->end) {
+						healthAmount -= 10;
+						//delete testMobArray[i];
+						mobAmount--;
+						for (int i=0; i<mobAmount; i++) {
+							testMobArray[i] = testMobArray[i+1];
+						}
 					}
 				}
 			}
 		} 
 		else {
-			/*for (int i=0; i<10; i++) {
-				delete testMobArray[i];
-			}*/
 
 			endLevel = false;
 			waveActive = false;
 			towerActive = false;
 			towerPlaced = false;
-			towerX = 1280.0f;
-			towerY = 170.0f;
+			towerX = 1350.0f;
+			towerY = 240.0f;
 			healthAmount = 100;
 			mobAmount = 10;
 			window.close();
@@ -126,17 +227,6 @@ void DrawLevel2D()
 			switchToLevelSelect();
 		}
 	}
-
-	//update and draw fps
-	currentTime = clocking.restart().asSeconds();
-    fps = 1.f / currentTime;
-
-	sf::Text fpsText(std::to_string(fps), font);
-	fpsText.setPosition(30, 35);
-	fpsText.setCharacterSize(20);
-	fpsText.setStyle(sf::Text::Regular);
-	fpsText.setColor(sf::Color::Black);
-	window.draw(fpsText);
 
 	//draw health amount
 	sf::Text healthText(std::to_string(healthAmount), font);
@@ -154,6 +244,8 @@ void DrawLevel2D()
 	currencyText.setColor(sf::Color::Black);
 	window.draw(currencyText);
 
+
+
 }
 //
 //// This is called when keyboard presses are detected.
@@ -170,32 +262,46 @@ void LevelKeyboard(int Key){
 void LevelOnMouseClick(int button, int type, int x, int y){
 	if(button == sf::Mouse::Left)
 	{
-		cout << "PRESSSSSSSSSS";
+		//cout << "LMB clicked "<<std::endl;
 		if(type == sf::Event::MouseButtonPressed)
 		{
-			if(tower_being_moved)
-			{
-				tower_being_moved = false;
-			}
-			else if(towerX-x+50<50 && towerX-x+50>-50 && towerY-y+50<50 && towerY-y+50>-50){
-				tower_being_moved = true;
-				towerX = x-50;
-				towerY = y-50;
+			// In process of placing tower
+			if(pickedUpTower && createdTowers[currentTower]->checkPlacement()){
+					pickedUpTower = false;
+					towerX = 1350;
+					towerY = 240;
+					currentTower++;
 			}
 
 			// Start button
 			if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
-				cout << "Clicked start "<<std::endl;
+				//cout << "Clicked start "<<std::endl;
 				waveActive = true;
 			}
+
+			// Exit button
 			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
+				
+				waveActive = false;
+				// Reset Towers
+				for(int i=0; i<30; i++){
+					createdTowers[i] = NULL;
+				}
+				currentTower=0;
+
 				window.close();
 				window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 				window.setFramerateLimit(60);
 				switchToLevelSelect();
 			}
+
+			// Basic Tower button
 			if((x < 1410 && x > 1280) && (y < 310 && y > 170)){
-				towerActive = true;
+				if(!pickedUpTower){
+					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,1);
+					createdTowers[currentTower]->DrawTower();
+					pickedUpTower = true;
+				}
 			}
 		}
 	}
@@ -203,9 +309,9 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 
 void MouseMotion(int x, int y)
 {
-	if (tower_being_moved) {
-		towerX = x-50;
-		towerY = y-50;
+	if (pickedUpTower) {
+		towerX = x;
+		towerY = y;
 	}
 
 }
