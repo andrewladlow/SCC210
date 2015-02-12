@@ -1,5 +1,6 @@
 #include <SFML/Network.hpp>
 #include "highscore.h"
+#include "LevelSelect.h"
 using namespace std;
 
 bool submitHighScore(int level, int score, string name)
@@ -21,9 +22,9 @@ bool submitHighScore(int level, int score, string name)
 		return false;
 }
 
-Highscore getHighScores()
+void getHighScores()
 {
-	Highscore highScoreInfo;
+	int highScoreCount[10];
 
 	sf::Http http("jwoodmansey.com");
 	sf::Http::Request request;
@@ -37,7 +38,7 @@ Highscore getHighScores()
 	string responseString = response.getBody();
 
 	for(int i = 0; i < 10; i++)
-		highScoreInfo.highScoreCount[i] = 0;
+		highScoreCount[i] = 0;
 
 	string temp;
 	int last = 0; int next = 0;
@@ -46,7 +47,7 @@ Highscore getHighScores()
 	{
 		temp = responseString.substr(last, next-last);
 		if(field == 1 || field == 2)
-			highScoreInfo.highScores[level][highScoreInfo.highScoreCount[level]][field-1] = temp;
+			highScores[level][highScoreCount[level]][field-1] = temp;
 		if(field == 0) //set the current level we're adding the score to
 		{
 			level = atoi(temp.c_str());
@@ -54,8 +55,8 @@ Highscore getHighScores()
 		}
 		else if(field == 2)
 		{
-			highScoreInfo.highScoreCount[level]++;
-			if(highScoreInfo.highScoreCount[level] >= 10) //we don't want more than the 10 highest scores for each level (althought the DB shouldn't ever return more - check anyway)
+			highScoreCount[level]++;
+			if(highScoreCount[level] >= 10) //we don't want more than the 10 highest scores for each level (althought the DB shouldn't ever return more - check anyway)
 				break;
 			field = 0;
 		}
@@ -68,8 +69,6 @@ Highscore getHighScores()
 		{
 			break;
 		}
-
-		return highScoreInfo;
 	}
 
 	//debug info, not needed

@@ -1,16 +1,22 @@
-﻿Build started 12/02/2015 14:15:29.
-     1>Project "D:\My Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
+﻿Build started 12/02/2015 16:34:44.
+     1>Project "H:\My Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Software\Visual Studio\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt LevelSelect.cpp highscore.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt LevelSelect.cpp highscore.cpp level.cpp window.cpp
+         window.cpp
+         level.cpp
+     1>h:\my documents\github\scc210\current\level.cpp(52): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(182): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(183): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(207): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\level.cpp(208): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
          LevelSelect.cpp
-     1>d:\my documents\github\scc210\current\levelselect.cpp(118): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>h:\my documents\github\scc210\current\levelselect.cpp(118): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
          Generating Code...
          Compiling...
          highscore.cpp
          Generating Code...
-     1>d:\my documents\github\scc210\current\highscore.cpp(100): warning C4715: 'getHighScores' : not all control paths return a value
        Link:
-         D:\Software\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"SFML-2.2\lib" "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.lib" /MACHINE:X86 Debug\bullet.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"SFML-2.2\lib" "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.lib" /MACHINE:X86 Debug\bullet.obj
          Debug\collision.obj
          Debug\enemy.obj
          Debug\highscore.obj
@@ -22,9 +28,9 @@
          Debug\profile.obj
          Debug\Tower.obj
          Debug\window.obj
-         SCC210_2.vcxproj -> D:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe
-     1>Done Building Project "D:\My Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" (Build target(s)).
+         SCC210_2.vcxproj -> H:\My Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe
+     1>Done Building Project "H:\My Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.63
+Time Elapsed 00:00:14.77
