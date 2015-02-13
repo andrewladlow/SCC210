@@ -2,6 +2,7 @@
 #include "menu.h"
 #include "level.h"
 #include "LevelSelect.h"
+#include "winscreen.h"
 #include <SFML/Graphics.hpp>
 
 #include <vector>
@@ -41,6 +42,9 @@ void switchToLevel()
 	window.create(sf::VideoMode(1680, 720), "Space Tower Defence", sf::Style::Close);
 	window.setFramerateLimit(60);
 	screen = 2;
+}
+void switchToWinScreen() {
+	screen = 3;
 }
 
 
@@ -90,19 +94,40 @@ void LevelSelectWindow(){
 	{
 		switch(event.type)
 		{
-			case sf::Event::Closed:
-				window.close();
-				break;
 			case sf::Event::KeyPressed:
 				LevelSelectKeyboard(event.key.code);
 				break;
 			case sf::Event::MouseButtonPressed:
 				LevelSelectOnMouseClick(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
 				break;
+			case sf::Event::Closed:
+				window.close();
+				break;
 		}
 	}
 	window.clear();
 	DrawLevelSelect2D();
+}
+
+void WinWindow() {
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		switch(event.type)
+		{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::KeyPressed:
+				//LevelSelectKeyboard(event.key.code);
+				break;
+			case sf::Event::MouseButtonPressed:
+				WinOnMouseClick(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
+				break;
+		}
+	}
+	window.clear();
+	DrawWin2D();
 }
 
 void loadResources()
@@ -137,6 +162,9 @@ void initialiseWindow(int argc,char **argv){
 				break;
 			case 2:
 				LevelWindow();
+				break;
+			case 3:
+				WinWindow();
 				break;
 		}
 		window.display();

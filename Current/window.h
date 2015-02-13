@@ -3,9 +3,11 @@ void initialiseWindow(int argc,char **argv);
 void MenuWindow();
 void LevelWindow(int levelSelected);
 void LevelSelectWindow();
+void WinWindow();
 void switchToMenu();
 void switchToLevelSelect();
 void switchToLevel();
+void switchToWinScreen();
 void loadResources();
 
 extern float towerX;

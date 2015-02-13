@@ -187,7 +187,15 @@ void DrawLevel2D()
 				}
 			}
 		}
-		if (healthAmount != 0) { // keep enemies moving until health = 0
+		if (mobAmount == 0 && healthAmount != 0) { // all enemies dead, player still alive
+			waveActive = false;
+			mobAmount = 10;
+			window.close();
+			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
+			window.setFramerateLimit(60);
+			switchToWinScreen();
+
+		} else if (healthAmount != 0) { // keep enemies moving until health = 0
 			for (int i=0; i<mobAmount; i++) {
 				if(testMobArray[i] != NULL){
 					GenPath(testMobArray[i], currentLevel);
@@ -201,8 +209,7 @@ void DrawLevel2D()
 					}
 				}
 			}
-		} 
-		else {
+		} else {
 
 			endLevel = false;
 			waveActive = false;
