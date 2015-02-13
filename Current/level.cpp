@@ -37,29 +37,27 @@ void InitLevel(int levelValue)
 {
 	cout << currentLevel << std::endl;
 
-
-	//testMob1 = new Enemy(50, 200, 100, 0, 0);
 	for (int i=0; i<10; i++) {
 		if (currentLevel == 1)
-			testMobArray[i] = new Enemy(0-(i*200), 190, 150, 0, i);
+			testMobArray[i] = new Enemy(0-(i*200), 190, 1);
 		else if (currentLevel == 2)
-			testMobArray[i] = new Enemy(150, 0-(i*200), 150, 0, i);
+			testMobArray[i] = new Enemy(150, 0-(i*200), 1);
 		else if (currentLevel == 3)
-			testMobArray[i] = new Enemy(0-(i*200), 220, 150, 0, i);
+			testMobArray[i] = new Enemy(0-(i*200), 220, 1);
 		else if (currentLevel == 4)
-			testMobArray[i] = new Enemy(0-(i*200), 220, 150, 0, i);
+			testMobArray[i] = new Enemy(0-(i*200), 220, 1);
 		else if (currentLevel == 5)
-			testMobArray[i] = new Enemy(280-(i*200), 360, 150, 1, i);
+			testMobArray[i] = new Enemy(280-(i*200), 360, 0);
 		else if (currentLevel == 6)
-			testMobArray[i] = new Enemy(1280+(i*200), 80, 150, 1, i);
+			testMobArray[i] = new Enemy(1280+(i*200), 80, 0);
 		else if (currentLevel == 7)
-			testMobArray[i] = new Enemy(1280+(i*200), 150, 150, 1, i);
+			testMobArray[i] = new Enemy(1280+(i*200), 150, 0);
 		else if (currentLevel == 8)
-			testMobArray[i] = new Enemy(80, 0-(i*200), 150, 0, i);
+			testMobArray[i] = new Enemy(80, 0-(i*200), 1);
 		else if (currentLevel == 9)
-			testMobArray[i] = new Enemy(720, 720+(i*200), 150, 0, i);
+			testMobArray[i] = new Enemy(720, 720+(i*200), 1);
 		else if (currentLevel == 10)
-			testMobArray[i] = new Enemy(220, 0-(i*200), 150, 0, i);
+			testMobArray[i] = new Enemy(220, 0-(i*200), 1);
 	}
 
 	//testTower = new Tower(0, 0, 1);
@@ -104,11 +102,12 @@ void DrawLevel2D()
 		}
 	}
 
+	// handle enemy movement with certain map spawn points
 	if (currentLevel == 5) {
 		for (int i=0; i<mobAmount; i++) {
 			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 280 && testMobArray[i]->yPos == 360 && testMobArray[i]->type == 1) {
-					testMobArray[i]->type = 0;
+				if (testMobArray[i]->xPos == 280 && testMobArray[i]->yPos == 360 && testMobArray[i]->type == 0) {
+					testMobArray[i]->setProperties(1);
 					testMobArray[i]->draw();
 				}
 			}
@@ -118,8 +117,8 @@ void DrawLevel2D()
 	if (currentLevel == 6) {
 		for (int i=0; i<mobAmount; i++) {
 			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 80 && testMobArray[i]->type == 1) {
-					testMobArray[i]->type = 0;
+				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 80 && testMobArray[i]->type == 0) {
+					testMobArray[i]->setProperties(1);
 					testMobArray[i]->draw();
 				}
 			}
@@ -129,8 +128,8 @@ void DrawLevel2D()
 	if (currentLevel == 7) {
 		for (int i=0; i<mobAmount; i++) {
 			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 150 && testMobArray[i]->type == 1) {
-					testMobArray[i]->type = 0;
+				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 150 && testMobArray[i]->type == 0) {
+					testMobArray[i]->setProperties(1);
 					testMobArray[i]->draw();
 				}
 			}
@@ -140,8 +139,8 @@ void DrawLevel2D()
 	if (currentLevel == 8) {
 		for (int i=0; i<mobAmount; i++) {
 			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 80 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 1) {
-					testMobArray[i]->type = 0;
+				if (testMobArray[i]->xPos == 80 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 0) {
+					testMobArray[i]->setProperties(1);
 					testMobArray[i]->draw();
 				}
 			}
@@ -151,8 +150,8 @@ void DrawLevel2D()
 	if (currentLevel == 9) {
 		for (int i=0; i<mobAmount; i++) {
 			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 720 && testMobArray[i]->yPos == 720 && testMobArray[i]->type == 1) {
-					testMobArray[i]->type = 0;
+				if (testMobArray[i]->xPos == 720 && testMobArray[i]->yPos == 720 && testMobArray[i]->type == 0) {
+					testMobArray[i]->setProperties(1);
 					testMobArray[i]->draw();
 				}
 			}
@@ -162,8 +161,8 @@ void DrawLevel2D()
 	if (currentLevel == 10) {
 		for (int i=0; i<mobAmount; i++) {
 			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 220 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 1) {
-					testMobArray[i]->type = 0;
+				if (testMobArray[i]->xPos == 220 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 0) {
+					testMobArray[i]->setProperties(1);
 					testMobArray[i]->draw();
 				}
 			}
@@ -181,7 +180,10 @@ void DrawLevel2D()
 					}
 				}
 				if(testMobArray[i]->healthPoints < 1){
-							testMobArray[i] = NULL;					
+					mobAmount--;
+					for (int i=0; i<mobAmount; i++) {
+						testMobArray[i] = testMobArray[i+1];
+					}				
 				}
 			}
 		}
