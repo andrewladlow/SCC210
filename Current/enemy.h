@@ -7,6 +7,7 @@ class Enemy {
       float xPos;
       float yPos;
 	  int healthPoints;
+	  int startingHealthPoints;
 	  float speed;
 	  int type;
 	  int arrayNum;
