@@ -13,18 +13,12 @@
 using namespace std;
 
 bool waveActive = false;
-bool towerActive = false;
-bool tower_being_moved = false;
-bool endLevel = false;
-bool clicked = false;
-bool towerPlaced = false;
 
 int healthAmount = 100;
 int currencyAmount = 1000;
 int mobAmount = 10;
 
-Enemy* testMob1;
-Enemy* testMobArray[10];
+Enemy* mobArray[10];
 
 Tower* createdTowers[30];
 int currentTower = 0;
@@ -32,35 +26,39 @@ bool pickedUpTower = false;
 
 Bullet* testBullet;
 
-
 void InitLevel(int levelValue)
 {
 	cout << currentLevel << std::endl;
+	mobAmount = 10;
+	healthAmount = 100;
+	for (int i=0; i<30; i++) {
+		createdTowers[i] = NULL;
+	}
+	waveActive = false;
+	currentTower=0;
 
 	for (int i=0; i<10; i++) {
 		if (currentLevel == 1)
-			testMobArray[i] = new Enemy(0-(i*200), 190, 1);
+			mobArray[i] = new Enemy(0-(i*200), 190, 1);
 		else if (currentLevel == 2)
-			testMobArray[i] = new Enemy(150, 0-(i*200), 1);
+			mobArray[i] = new Enemy(150, 0-(i*200), 1);
 		else if (currentLevel == 3)
-			testMobArray[i] = new Enemy(0-(i*200), 220, 1);
+			mobArray[i] = new Enemy(0-(i*200), 220, 1);
 		else if (currentLevel == 4)
-			testMobArray[i] = new Enemy(0-(i*200), 220, 1);
+			mobArray[i] = new Enemy(0-(i*200), 220, 1);
 		else if (currentLevel == 5)
-			testMobArray[i] = new Enemy(280-(i*200), 360, 0);
+			mobArray[i] = new Enemy(280-(i*200), 360, 0);
 		else if (currentLevel == 6)
-			testMobArray[i] = new Enemy(1280+(i*200), 80, 0);
+			mobArray[i] = new Enemy(1280+(i*200), 80, 0);
 		else if (currentLevel == 7)
-			testMobArray[i] = new Enemy(1280+(i*200), 150, 0);
+			mobArray[i] = new Enemy(1280+(i*200), 150, 0);
 		else if (currentLevel == 8)
-			testMobArray[i] = new Enemy(80, 0-(i*200), 1);
+			mobArray[i] = new Enemy(80, 0-(i*200), 1);
 		else if (currentLevel == 9)
-			testMobArray[i] = new Enemy(720, 720+(i*200), 1);
+			mobArray[i] = new Enemy(720, 720+(i*200), 1);
 		else if (currentLevel == 10)
-			testMobArray[i] = new Enemy(220, 0-(i*200), 1);
+			mobArray[i] = new Enemy(220, 0-(i*200), 1);
 	}
-
-	//testTower = new Tower(0, 0, 1);
 }
 
 void DrawLevel2D()
@@ -105,10 +103,10 @@ void DrawLevel2D()
 	// handle enemy movement with certain map spawn points
 	if (currentLevel == 5) {
 		for (int i=0; i<mobAmount; i++) {
-			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 280 && testMobArray[i]->yPos == 360 && testMobArray[i]->type == 0) {
-					testMobArray[i]->setProperties(1);
-					testMobArray[i]->draw();
+			if(mobArray[i] != NULL) {
+				if (mobArray[i]->xPos == 280 && mobArray[i]->yPos == 360 && mobArray[i]->type == 0) {
+					mobArray[i]->setProperties(1);
+					mobArray[i]->draw();
 				}
 			}
 		}
@@ -116,10 +114,10 @@ void DrawLevel2D()
 
 	if (currentLevel == 6) {
 		for (int i=0; i<mobAmount; i++) {
-			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 80 && testMobArray[i]->type == 0) {
-					testMobArray[i]->setProperties(1);
-					testMobArray[i]->draw();
+			if(mobArray[i] != NULL) {
+				if (mobArray[i]->xPos == 1240 && mobArray[i]->yPos == 80 && mobArray[i]->type == 0) {
+					mobArray[i]->setProperties(1);
+					mobArray[i]->draw();
 				}
 			}
 		}
@@ -127,10 +125,10 @@ void DrawLevel2D()
 
 	if (currentLevel == 7) {
 		for (int i=0; i<mobAmount; i++) {
-			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 1240 && testMobArray[i]->yPos == 150 && testMobArray[i]->type == 0) {
-					testMobArray[i]->setProperties(1);
-					testMobArray[i]->draw();
+			if(mobArray[i] != NULL) {
+				if (mobArray[i]->xPos == 1240 && mobArray[i]->yPos == 150 && mobArray[i]->type == 0) {
+					mobArray[i]->setProperties(1);
+					mobArray[i]->draw();
 				}
 			}
 		}
@@ -138,10 +136,10 @@ void DrawLevel2D()
 
 	if (currentLevel == 8) {
 		for (int i=0; i<mobAmount; i++) {
-			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 80 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 0) {
-					testMobArray[i]->setProperties(1);
-					testMobArray[i]->draw();
+			if(mobArray[i] != NULL) {
+				if (mobArray[i]->xPos == 80 && mobArray[i]->yPos == 0 && mobArray[i]->type == 0) {
+					mobArray[i]->setProperties(1);
+					mobArray[i]->draw();
 				}
 			}
 		}
@@ -149,10 +147,10 @@ void DrawLevel2D()
 
 	if (currentLevel == 9) {
 		for (int i=0; i<mobAmount; i++) {
-			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 720 && testMobArray[i]->yPos == 720 && testMobArray[i]->type == 0) {
-					testMobArray[i]->setProperties(1);
-					testMobArray[i]->draw();
+			if(mobArray[i] != NULL) {
+				if (mobArray[i]->xPos == 720 && mobArray[i]->yPos == 720 && mobArray[i]->type == 0) {
+					mobArray[i]->setProperties(1);
+					mobArray[i]->draw();
 				}
 			}
 		}
@@ -160,10 +158,10 @@ void DrawLevel2D()
 
 	if (currentLevel == 10) {
 		for (int i=0; i<mobAmount; i++) {
-			if(testMobArray[i] != NULL) {
-				if (testMobArray[i]->xPos == 220 && testMobArray[i]->yPos == 0 && testMobArray[i]->type == 0) {
-					testMobArray[i]->setProperties(1);
-					testMobArray[i]->draw();
+			if(mobArray[i] != NULL) {
+				if (mobArray[i]->xPos == 220 && mobArray[i]->yPos == 0 && mobArray[i]->type == 0) {
+					mobArray[i]->setProperties(1);
+					mobArray[i]->draw();
 				}
 			}
 		}
@@ -172,24 +170,22 @@ void DrawLevel2D()
 	// draw enemy
 	if (waveActive) {
 		for (int i=0; i<mobAmount; i++) {
-			if(testMobArray[i] != NULL){
-				testMobArray[i]->draw();
+			if(mobArray[i] != NULL){
+				mobArray[i]->draw();
 				for(int j=0; j<30; j++){
 					if(createdTowers[j] != NULL){
-						createdTowers[j]->enemyInRange(testMobArray[i]);
+						createdTowers[j]->enemyInRange(mobArray[i]);
 					}
 				}
-				if(testMobArray[i]->healthPoints < 1){
+				if(mobArray[i]->healthPoints < 1){
 					mobAmount--;
 					for (int i=0; i<mobAmount; i++) {
-						testMobArray[i] = testMobArray[i+1];
+						mobArray[i] = mobArray[i+1];
 					}				
 				}
 			}
 		}
 		if (mobAmount == 0 && healthAmount != 0) { // all enemies dead, player still alive
-			waveActive = false;
-			mobAmount = 10;
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
@@ -197,28 +193,19 @@ void DrawLevel2D()
 
 		} else if (healthAmount != 0) { // keep enemies moving until health = 0
 			for (int i=0; i<mobAmount; i++) {
-				if(testMobArray[i] != NULL){
-					GenPath(testMobArray[i], currentLevel);
-					if (testMobArray[i]->end) {
+				if(mobArray[i] != NULL){
+					GenPath(mobArray[i], currentLevel);
+					if (mobArray[i]->end) {
 						healthAmount -= 10;
-						//delete testMobArray[i];
+						//delete mobArray[i];
 						mobAmount--;
 						for (int i=0; i<mobAmount; i++) {
-							testMobArray[i] = testMobArray[i+1];
+							mobArray[i] = mobArray[i+1];
 						}
 					}
 				}
 			}
 		} else {
-
-			endLevel = false;
-			waveActive = false;
-			towerActive = false;
-			towerPlaced = false;
-			towerX = 1350.0f;
-			towerY = 240.0f;
-			healthAmount = 100;
-			mobAmount = 10;
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
@@ -279,13 +266,6 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 
 			// Exit button
 			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
-				
-				waveActive = false;
-				// Reset Towers
-				for(int i=0; i<30; i++){
-					createdTowers[i] = NULL;
-				}
-				currentTower=0;
 
 				window.close();
 				window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
