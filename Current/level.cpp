@@ -209,7 +209,7 @@ void DrawLevel2D()
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
-			switchToLevelSelect();
+			switchToLoseScreen();
 		}
 	}
 

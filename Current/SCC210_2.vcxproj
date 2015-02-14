@@ -86,6 +86,7 @@
     <ClCompile Include="highscore.cpp" />
     <ClCompile Include="LevelSelect.cpp" />
     <ClCompile Include="level.cpp" />
+    <ClCompile Include="losescreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="Pathing.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="highscore.h" />
     <ClInclude Include="LevelSelect.h" />
+    <ClInclude Include="losescreen.h" />
     <ClInclude Include="pathing.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="window.h" />

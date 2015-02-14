@@ -3,6 +3,7 @@
 #include "level.h"
 #include "LevelSelect.h"
 #include "winscreen.h"
+#include "losescreen.h"
 #include <SFML/Graphics.hpp>
 
 #include <vector>
@@ -46,7 +47,9 @@ void switchToLevel()
 void switchToWinScreen() {
 	screen = 3;
 }
-
+void switchToLoseScreen() {
+	screen = 4;
+}
 
 void MenuWindow(){
 	sf::Event event;
@@ -130,6 +133,27 @@ void WinWindow() {
 	DrawWin2D();
 }
 
+void LoseWindow() {
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		switch(event.type)
+		{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::KeyPressed:
+				//LevelSelectKeyboard(event.key.code);
+				break;
+			case sf::Event::MouseButtonPressed:
+				LoseOnMouseClick(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
+				break;
+		}
+	}
+	window.clear();
+	DrawLose2D();
+}
+
 void loadResources()
 {
 	playButtonTexture.loadFromFile("images/Shared/playbut.png");
@@ -165,6 +189,9 @@ void initialiseWindow(int argc,char **argv){
 				break;
 			case 3:
 				WinWindow();
+				break;
+			case 4:
+				LoseWindow();
 				break;
 		}
 		window.display();

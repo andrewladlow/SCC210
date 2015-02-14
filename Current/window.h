@@ -4,10 +4,12 @@ void MenuWindow();
 void LevelWindow(int levelSelected);
 void LevelSelectWindow();
 void WinWindow();
+void LoseWindow();
 void switchToMenu();
 void switchToLevelSelect();
 void switchToLevel();
 void switchToWinScreen();
+void switchToLoseScreen();
 void loadResources();
 
 extern float towerX;
