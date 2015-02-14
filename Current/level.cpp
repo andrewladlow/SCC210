@@ -178,6 +178,7 @@ void DrawLevel2D()
 					}
 				}
 				if(mobArray[i]->healthPoints < 1){
+					currencyAmount += 20;
 					mobAmount--;
 					for (int i=0; i<mobAmount; i++) {
 						mobArray[i] = mobArray[i+1];
@@ -274,8 +275,9 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			}
 
 			// Basic Tower button
-			if((x < 1410 && x > 1280) && (y < 310 && y > 170)){
+			if((x < 1410 && x > 1280) && (y < 310 && y > 170) && currencyAmount >= 100){
 				if(!pickedUpTower){
+					currencyAmount -= 100;
 					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,1);
 					createdTowers[currentTower]->DrawTower();
 					pickedUpTower = true;
