@@ -152,8 +152,8 @@ void InitMenu()
 	}
 	if (!menuMusic.openFromFile("audio/Fanfare for Space.ogg"))
 		cout << "error loading audio"; // error
-	menuMusic.play();
-	menuMusic.setLoop(true);
+	//menuMusic.play();
+	//menuMusic.setLoop(true);
 	loadProfiles();
 }
 

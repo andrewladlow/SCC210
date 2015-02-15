@@ -21,8 +21,8 @@ void InitLevelSelect()
 {
 	if (!levelMusic.openFromFile("audio/Space 1990.ogg"))
 		cout << "error loading audio"; // error
-	levelMusic.play();
-	levelMusic.setLoop(true);
+	//levelMusic.play();
+	//levelMusic.setLoop(true);
 	getHighScores();
 
 	if (!lsSoundBuffer.loadFromFile("audio/laser_1.ogg"))

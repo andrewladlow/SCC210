@@ -11,18 +11,26 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		// set enemy speed and hp based on type
 		// 0
 		switch (this->type) { 
-			case 0:
+			case 0: // invisible type
+				this->speed = 5.0f;
+				this->healthPoints = 150;
+				this->startingHealthPoints = 150;
+				break;
+			case 1: // standard type
 				this->speed = 4.0f;
 				this->healthPoints = 150;
 				this->startingHealthPoints = 150;
-			case 1:
-				this->speed = 7.0f;
+				break;
+			case 2: // fast + weak
+				this->speed = 5.0f;
 				this->healthPoints = 100;
 				this->startingHealthPoints = 100;
-			case 2:
+				break;
+			case 3: // strong + slow
 				this->speed = 3.0f;
 				this->healthPoints = 250;
 				this->startingHealthPoints = 250;
+				break;
 		}
 		this->end = false;
 }
@@ -54,5 +62,6 @@ void Enemy::setProperties(int typeVal) {
 			this->speed = 5.0f;
 			this->healthPoints = 150;
 			this->startingHealthPoints = 150;
+			break;
 	}
 }
