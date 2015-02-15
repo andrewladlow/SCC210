@@ -27,4 +27,5 @@ extern sf::Texture sideMenuTexture;
 extern sf::Texture levelBackgroundTexture;
 extern sf::Texture enemyTexture[3];
 extern sf::Texture basicTowerTexture[2];
+extern sf::Texture longRangeTowerTexture[2];
 extern sf::Music menuMusic;

@@ -15,7 +15,7 @@ using namespace std;
 bool waveActive = false;
 
 int healthAmount = 100;
-int currencyAmount = 1000;
+int currencyAmount = 100;
 int mobAmount = 10;
 
 Enemy* mobArray[10];
@@ -272,6 +272,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			// Exit button
 			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
 
+				currencyAmount = 100;
 				window.close();
 				window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 				window.setFramerateLimit(60);
@@ -279,10 +280,20 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			}
 
 			// Basic Tower button
-			if((x < 1410 && x > 1280) && (y < 310 && y > 170) && currencyAmount >= 100){
+			if((x < 1410 && x > 1280) && (y < 310 && y > 170) && currencyAmount >= 50){
+				if(!pickedUpTower){
+					currencyAmount -= 50;
+					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,1);
+					createdTowers[currentTower]->DrawTower();
+					pickedUpTower = true;
+				}
+			}
+
+			// Long range Tower button
+			if((x < 1555 && x > 1430) && (y < 310 && y > 170) && currencyAmount >= 100){
 				if(!pickedUpTower){
 					currencyAmount -= 100;
-					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,1);
+					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,2);
 					createdTowers[currentTower]->DrawTower();
 					pickedUpTower = true;
 				}

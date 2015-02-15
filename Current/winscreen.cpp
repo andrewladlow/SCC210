@@ -44,10 +44,10 @@ void DrawWin2D() {
 
 void WinOnMouseClick(int button,int x,int y) {
 	if(button == sf::Mouse::Left) {
-		if((x < 440 && x > 240) && (y < 650 && y > 450)) {
+		if((x < 440 && x > 240) && (y < 650 && y > 300)) {
 			switchToLevelSelect();
 		}
-		if((x < 1240 && x > 1040) && (y < 650 && y > 450)) {
+		if((x < 1240 && x > 1040) && (y < 650 && y > 300)) {
 			exit(0);
 		}
 	}

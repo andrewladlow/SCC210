@@ -35,7 +35,7 @@ void Tower::DrawTower(){
 			int laserLength = sqrt(triangleLength+triangleHeight);
 			//std::cout << laserLength << "  ";
 
-			std::cout << direction << " ";
+			//std::cout << direction << " ";
 			if (direction > 180 && direction < 270){
 				this->direction += 10;
 			}
@@ -59,6 +59,56 @@ void Tower::DrawTower(){
 		}
 
 		towerTop.setTexture(&basicTowerTexture[1]);
+		towerTop.setSize(sf::Vector2f(140, 140));
+		towerTop.setOrigin(70,70);
+		towerTop.setRotation(direction);
+		towerTop.setPosition(x+70,y+70);
+		
+		window.draw(towerTop);
+
+	}
+
+	else if(type == 2){
+
+		towerBase.setPosition(x,y);
+		towerBase.setTexture(&longRangeTowerTexture[0]);
+		towerBase.setSize(sf::Vector2f(140, 140));
+		window.draw(towerBase);
+
+		if(this->hasTarget == true){
+			int triangleLength = pow((currentTarget->xPos-this->x),2);
+			//std::cout << triangleLength << "  ";
+
+			int triangleHeight = pow((currentTarget->yPos-this->y),2);
+			//std::cout << triangleHeight << "  ";
+
+			int laserLength = sqrt(triangleLength+triangleHeight);
+			//std::cout << laserLength << "  ";
+
+			//std::cout << direction << " ";
+			if (direction > 180 && direction < 270){
+				//this->direction -= 10;
+			}
+			else if( direction > 90 && direction < 180){
+				//laserLength -= 20;
+			}
+			else if( direction < 360 && direction > 270 ){
+				//laserLength +=70;
+			}
+			else if( direction > 0 && direction < 90){
+				//this->direction -= 20;
+			}
+
+			laser.setFillColor(sf::Color(0,255,0));
+			laser.setSize(sf::Vector2f(laserLength, 5));
+			laser.setRotation(direction-90);
+			laser.setPosition(x+70,y+70);
+
+			window.draw(laser);
+
+		}
+
+		towerTop.setTexture(&longRangeTowerTexture[1]);
 		towerTop.setSize(sf::Vector2f(140, 140));
 		towerTop.setOrigin(70,70);
 		towerTop.setRotation(direction);
@@ -100,9 +150,15 @@ void Tower::enemyInRange(Enemy* enemyCheck){
 		//std::cout << enemyCheckX << "  ";
 		float enemyCheckY = enemyCheck->yPos;
 		//std::cout << enemyCheckY << "  ";
-		if(hasTarget == false){
-			if( enemyCheckX > (this->x-200) && enemyCheckX < (this->x+200)){
-				if( enemyCheckY > (this->y-200) && enemyCheckY < (this->y+200)){
+
+		int towerRange =0;
+		if(this->type == 1){ towerRange = 200;}
+		else if(this->type == 2){ towerRange = 1000;}
+
+		if(hasTarget == false && enemyCheckX>0 && enemyCheckY>0){
+
+			if( enemyCheckX > (this->x-towerRange) && enemyCheckX < (this->x+towerRange)){
+				if( enemyCheckY > (this->y-towerRange) && enemyCheckY < (this->y+towerRange)){
 					this->hasTarget = true;
 					this->currentTarget = enemyCheck;
 					workOutAngle(this->x,this->y,enemyCheckX,enemyCheckY);
@@ -111,10 +167,10 @@ void Tower::enemyInRange(Enemy* enemyCheck){
 			}
 		}
 	
-		if(hasTarget == true){
-			if( currentTarget->xPos > (this->x-200) && currentTarget->xPos < (this->x+200)){
-				if( currentTarget->yPos > (this->y-200) && currentTarget->yPos < (this->y+200)){
-
+		if(hasTarget == true && enemyCheckX>0 && enemyCheckY>0){
+			if( currentTarget->xPos > (this->x-towerRange) && currentTarget->xPos < (this->x+towerRange)){
+				if( currentTarget->yPos > (this->y-towerRange) && currentTarget->yPos < (this->y+towerRange)){
+					
 					workOutAngle(this->x,this->y,currentTarget->xPos,currentTarget->yPos);
 					currentTarget->healthPoints -= 1;
 					if(currentTarget->healthPoints < 1){hasTarget = false;}
