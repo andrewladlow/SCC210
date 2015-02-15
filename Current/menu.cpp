@@ -150,6 +150,10 @@ void InitMenu()
 		loadResources();
 		rescourcesLoaded = true;
 	}
+	if (!menuMusic.openFromFile("audio/Fanfare for Space.ogg"))
+		cout << "error loading audio"; // error
+	menuMusic.play();
+	menuMusic.setLoop(true);
 	loadProfiles();
 }
 
@@ -249,6 +253,7 @@ void MenuOnMouseClick(int button,int x,int y)
 	if(button == sf::Mouse::Left)
 	{
 		if((x < 540 && x > 340) && (y < 450 && y > 350)){
+			menuMusic.stop();
 			switchToLevelSelect();
 		}
 		if((x < 940 && x > 740) && (y < 450 && y > 350)){

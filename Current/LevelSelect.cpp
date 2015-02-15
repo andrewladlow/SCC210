@@ -12,12 +12,22 @@ int currentLevel = 1;
 
 //string * highScores[10][10][2];
 string highScores[10][10][2];
-
+sf::Music levelMusic;
+sf::SoundBuffer lsSoundBuffer;
+sf::Sound sound;
 //int highScoreCount[10]; //we use this to store the number of highscore that were loaded for each level
 
 void InitLevelSelect()
 {
-	 getHighScores();
+	if (!levelMusic.openFromFile("audio/Space 1990.ogg"))
+		cout << "error loading audio"; // error
+	levelMusic.play();
+	levelMusic.setLoop(true);
+	getHighScores();
+
+	if (!lsSoundBuffer.loadFromFile("audio/laser_1.ogg"))
+		cout << "error loading audio"; // error
+	sound.setBuffer(lsSoundBuffer);
 }
 
 
@@ -115,6 +125,7 @@ void DrawLevelSelect2D()
 // This is called when keyboard presses are detected.
 void LevelSelectKeyboard(int Key){
 	if (Key == sf::Keyboard::Escape) {
+		levelMusic.stop();
 		switchToMenu();
 	}
 }
@@ -125,6 +136,7 @@ void LevelSelectOnMouseClick(int button,int x,int y){
 	{
 		// Exit button
 		if((x < 1260 && x > 1060) && (y < 700 && y > 600)){
+			levelMusic.stop();
 			switchToMenu();
 		}
 
@@ -135,12 +147,18 @@ void LevelSelectOnMouseClick(int button,int x,int y){
 
 		// Right arrow
 		if((x < 947 && x > 847) && (y < 500 && y > 300)){
-			if(currentLevel < 10){currentLevel++;}
+			if(currentLevel < 10){
+				currentLevel++;
+				sound.play();
+			}
 		}
 
 		// Left arrow
 		if((x < 400 && x > 300) && (y < 500 && y > 300)){
-			if(currentLevel > 1){currentLevel--;}
+			if(currentLevel > 1){
+				currentLevel--;
+				sound.play();
+			}
 		}
 
 	}

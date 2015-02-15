@@ -15,7 +15,7 @@ class Tower {
 	  bool hasTarget;
 	  Enemy* currentTarget;
 	  int type;
-
+	  sf::Sound sound;
 	  Tower(float, float, int);
 	  void DrawTower();
 	  bool checkPlacement();

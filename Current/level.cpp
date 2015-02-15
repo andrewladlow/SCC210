@@ -25,6 +25,8 @@ int currentTower = 0;
 bool pickedUpTower = false;
 
 Bullet* testBullet;
+sf::SoundBuffer levelSoundBuffer;
+
 
 void InitLevel(int levelValue)
 {
@@ -59,6 +61,8 @@ void InitLevel(int levelValue)
 		else if (currentLevel == 10)
 			mobArray[i] = new Enemy(220, 0-(i*200), 1);
 	}
+	if (!levelSoundBuffer.loadFromFile("sound.wav"))
+		cout << "error loading sound buffer";
 }
 
 void DrawLevel2D()

@@ -5,7 +5,7 @@
 #include "winscreen.h"
 #include "losescreen.h"
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Audio.hpp>
 #include <vector>
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
@@ -24,6 +24,7 @@ sf::Texture sideMenuTexture;
 sf::Texture levelBackgroundTexture;
 sf::Texture enemyTexture[3];
 sf::Texture basicTowerTexture[2];
+sf::Music menuMusic;
 
 //we call this function when switching screens, it will initialise whatever screen we are calling
 void switchToMenu()
