@@ -27,13 +27,27 @@ void Tower::DrawTower(){
 
 		if(this->hasTarget == true){
 			int triangleLength = pow((currentTarget->xPos-this->x),2);
-			std::cout << triangleLength << "  ";
+			//std::cout << triangleLength << "  ";
 
 			int triangleHeight = pow((currentTarget->yPos-this->y),2);
-			std::cout << triangleHeight << "  ";
+			//std::cout << triangleHeight << "  ";
 
 			int laserLength = sqrt(triangleLength+triangleHeight);
-			std::cout << laserLength << "  ";
+			//std::cout << laserLength << "  ";
+
+			std::cout << direction << " ";
+			if (direction > 180 && direction < 270){
+				this->direction += 10;
+			}
+			else if( direction > 90 && direction < 180){
+				laserLength -= 20;
+			}
+			else if( direction < 360 && direction > 270 ){
+				laserLength +=70;
+			}
+			else if( direction > 0 && direction < 90){
+				this->direction -= 20;
+			}
 
 			laser.setFillColor(sf::Color(255,0,0));
 			laser.setSize(sf::Vector2f(laserLength, 5));
@@ -126,6 +140,15 @@ void Tower::workOutAngle(float towerX, float towerY, float targetX, float target
 	float pi = 3.14159;
 
 	int angleInDegrees = (atan2(deltaY, deltaX)) * 180 / pi;
-	this->direction = angleInDegrees+90;
+	angleInDegrees += 90;
 
+	//std::cout << direction << " ";
+	if(angleInDegrees < 0) { 
+		angleInDegrees += 360; 
+	}
+	if(angleInDegrees > 360) { 
+		angleInDegrees -= 360;
+	}
+	this->direction = angleInDegrees;
+	//std::cout << direction << " ";
 }

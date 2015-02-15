@@ -12,13 +12,17 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		// 0
 		switch (this->type) { 
 			case 0:
-				this->speed = 5.0f;
+				this->speed = 4.0f;
 				this->healthPoints = 150;
 				this->startingHealthPoints = 150;
 			case 1:
-				this->speed = 5.0f;
-				this->healthPoints = 150;
-				this->startingHealthPoints = 150;
+				this->speed = 7.0f;
+				this->healthPoints = 100;
+				this->startingHealthPoints = 100;
+			case 2:
+				this->speed = 3.0f;
+				this->healthPoints = 250;
+				this->startingHealthPoints = 250;
 		}
 		this->end = false;
 }
