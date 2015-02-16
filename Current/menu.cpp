@@ -50,10 +50,6 @@ void loadCurrentProfile()
 {
 	string currentLine;
 	ifstream profileFile ("saves/" + profileList[currentProfile] + ".towerdefence");
-	for(int i = 0; i < 5; i++)
-	{
-		profileList[i] = "null";
-	}
 	if (profileFile.is_open())
 	{
 		getline (profileFile,currentLine);
