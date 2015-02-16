@@ -13,6 +13,10 @@ class Enemy {
 		int frame;
 		bool end;
 		bool timerStarted;
+		bool rotateFlagN;
+		bool rotateFlagE;
+		bool rotateFlagS;
+		bool rotateFlagW;
 		sf::RectangleShape enemyRect;
 		sf::Clock timer;
 		Enemy(float, float, int);

@@ -44,12 +44,10 @@ void DrawLose2D() {
 
 void LoseOnMouseClick(int button,int x,int y) {
 	if(button == sf::Mouse::Left) {
-		if((x < 440 && x > 240) && (y < 650 && y > 550)) {
-			cout << "Clicked level select" << std::endl;
+		if((x < 640 && x > 140) && (y < 750 && y > 450)) {
 			switchToLevelSelect();
 		}
 		if((x < 1240 && x > 1040) && (y < 650 && y > 550)) {
-			cout << "Clicked end" << std::endl;
 			exit(0);
 		}
 	}

@@ -5,7 +5,6 @@
 #include <vector>
 using namespace std;
 
-int temp = 0;
 
 void GenPath(Enemy *e, int currentLevel) {
 	switch(currentLevel) {
@@ -15,44 +14,94 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			} 
 			else if (e->yPos < 470) {
+				if (!e->rotateFlagS) {
+					e->enemyRect.setOrigin(0,50);
+					e->enemyRect.rotate(90);
+					e->rotateFlagS = true;
+				}
 				e->yPos += e->speed;
 				break;
 			} 
 			else if (e->xPos >= 590 && e->xPos < 1100) {
+				if (!e->rotateFlagE) {
+					e->enemyRect.setOrigin(0,0);
+					e->enemyRect.rotate(-90);
+					e->rotateFlagE = true;
+				}
 				e->xPos += e->speed;
 				break;
 			} 
 			else {
 				//cout << "Enemy reached exit" << endl;
+				e->rotateFlagS = false;
+				e->rotateFlagE = false;
 				e->end = true;
 				break;
 			}
 		case 2:
 			if (e->yPos < 510 && e->xPos == 150) {
+				if (!e->rotateFlagS) {
+					e->enemyRect.setOrigin(0,50);
+					e->enemyRect.rotate(90);
+					e->rotateFlagS = true;
+				}
 				e->yPos += e->speed;
 				break;
 			}
 			else if (e->yPos >= 510 && e->xPos < 510) {
+				if (!e->rotateFlagE) {
+					e->enemyRect.setOrigin(0,0);
+					e->enemyRect.rotate(-90);
+					e->rotateFlagE = true;
+				}
 				e->xPos += e->speed;
 				break;
 			}
 			else if (e->xPos == 510 && e->yPos > 220) {
+				if (!e->rotateFlagN) {
+					e->enemyRect.setOrigin(50,0);
+					e->enemyRect.rotate(-90);
+					e->rotateFlagN = true;
+					e->rotateFlagE = false;
+				}
 				e->yPos -= e->speed;
 				break;
 			}
 			else if (e->yPos <= 220 && e->xPos >= 510 && e->xPos < 860) {
+				if (!e->rotateFlagE) {
+					e->enemyRect.setOrigin(0,0);
+					e->enemyRect.rotate(90);
+					e->rotateFlagE = true;
+					e->rotateFlagS = false;
+				}
 				e->xPos += e->speed;
 				break;
 			}
 			else if (e->yPos >= 220 && e->yPos < 510 && e->xPos >= 860) {
+				if (!e->rotateFlagS) {
+					e->enemyRect.setOrigin(0,50);
+					e->enemyRect.rotate(90);
+					e->rotateFlagS = true;
+					e->rotateFlagE = false;
+				}
 				e->yPos += e->speed;
 				break;
 			}
 			else if (e->yPos >= 510 && e->xPos >= 860 && e->xPos < 1100) {
+				if (!e->rotateFlagE) {
+					e->enemyRect.setOrigin(0,0);
+					e->enemyRect.rotate(-90);
+					e->rotateFlagE = true;
+					e->rotateFlagS = false;
+				}
 				e->xPos += e->speed;
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -82,6 +131,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -99,6 +152,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -124,6 +181,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -141,6 +202,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -182,6 +247,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -215,6 +284,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -264,6 +337,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}
@@ -295,6 +372,10 @@ void GenPath(Enemy *e, int currentLevel) {
 				break;
 			}
 			else {
+				e->rotateFlagN = false;
+				e->rotateFlagE = false;
+				e->rotateFlagS = false;
+				e->rotateFlagW = false;
 				e->end = true;
 				break;
 			}

@@ -1,36 +1,40 @@
 #include "enemy.h"
-
+#include "LevelSelect.h"
 
 Enemy::Enemy(float xPos, float yPos, int type)
 {
 		sf::RectangleShape enemyRect; 
 		this->xPos = xPos;
 		this->yPos = yPos;
-		this->healthPoints = healthPoints;
-		this->startingHealthPoints = healthPoints;
+		this->healthPoints = healthPoints + (currentLevel * 15); // enemies become stronger as level increases
+		this->startingHealthPoints = healthPoints + (currentLevel * 15);
 		this->type = type;
 		this->timerStarted = false;
 		this->frame = 0;
+		this->rotateFlagN = false;
+		this->rotateFlagE = false;
+		this->rotateFlagS = false;
+		this->rotateFlagW = false;
 		// set enemy speed and hp based on type
 		// 0
 		switch (this->type) { 
 			case 0: // invisible type
-				this->speed = 5.0f;
+				this->speed = 5.0f + (waveNum * 0.4); // enemies become faster as wave increases
 				this->healthPoints = 150;
 				this->startingHealthPoints = 150;
 				break;
 			case 1: // standard type
-				this->speed = 4.0f;
+				this->speed = 4.0f + (waveNum * 0.4);
 				this->healthPoints = 150;
 				this->startingHealthPoints = 150;
 				break;
 			case 2: // weak + fast
-				this->speed = 5.0f;
+				this->speed = 5.0f + (waveNum * 0.4);
 				this->healthPoints = 100;
 				this->startingHealthPoints = 100;
 				break;
 			case 3: // strong + slow
-				this->speed = 3.0f;
+				this->speed = 3.0f + (waveNum * 0.4);
 				this->healthPoints = 250;
 				this->startingHealthPoints = 250;
 				break;
@@ -58,7 +62,7 @@ void Enemy::draw()
 
 	if (this->timerStarted) {
 		sf::Time elapsed1 = timer.getElapsedTime();
-		if (elapsed1.asMilliseconds() > 150) {
+		if (elapsed1.asMilliseconds() > 150) { //change enemy texture every 150ms
 			timer.restart();
 			frame++;
 			if (frame == 3) {

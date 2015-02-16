@@ -71,8 +71,6 @@ void InitLevel(int levelValue)
 
 void DrawLevel2D()
 {	
-	cout << "Wave:" << waveNum << std::endl;
-	cout << "Mob amount: " << mobAmount << std::endl;
 	sf::RectangleShape background(sf::Vector2f(1680, 720));
 	background.setFillColor(sf::Color(255, 255, 255));
 	window.draw(background);
