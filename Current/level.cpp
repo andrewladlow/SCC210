@@ -8,7 +8,8 @@
 #include "enemy.h"
 #include "bullet.h"
 #include "Tower.h"
-
+#include "highscore.h"
+#include "menu.h"
 //#include <vector>
 using namespace std;
 
@@ -194,6 +195,7 @@ void DrawLevel2D()
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
+			submitHighScore(currentLevel, healthAmount + currencyAmount, profileList[currentProfile]);
 			switchToWinScreen();
 
 		} else if (healthAmount != 0) { // keep enemies moving until health = 0
@@ -214,6 +216,7 @@ void DrawLevel2D()
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
+			submitHighScore(currentLevel, healthAmount + currencyAmount, profileList[currentProfile]);
 			switchToLoseScreen();
 		}
 	}

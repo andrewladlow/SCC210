@@ -7,6 +7,7 @@
 #include <vector>
 #include <SFML/Network.hpp>
 #include "highscore.h"
+#include "menu.h"
 using namespace std;
 int currentLevel = 1;
 
@@ -43,15 +44,25 @@ void DrawLevelSelect2D()
 	window.draw(exitButtonSprite);
 
 	//Current Level
-
-
 	sf::RectangleShape levelSprites[3];
+
 	levelSprites[0].setSize(sf::Vector2f(427, 240));
 	sf::FloatRect spritesRect = levelSprites[0].getLocalBounds();
 	levelSprites[0].setOrigin(spritesRect.left + spritesRect.width / 2.0f, spritesRect.top  + spritesRect.height / 2.0f);
 	levelSprites[0].setPosition(sf::Vector2f(1280 / 2.0f, 390));
 	levelSprites[0].setTexture(&levelsTextures[currentLevel]);
 	window.draw(levelSprites[0]);
+
+	if(levelsUnlocked < currentLevel)
+	{
+		sf::RectangleShape padlock;
+		padlock.setSize(sf::Vector2f(105, 150));
+		sf::FloatRect padlockRect = padlock.getLocalBounds();
+		padlock.setOrigin(padlockRect.left + padlockRect.width / 2.0f, padlockRect.top  + padlockRect.height / 2.0f);
+		padlock.setPosition(sf::Vector2f(1280 / 2.0f, 390));
+		padlock.setTexture(&padLockTexture);
+		window.draw(padlock);
+	}
 
 	//Previous Level
 	levelSprites[1].setSize(sf::Vector2f(160, 95));
@@ -142,7 +153,8 @@ void LevelSelectOnMouseClick(int button,int x,int y){
 
 		// Play Level
 		if((x < 837 && x > 410) && (y < 520 && y > 280)){
-			switchToLevel();
+			if(currentLevel <= levelsUnlocked)
+				switchToLevel();
 		}
 
 		// Right arrow

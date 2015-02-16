@@ -25,6 +25,7 @@ sf::Texture levelBackgroundTexture;
 sf::Texture enemyTexture[3];
 sf::Texture basicTowerTexture[2];
 sf::Texture longRangeTowerTexture[2];
+sf::Texture padLockTexture;
 sf::Music menuMusic;
 
 //we call this function when switching screens, it will initialise whatever screen we are calling
@@ -172,6 +173,7 @@ void loadResources()
 	basicTowerTexture[1].loadFromFile("images/Towers/Basic tower/basicTowerTop.png");
 	longRangeTowerTexture[0].loadFromFile("images/Towers/Long Distance tower/longDistanceBase.png");
 	longRangeTowerTexture[1].loadFromFile("images/Towers/Long Distance tower/longDistanceTop.png");
+	padLockTexture.loadFromFile("images/LevelSelect/padlock-hi.png");
 }
 
 void initialiseWindow(int argc,char **argv){

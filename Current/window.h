@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <string>
 void initialiseWindow(int argc,char **argv);
 void MenuWindow();
 void LevelWindow(int levelSelected);
@@ -29,3 +30,4 @@ extern sf::Texture enemyTexture[3];
 extern sf::Texture basicTowerTexture[2];
 extern sf::Texture longRangeTowerTexture[2];
 extern sf::Music menuMusic;
+extern sf::Texture padLockTexture;

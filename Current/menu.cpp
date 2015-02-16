@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "window.h"
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
@@ -15,19 +16,22 @@ int creatingProfileNumber = -1;
 string creatingNewProfileString = "";
 int deletePressed = 0;
 bool rescourcesLoaded = false;
+int levelsUnlocked = 1;
 
 bool newProfile(string name){
 	ofstream newProfileFile ("saves/" + name + ".towerdefence");
 	if (newProfileFile.is_open())
 	{
-		newProfileFile << "Data\n";
+		newProfileFile << "1\n";
 		newProfileFile << "Can go in here\n";
 		newProfileFile.close();
 		profileList[creatingProfileNumber] = name;
 		creatingNewProfileString = "";
 		creatingProfileNumber = -1;
+		newProfileFile.close();
 	}
 	else cout << "Error accessing files";
+
 
 	ofstream profileListFile ("saves/savenames.towerdefenceprofiles");
 	if (profileListFile.is_open())
@@ -42,22 +46,41 @@ bool newProfile(string name){
 	return 0;
 }
 
-void loadProfiles()
+void loadCurrentProfile()
 {
-	string line;
-	ifstream myfile ("saves/savenames.towerdefenceprofiles");
+	string currentLine;
+	ifstream profileFile ("saves/" + profileList[currentProfile] + ".towerdefence");
 	for(int i = 0; i < 5; i++)
 	{
 		profileList[i] = "null";
 	}
-	if (myfile.is_open())
+	if (profileFile.is_open())
+	{
+		getline (profileFile,currentLine);
+		cout << currentLine;
+		levelsUnlocked = stoi(currentLine);
+		profileFile.close();
+	}
+	else cout << "Unable to open file";
+}
+
+void loadProfiles()
+{
+	string currentLine;
+	ifstream profileListFile ("saves/savenames.towerdefenceprofiles");
+	for(int i = 0; i < 5; i++)
+	{
+		profileList[i] = "null";
+	}
+	if (profileListFile.is_open())
 	{
 		int i = 0;
-		while (getline (myfile,line) && i < 5)
+		while (getline (profileListFile,currentLine) && i < 5)
 		{
-			profileList[i] = line;
+			profileList[i] = currentLine;
 			i++;
 		}
+		profileListFile.close();
 	}
 	else cout << "Unable to open file";
 	for(int i = 0; i < 5; i++)
@@ -253,6 +276,7 @@ void MenuOnMouseClick(int button,int x,int y)
 	if(button == sf::Mouse::Left)
 	{
 		if((x < 540 && x > 340) && (y < 450 && y > 350)){
+			loadCurrentProfile();
 			menuMusic.stop();
 			switchToLevelSelect();
 		}
