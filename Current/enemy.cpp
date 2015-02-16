@@ -21,7 +21,7 @@ Enemy::Enemy(float xPos, float yPos, int type)
 				this->healthPoints = 150;
 				this->startingHealthPoints = 150;
 				break;
-			case 2: // fast + weak
+			case 2: // weak + fast
 				this->speed = 5.0f;
 				this->healthPoints = 100;
 				this->startingHealthPoints = 100;

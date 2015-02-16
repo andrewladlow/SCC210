@@ -168,9 +168,9 @@ void loadResources()
 	sideMenuTexture.loadFromFile("Images/Levels/UI/LevelUI.png");
 	//levelBackgroundTexture.loadFromFile("Images/LevelSelect/Level" + std::to_string(currentLevel) + ".png");
 	enemyTexture[0].loadFromFile("Images/Blank.png");
-	enemyTexture[1].loadFromFile("Images/megaman.png");
-	enemyTexture[2].loadFromFile("Images/megaman.png");
-	enemyTexture[3].loadFromFile("Images/megaman.png");
+	enemyTexture[1].loadFromFile("Images/enemy/standard enemy/1.png");
+	enemyTexture[2].loadFromFile("Images/enemy/fast enemy/1.png");
+	enemyTexture[3].loadFromFile("Images/enemy/slow enemy/1.png");
 	basicTowerTexture[0].loadFromFile("images/Towers/Basic tower/basicTowerBase.png");
 	basicTowerTexture[1].loadFromFile("images/Towers/Basic tower/basicTowerTop.png");
 	longRangeTowerTexture[0].loadFromFile("images/Towers/Long Distance tower/longDistanceBase.png");
