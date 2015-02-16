@@ -20,7 +20,7 @@ int currencyAmount = 100;
 int mobAmount = 10;
 int waveNum = 0;
 
-Enemy* mobArray[11][10];
+Enemy* mobArray[4][10];
 
 Tower* createdTowers[30];
 int currentTower = 0;
@@ -40,7 +40,7 @@ void InitLevel(int levelValue)
 	}
 	waveActive = false;
 	currentTower=0;
-	for (int i=0; i<11; i++) {
+	for (int i=0; i<3; i++) {
 		for (int j=0; j<10; j++) {
 			if (currentLevel == 1)
 				mobArray[i][j] = new Enemy(0-(j*200), 190, Random(1,3));
@@ -168,11 +168,11 @@ void DrawLevel2D()
 				}
 			}
 		}
-		if (waveNum != 10 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
+		if (waveNum != 2 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
 			waveActive = false;
 			waveNum++;
 			mobAmount = 10;
-		} else if (waveNum == 10 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
+		} else if (waveNum == 2 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);

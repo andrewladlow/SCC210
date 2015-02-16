@@ -75,11 +75,23 @@ void Enemy::draw()
 // call when an enemy becomes visible to redefine speed and hp
 void Enemy::setProperties(int typeVal) {
 	switch (typeVal) { 
-		case 1:
+		case 1: // standard type
 			this->type = typeVal;
-			this->speed = 5.0f;
+			this->speed = 4.0f + (waveNum * 0.4);
 			this->healthPoints = 150;
 			this->startingHealthPoints = 150;
+			break;
+		case 2: // weak + fast
+			this->type = typeVal;
+			this->speed = 5.0f + (waveNum * 0.4);
+			this->healthPoints = 100;
+			this->startingHealthPoints = 100;
+			break;
+		case 3: // strong + slow
+			this->type = typeVal;
+			this->speed = 3.0f + (waveNum * 0.4);
+			this->healthPoints = 250;
+			this->startingHealthPoints = 250;
 			break;
 	}
 }
