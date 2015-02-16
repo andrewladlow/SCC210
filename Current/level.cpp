@@ -43,13 +43,13 @@ void InitLevel(int levelValue)
 	for (int i=0; i<10; i++) {
 		for (int j=0; j<10; j++) {
 			if (currentLevel == 1)
-				mobArray[i][j] = new Enemy(0-(j*200), 190, 1);
+				mobArray[i][j] = new Enemy(0-(j*200), 190, Random(1,3));
 			else if (currentLevel == 2)
-				mobArray[i][j] = new Enemy(150, 0-(j*200), 1);
+				mobArray[i][j] = new Enemy(150, 0-(j*200), Random(1,3));
 			else if (currentLevel == 3)
-				mobArray[i][j] = new Enemy(0-(j*200), 220, 1);
+				mobArray[i][j] = new Enemy(0-(j*200), 220, Random(1,3));
 			else if (currentLevel == 4)
-				mobArray[i][j] = new Enemy(0-(j*200), 220, 1);
+				mobArray[i][j] = new Enemy(0-(j*200), 220, Random(1,3));
 			else if (currentLevel == 5)
 				mobArray[i][j] = new Enemy(280-(j*200), 360, 0);
 			else if (currentLevel == 6)
@@ -57,11 +57,11 @@ void InitLevel(int levelValue)
 			else if (currentLevel == 7)
 				mobArray[i][j] = new Enemy(1280+(j*200), 150, 0);
 			else if (currentLevel == 8)
-				mobArray[i][j] = new Enemy(80, 0-(j*200), 1);
+				mobArray[i][j] = new Enemy(80, 0-(j*200), Random(1,3));
 			else if (currentLevel == 9)
-				mobArray[i][j] = new Enemy(720, 720+(j*200), 1);
+				mobArray[i][j] = new Enemy(720, 720+(j*200), Random(1,3));
 			else if (currentLevel == 10)
-				mobArray[i][j] = new Enemy(220, 0-(j*200), 1);
+				mobArray[i][j] = new Enemy(220, 0-(j*200), Random(1,3));
 		}
 	}
 	if (!levelSoundBuffer.loadFromFile("sound.wav"))
@@ -114,7 +114,7 @@ void DrawLevel2D()
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
 				if (mobArray[waveNum][i]->xPos == 280 && mobArray[waveNum][i]->yPos == 360 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(1);
+					mobArray[waveNum][i]->setProperties(Random(1,3));
 					mobArray[waveNum][i]->draw();
 				}
 			}
@@ -125,7 +125,7 @@ void DrawLevel2D()
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
 				if (mobArray[waveNum][i]->xPos == 1240 && mobArray[waveNum][i]->yPos == 80 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(1);
+					mobArray[waveNum][i]->setProperties(Random(1,3));
 					mobArray[waveNum][i]->draw();
 				}
 			}
@@ -136,45 +136,13 @@ void DrawLevel2D()
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
 				if (mobArray[waveNum][i]->xPos == 1240 && mobArray[waveNum][i]->yPos == 150 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(1);
+					mobArray[waveNum][i]->setProperties(Random(1,3));
 					mobArray[waveNum][i]->draw();
 				}
 			}
 		}
 	}
 
-	if (currentLevel == 8) {
-		for (int i=0; i<mobAmount; i++) {
-			if(mobArray[waveNum][i] != NULL) {
-				if (mobArray[waveNum][i]->xPos == 80 && mobArray[waveNum][i]->yPos == 0 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(1);
-					mobArray[waveNum][i]->draw();
-				}
-			}
-		}
-	}
-
-	if (currentLevel == 9) {
-		for (int i=0; i<mobAmount; i++) {
-			if(mobArray[waveNum][i] != NULL) {
-				if (mobArray[waveNum][i]->xPos == 720 && mobArray[waveNum][i]->yPos == 720 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(1);
-					mobArray[waveNum][i]->draw();
-				}
-			}
-		}
-	}
-
-	if (currentLevel == 10) {
-		for (int i=0; i<mobAmount; i++) {
-			if(mobArray[waveNum][i] != NULL) {
-				if (mobArray[waveNum][i]->xPos == 220 && mobArray[waveNum][i]->yPos == 0 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(1);
-					mobArray[waveNum][i]->draw();
-				}
-			}
-		}
-	}
 
 	// draw enemy
 	if (waveActive) {
@@ -323,4 +291,15 @@ void MouseMotion(int x, int y)
 		towerY = y;
 	}
 
+}
+
+int Random(int min, int max)
+{
+   static bool first = true;
+   if ( first ) 
+   {  
+      srand(time(NULL)); //seeding for the first time only!
+      first = false;
+   }
+   return min + rand() % (max - min + 1);
 }

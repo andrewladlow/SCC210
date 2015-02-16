@@ -22,7 +22,7 @@ sf::Texture playButtonTexture;
 sf::Texture exitButtonTexture;
 sf::Texture sideMenuTexture;
 sf::Texture levelBackgroundTexture;
-sf::Texture enemyTexture[3];
+sf::Texture enemyTexture[4];
 sf::Texture basicTowerTexture[2];
 sf::Texture longRangeTowerTexture[2];
 sf::Texture padLockTexture;
@@ -169,6 +169,8 @@ void loadResources()
 	//levelBackgroundTexture.loadFromFile("Images/LevelSelect/Level" + std::to_string(currentLevel) + ".png");
 	enemyTexture[0].loadFromFile("Images/Blank.png");
 	enemyTexture[1].loadFromFile("Images/megaman.png");
+	enemyTexture[2].loadFromFile("Images/megaman.png");
+	enemyTexture[3].loadFromFile("Images/megaman.png");
 	basicTowerTexture[0].loadFromFile("images/Towers/Basic tower/basicTowerBase.png");
 	basicTowerTexture[1].loadFromFile("images/Towers/Basic tower/basicTowerTop.png");
 	longRangeTowerTexture[0].loadFromFile("images/Towers/Long Distance tower/longDistanceBase.png");
