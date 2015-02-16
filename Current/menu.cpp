@@ -22,7 +22,7 @@ bool newProfile(string name){
 	ofstream newProfileFile ("saves/" + name + ".towerdefence");
 	if (newProfileFile.is_open())
 	{
-		newProfileFile << "1\n";
+		newProfileFile <<  std::to_string(levelsUnlocked) + "\n";
 		newProfileFile << "Can go in here\n";
 		newProfileFile.close();
 		profileList[creatingProfileNumber] = name;

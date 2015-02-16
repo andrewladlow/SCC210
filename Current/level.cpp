@@ -177,6 +177,11 @@ void DrawLevel2D()
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
 			//submitHighScore(currentLevel, healthAmount + currencyAmount, profileList[currentProfile]);
+			if(currentLevel == levelsUnlocked)
+			{
+				levelsUnlocked = levelsUnlocked + 1;
+				newProfile(profileList[currentProfile]);
+			}
 			switchToWinScreen();
 
 		} else if (healthAmount != 0) { // keep enemies moving until health = 0

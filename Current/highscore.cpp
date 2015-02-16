@@ -57,7 +57,7 @@ void getHighScores()
 		{
 			highScoreCount[level]++;
 			if(highScoreCount[level] > 10) //we don't want more than the 10 highest scores for each level (althought the DB shouldn't ever return more - check anyway)
-				break; //this stops a crash potential overflow crash but will stop loading scores
+				break; //this stops a potential overflow crash but will stop loading scores
 			field = 0;
 		}
 		else 
