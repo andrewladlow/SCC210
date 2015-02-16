@@ -18,7 +18,7 @@ class Tower {
 	  sf::Sound sound;
 	  Tower(float, float, int);
 	  void DrawTower();
-	  bool checkPlacement();
+	  bool checkPlacement(int currentLevel);
 	  void setPos(float newX, float newY);
 	  void enemyInRange(Enemy* enemyCheck);
 	  void workOutAngle(float towerX, float towerY, float targetX, float targetY);

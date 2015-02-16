@@ -148,7 +148,14 @@ void DrawLevel2D()
 	if (waveActive) {
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL){
-				mobArray[waveNum][i]->draw();
+				if (mobArray[waveNum][i]->type != 0 ) {
+					if(mobArray[waveNum][i]->timerStarted == false){
+						mobArray[waveNum][i]->timer.restart();
+						mobArray[waveNum][i]->timerStarted = true;
+					}
+					mobArray[waveNum][i]->draw();
+				}
+
 				for(int j=0; j<30; j++){
 					if(createdTowers[j] != NULL){
 						createdTowers[j]->enemyInRange(mobArray[waveNum][i]);
@@ -157,8 +164,8 @@ void DrawLevel2D()
 				if(mobArray[waveNum][i]->healthPoints < 1){
 					currencyAmount += 20;
 					mobAmount--;
-					for (int i=0; i<mobAmount; i++) {
-						mobArray[waveNum][i] = mobArray[waveNum][i+1];
+					for (int k=i; k<mobAmount; k++) {
+						mobArray[waveNum][k] = mobArray[waveNum][k+1];
 					}				
 				}
 			}
@@ -182,8 +189,8 @@ void DrawLevel2D()
 						healthAmount -= 10;
 						//delete mobArray[waveNum][i];
 						mobAmount--;
-						for (int i=0; i<mobAmount; i++) {
-							mobArray[waveNum][i] = mobArray[waveNum][i+1];
+						for (int k=i; k<mobAmount; k++) {
+							mobArray[waveNum][k] = mobArray[waveNum][k+1];
 						}
 					}
 				}
@@ -235,7 +242,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 		if(type == sf::Event::MouseButtonPressed)
 		{
 			// In process of placing tower
-			if(pickedUpTower && createdTowers[currentTower]->checkPlacement()){
+			if(pickedUpTower && createdTowers[currentTower]->checkPlacement(currentLevel)){
 					pickedUpTower = false;
 					towerX = 1350;
 					towerY = 240;

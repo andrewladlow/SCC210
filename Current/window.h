@@ -26,7 +26,7 @@ extern sf::Texture playButtonTexture;
 extern sf::Texture exitButtonTexture;
 extern sf::Texture sideMenuTexture;
 extern sf::Texture levelBackgroundTexture;
-extern sf::Texture enemyTexture[4];
+extern sf::Texture enemyTexture[4][4];
 extern sf::Texture basicTowerTexture[2];
 extern sf::Texture longRangeTowerTexture[2];
 extern sf::Music menuMusic;

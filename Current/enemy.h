@@ -10,8 +10,11 @@ class Enemy {
 		int healthPoints;
 		int startingHealthPoints;
 		int type;
+		int frame;
 		bool end;
+		bool timerStarted;
 		sf::RectangleShape enemyRect;
+		sf::Clock timer;
 		Enemy(float, float, int);
 
 		void draw();

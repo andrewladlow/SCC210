@@ -1,5 +1,6 @@
 #include "enemy.h"
 
+
 Enemy::Enemy(float xPos, float yPos, int type)
 {
 		sf::RectangleShape enemyRect; 
@@ -8,6 +9,8 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		this->healthPoints = healthPoints;
 		this->startingHealthPoints = healthPoints;
 		this->type = type;
+		this->timerStarted = false;
+		this->frame = 0;
 		// set enemy speed and hp based on type
 		// 0
 		switch (this->type) { 
@@ -48,10 +51,21 @@ void Enemy::draw()
 		window.draw(healthRect);
 	}
 
-		enemyRect.setTexture(&enemyTexture[this->type], true);
+		enemyRect.setTexture(&enemyTexture[this->type][this->frame], true);
 		enemyRect.setSize(sf::Vector2f(50, 50));
 		enemyRect.setPosition(xPos, yPos);
 		window.draw(enemyRect);
+
+	if (this->timerStarted) {
+		sf::Time elapsed1 = timer.getElapsedTime();
+		if (elapsed1.asMilliseconds() > 150) {
+			timer.restart();
+			frame++;
+			if (frame == 3) {
+				frame = 0;
+			}
+		}
+	}
 }
 
 // call when an enemy becomes visible to redefine speed and hp

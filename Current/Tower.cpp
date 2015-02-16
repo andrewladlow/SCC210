@@ -121,20 +121,280 @@ void Tower::DrawTower(){
 }
 
 
-bool Tower::checkPlacement(){
-		if(x>0 && x<640 && y<240 && y>93)
-			return false;
+bool Tower::checkPlacement(int currentLevel){
+switch(currentLevel)
+		{
+		case 1:
+			if(x>1160)
+				return false;
+
+			if(x<640 && y<240 && y>93)
+				return false;
 		
-		if(x>486 && x<643 && y<525 && y>150)
-			return false;
+			if(x>486 && x<643 && y<525 && y>150)
+				return false;
 		
-		if(x>534 && x<1225 && y<525 && y>378)
-			return false;
-		else{
-			towerX=this->x;
-			towerY=this->y;
-			return true;
-		}
+			if(x>534 && x<1225 && y<525 && y>378)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+	
+		case 2:
+			if(x>1160)
+				return false;
+
+			if(x>35 && x<200 && y<550)
+				return false;
+		
+			if(x>25 && x<554 && y<553 && y>390)
+				return false;
+		
+			if(x>380 && x<565 && y<553 && y>100)
+				return false;
+
+			if(x>380 && x<900 && y<270 && y>100)
+				return false;
+
+			if(x>730 && x<910 && y<550 && y>100)
+				return false;
+
+			if(x>730 && x<1280 && y<560 && y>380)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+		
+		case 3:
+			if(x>1160)
+				return false;
+
+			if(x<280 && y<270 && y>100)
+				return false;
+			
+			if(x>100 && x<280 && y<550 && y>100)
+				return false;
+		
+			if(x>100 && x<1130 && y<550 && y>380)
+				return false;
+	
+			if(x>840 && x<880 && y<550 && y>200)
+				return false;
+
+			if(x>950 && x<1130 && y<530 && y>100)
+				return false;
+
+			if(x>300 && x<1130 && y<270 && y>100)
+				return false;
+
+			if(x>300 && x<490 && y<422 && y>100)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+
+		case 4:
+			if(x>1160)
+				return false;
+
+			if(x<1125 && y<270 && y>100)
+				return false;
+		
+			if(x>950 && x<1125 && y<550 && y>100)
+				return false;
+		
+			 if(x<1125 && y<553 && y>380)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+
+		case 5:
+			if(x>1160)
+				return false;
+
+			if(x>170&&x<1050 && y<410 && y>240)
+				return false;
+			
+			if(x>870 && x<1050 && y<410 && y>30)
+				return false;
+		
+			if(x>30 && x<1130 && y<197 && y>30)
+				return false;
+	
+			if(x>30 && x<203 && y<550 && y>30)
+				return false;
+
+			if(x>30 && x<1200 && y<550 && y>390)
+				return false;
+
+			if(x>1020 && x<1200 && y<550 && y>20)
+				return false;
+
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+
+		case 6:
+			if(x>1160)
+				return false;
+
+			if(x>25 && y<130)
+				return false;
+			
+			if(x>25 && x<203 && y<412)
+				return false;
+		
+			if(x>25 && x<1125 && y<412 && y>250)
+				return false;
+	
+			if(x>950 && x<1125 && y<622 && y>250)
+				return false;
+
+			if(x<1125 && y<622 && y>460)
+				return false;
+
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+
+		case 7:
+			if(x>1160)
+				return false;
+
+			if(x>25 && y<200 && y>30)
+				return false;
+		
+			if(x>25 && x<200 && y<555 && y>30)
+				return false;
+		
+			 if(x>25 && y<555 && y>390)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+		case 8:
+			if(x>1160)
+				return false;
+
+			if(x<130 && y<340)
+				return false;
+			
+			if(x<415 && y<340 && y>180)
+				return false;
+		
+			if(x>240 && x<415 && y<625 && y>180)
+				return false;
+	
+			if(x>240 && x<700 && y<625 && y>464)
+				return false;
+
+			if(x>520 && x<700 && y<625)
+				return false;
+
+			if(x>520 && x<980 && y<127)
+				return false;
+
+			if(x>807 && x<980 && y<625)
+				return false;
+
+			if(x>807 && x<1197 && y<625 && y>460)
+				return false;
+
+			if(x>1020 && x<1197 && y<625)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+
+		case 9:
+			if(x>1160)
+				return false;
+
+			if(x>590 && x<770 && y>390)
+				return false;
+			
+			if(x>590 && y<553 && y>390)
+				return false;
+		
+			if(x>1020 && y<553)
+				return false;
+	
+			if(y<126)
+				return false;
+
+			if(x>130 && y<553)
+				return false;
+
+			if(x<558 && y<553 && y>390)
+				return false;
+
+			if(x>350 && x<555 && y>390)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+
+		case 10:
+			if(x>1160)
+				return false;
+
+			if(x<275 && x>95 && y<200)
+				return false;
+			
+			if(x<275 && y<200 && y>35)
+				return false;
+		
+			if(x<131 && y<340 && y>35)
+				return false;
+	
+			if(x<415 && y<340 && y>177)
+				return false;
+
+			if(x>237 && x<417 && y<625 && y>177)
+				return false;
+
+			if(x>237 && x<700 && y<625 && y>460)
+				return false;
+
+			if(x>520 && x<700 && y<625 && y>35)
+				return false;
+
+			if(x>520 && x<915 && y<200 && y>35)
+				return false;
+
+			if(x>736 && x<915 && y<625 && y>35)
+				return false;
+
+			if(x>736 && y<625 && y>460)
+				return false;
+
+			if(x>1020 && y<625)
+				return false;
+			else{
+				towerX=this->x;
+				towerY=this->y;
+				return true;
+			}
+	}
 }
 
 void Tower::setPos(float newX, float newY){
