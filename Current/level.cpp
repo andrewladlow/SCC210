@@ -8,6 +8,7 @@
 #include "enemy.h"
 #include "bullet.h"
 #include "Tower.h"
+#include "bomb.h"
 #include "highscore.h"
 #include "menu.h"
 #include <sstream>
@@ -22,10 +23,12 @@ int mobAmount = 10;
 int waveNum = -1;
 
 Enemy* mobArray[4][10];
+Bomb* bomb;
 
 Tower* createdTowers[30];
 int currentTower = 0;
 bool pickedUpTower = false;
+bool pickedUpBomb = false;
 
 Bullet* testBullet;
 sf::SoundBuffer levelSoundBuffer;
@@ -68,6 +71,7 @@ void InitLevel(int levelValue)
 	if (!levelSoundBuffer.loadFromFile("sound.wav"))
 		cout << "error loading sound buffer";
 	waveNum = -1;
+	bomb = new Bomb(1350.0f, 600.0f,0);
 }
 
 void DrawLevel2D()
@@ -99,7 +103,6 @@ void DrawLevel2D()
 	if(pickedUpTower){
 		createdTowers[currentTower]->setPos(towerX,towerY);
 	}
-
 
 	// draw towers
 	for(int i=0; i<30; i++){
@@ -142,6 +145,26 @@ void DrawLevel2D()
 		}
 	}
 
+		//bomb handling 
+	if(pickedUpBomb)
+	{
+		bomb->setPos(towerX, towerY);
+		bomb->DrawBomb();
+	}
+	else if(bomb->timerStarted)
+	{
+		bomb->DrawBomb();
+	}
+
+	bool exploded = false;
+	if (bomb->timerStarted) {
+		sf::Time elapsed1 = bomb->timer.getElapsedTime();
+		if (elapsed1.asSeconds() > 1.5) { //bomb explodes after one second
+			bomb->timer.restart();
+			exploded = true;
+			bomb->timerStarted = false;
+		}
+	}
 
 	// draw enemy
 	if (waveActive) {
@@ -154,6 +177,9 @@ void DrawLevel2D()
 					}
 					mobArray[waveNum][i]->draw();
 				}
+
+				if(exploded)  //bomb exploded - deal damage to enemies in range
+					bomb->enemyInRange(mobArray[waveNum][i]);
 
 				for(int j=0; j<30; j++){
 					if(createdTowers[j] != NULL){
@@ -244,6 +270,9 @@ void DrawLevel2D()
 	waveActiveText.setColor(sf::Color::Black);
 	window.draw(waveActiveText);
 
+
+
+
 }
 //
 //// This is called when keyboard presses are detected.
@@ -271,6 +300,16 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 					currentTower++;
 			}
 
+			if(pickedUpBomb && x < 1280)
+			{
+				//Bomb logic 
+				if(bomb->timerStarted == false){
+					pickedUpBomb = false;
+					bomb->timer.restart();
+					bomb->timerStarted = true;
+				}
+			}
+
 			// Start button
 			if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
 				//cout << "Clicked start "<<std::endl;
@@ -293,7 +332,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 
 			// Basic Tower button
 			if((x < 1410 && x > 1280) && (y < 310 && y > 170) && currencyAmount >= 50){
-				if(!pickedUpTower){
+				if(!pickedUpBomb && !pickedUpTower){
 					currencyAmount -= 50;
 					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,1);
 					createdTowers[currentTower]->DrawTower();
@@ -303,11 +342,20 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 
 			// Long range Tower button
 			if((x < 1555 && x > 1430) && (y < 310 && y > 170) && currencyAmount >= 100){
-				if(!pickedUpTower){
+				if(!pickedUpBomb && !pickedUpTower){
 					currencyAmount -= 100;
 					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,2);
 					createdTowers[currentTower]->DrawTower();
 					pickedUpTower = true;
+				}
+			}
+
+			// Bomb button
+			if((x < 1410 && x > 1280) && (y < 720 && y > 550) && currencyAmount >= 50){
+				if(!pickedUpBomb && !pickedUpTower && bomb->timerStarted == false){
+					currencyAmount -= 50;
+					bomb->DrawBomb();
+					pickedUpBomb = true;
 				}
 			}
 		}
@@ -316,7 +364,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 
 void MouseMotion(int x, int y)
 {
-	if (pickedUpTower) {
+	if (pickedUpTower || pickedUpBomb) {
 		towerX = x;
 		towerY = y;
 	}

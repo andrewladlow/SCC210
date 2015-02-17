@@ -31,3 +31,4 @@ extern sf::Texture basicTowerTexture[2];
 extern sf::Texture longRangeTowerTexture[2];
 extern sf::Music menuMusic;
 extern sf::Texture padLockTexture;
+extern sf::Texture bombTexture[2];

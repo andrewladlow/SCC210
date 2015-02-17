@@ -23,7 +23,6 @@ bool newProfile(string name){
 	if (newProfileFile.is_open())
 	{
 		newProfileFile <<  std::to_string(levelsUnlocked) + "\n";
-		newProfileFile << "Can go in here\n";
 		newProfileFile.close();
 		profileList[creatingProfileNumber] = name;
 		creatingNewProfileString = "";
@@ -271,7 +270,7 @@ void MenuOnMouseClick(int button,int x,int y)
 {
 	if(button == sf::Mouse::Left)
 	{
-		if((x < 540 && x > 340) && (y < 450 && y > 350)){
+		if((x < 540 && x > 340) && (y < 450 && y > 350) && profileList[currentProfile] != "null"){
 			loadCurrentProfile();
 			menuMusic.stop();
 			switchToLevelSelect();
