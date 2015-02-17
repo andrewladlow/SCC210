@@ -10,6 +10,7 @@
 #include "Tower.h"
 #include "highscore.h"
 #include "menu.h"
+#include <sstream>
 //#include <vector>
 using namespace std;
 
@@ -18,7 +19,7 @@ bool waveActive = false;
 int healthAmount = 100;
 int currencyAmount = 100;
 int mobAmount = 10;
-int waveNum = 0;
+int waveNum = -1;
 
 Enemy* mobArray[4][10];
 
@@ -66,7 +67,7 @@ void InitLevel(int levelValue)
 	}
 	if (!levelSoundBuffer.loadFromFile("sound.wav"))
 		cout << "error loading sound buffer";
-	waveNum = 0;
+	waveNum = -1;
 }
 
 void DrawLevel2D()
@@ -170,7 +171,6 @@ void DrawLevel2D()
 		}
 		if (waveNum != 2 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
 			waveActive = false;
-			waveNum++;
 			mobAmount = 10;
 		} else if (waveNum == 2 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
 			window.close();
@@ -208,22 +208,41 @@ void DrawLevel2D()
 	}
 
 	//draw health amount
-	sf::Text healthText(std::to_string(healthAmount), font);
+	sf::Text healthText(std::to_string(healthAmount), font, 20);
 	healthText.setPosition(1450, 10);
-	healthText.setCharacterSize(20);
 	healthText.setStyle(sf::Text::Regular);
 	healthText.setColor(sf::Color::Black);
 	window.draw(healthText);
 
 	//draw currency
-	sf::Text currencyText(std::to_string(currencyAmount), font);
+	sf::Text currencyText(std::to_string(currencyAmount), font, 20);
 	currencyText.setPosition(1450, 50);
-	currencyText.setCharacterSize(20);
 	currencyText.setStyle(sf::Text::Regular);
 	currencyText.setColor(sf::Color::Black);
 	window.draw(currencyText);
 
+	//draw wave number
+	std::stringstream waveTextResult;
+	int waveTextTemp1 = waveNum+1;
+	string waveTextTemp2 = "Current wave: ";
+	waveTextResult << waveTextTemp2 << waveTextTemp1;
+	string waveTextTemp3 = waveTextResult.str();
+	sf::Text waveText(waveTextTemp3, font, 20);
+	waveText.setPosition(10, 685);
+	waveText.setStyle(sf::Text::Regular);
+	waveText.setColor(sf::Color::Black);
+	window.draw(waveText);
 
+	//draw wave status
+	std::stringstream waveActiveResult;
+	string waveActiveTemp1;
+	if (waveActive) waveActiveTemp1 = "Wave active: true";
+	else waveActiveTemp1 = "Wave active: false";
+	sf::Text waveActiveText(waveActiveTemp1, font, 20);
+	waveActiveText.setPosition(10, 655);
+	waveActiveText.setStyle(sf::Text::Regular);
+	waveActiveText.setColor(sf::Color::Black);
+	window.draw(waveActiveText);
 
 }
 //
@@ -256,6 +275,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
 				//cout << "Clicked start "<<std::endl;
 				if (!waveActive) {
+					waveNum++;
 					waveActive = true;
 					mobAmount = 10;
 				}
