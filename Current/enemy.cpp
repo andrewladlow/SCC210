@@ -16,27 +16,26 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		this->rotateFlagS = false;
 		this->rotateFlagW = false;
 		// set enemy speed and hp based on type
-		// 0
 		switch (this->type) { 
 			case 0: // invisible type
-				this->speed = 5.0f + (waveNum * 0.4); // enemies become faster as wave increases
+				this->speed = 5.0f + (waveNum * 0.5); // enemies become faster as wave increases
 				this->healthPoints = 150;
 				this->startingHealthPoints = 150;
 				break;
 			case 1: // standard type
-				this->speed = 4.0f + (waveNum * 0.4);
-				this->healthPoints = 150;
-				this->startingHealthPoints = 150;
+				this->speed = 4.0f + (waveNum * 0.5);
+				this->healthPoints = 150 + (currentLevel * 20);
+				this->startingHealthPoints = 150 + (currentLevel * 20);
 				break;
 			case 2: // weak + fast
-				this->speed = 5.0f + (waveNum * 0.4);
-				this->healthPoints = 100;
-				this->startingHealthPoints = 100;
+				this->speed = 5.0f + (waveNum * 0.5);
+				this->healthPoints = 100 + (currentLevel * 20);
+				this->startingHealthPoints = 100 + (currentLevel * 20);
 				break;
 			case 3: // strong + slow
-				this->speed = 3.0f + (waveNum * 0.4);
-				this->healthPoints = 250;
-				this->startingHealthPoints = 250;
+				this->speed = 3.0f + (waveNum * 0.5);
+				this->healthPoints = 250 + (currentLevel * 20);
+				this->startingHealthPoints = 250 + (currentLevel * 20);
 				break;
 		}
 		this->end = false;
@@ -77,21 +76,21 @@ void Enemy::setProperties(int typeVal) {
 	switch (typeVal) { 
 		case 1: // standard type
 			this->type = typeVal;
-			this->speed = 4.0f + (waveNum * 0.4);
-			this->healthPoints = 150;
-			this->startingHealthPoints = 150;
+			this->speed = 4.0f + (waveNum * 0.5);
+			this->healthPoints = 150 + (currentLevel * 20);
+			this->startingHealthPoints = 150 + (currentLevel * 20);
 			break;
 		case 2: // weak + fast
 			this->type = typeVal;
-			this->speed = 5.0f + (waveNum * 0.4);
-			this->healthPoints = 100;
-			this->startingHealthPoints = 100;
+			this->speed = 5.0f + (waveNum * 0.5);
+			this->healthPoints = 100 + (currentLevel * 20);
+			this->startingHealthPoints = 100 + (currentLevel * 20);
 			break;
 		case 3: // strong + slow
 			this->type = typeVal;
-			this->speed = 3.0f + (waveNum * 0.4);
-			this->healthPoints = 250;
-			this->startingHealthPoints = 250;
+			this->speed = 3.0f + (waveNum * 0.5);
+			this->healthPoints = 250 + (currentLevel * 20);
+			this->startingHealthPoints = 250 + (currentLevel * 20);
 			break;
 	}
 }
