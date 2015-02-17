@@ -14,6 +14,19 @@ Bomb::Bomb(float x, float y, int type)
 }
 
 void Bomb::DrawBomb(){
+	if (this->timerStarted) {
+		sf::Time elapsed1 = timer.getElapsedTime();
+		sf::RectangleShape healthRect; 	
+		healthRect.setPosition(sf::Vector2f(x, y - 20));
+		float a, b;
+		a = (float) elapsed1.asMilliseconds();
+		b = (float) 1500;
+		healthRect.setSize(sf::Vector2f((a / b) * 140.0f, 10));
+		healthRect.setFillColor(sf::Color::Red);
+		window.draw(healthRect);
+	}
+
+
 	bombRect.setPosition(x,y);
 	bombRect.setTexture(&bombTexture[0]);
 	bombRect.setSize(sf::Vector2f(140, 140));
