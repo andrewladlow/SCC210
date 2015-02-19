@@ -84,8 +84,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bomb.cpp" />
-    <ClCompile Include="bullet.cpp" />
-    <ClCompile Include="collision.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="highscore.cpp" />
     <ClCompile Include="LevelSelect.cpp" />
@@ -101,8 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bomb.h" />
-    <ClInclude Include="bullet.h" />
-    <ClInclude Include="collision.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="highscore.h" />
     <ClInclude Include="LevelSelect.h" />

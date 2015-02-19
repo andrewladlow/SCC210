@@ -6,7 +6,6 @@
 #include "pathing.h"
 #include "LevelSelect.h"
 #include "enemy.h"
-#include "bullet.h"
 #include "Tower.h"
 #include "bomb.h"
 #include "highscore.h"
@@ -19,10 +18,10 @@ bool waveActive = false;
 
 int healthAmount = 100;
 int currencyAmount = 100;
-int mobAmount = 10;
-int waveNum = -1;
+int mobAmount = 20;
+int waveNum = 0;
 
-Enemy* mobArray[4][10];
+Enemy* mobArray[4][20];
 Bomb* bomb;
 
 Tower* createdTowers[30];
@@ -30,22 +29,20 @@ int currentTower = 0;
 bool pickedUpTower = false;
 bool pickedUpBomb = false;
 
-Bullet* testBullet;
 sf::SoundBuffer levelSoundBuffer;
-
 
 void InitLevel(int levelValue)
 {
 	cout << currentLevel << std::endl;
-	mobAmount = 10;
+	mobAmount = 20;
 	healthAmount = 100;
 	for (int i=0; i<30; i++) {
 		createdTowers[i] = NULL;
 	}
 	waveActive = false;
 	currentTower=0;
-	for (int i=0; i<3; i++) {
-		for (int j=0; j<10; j++) {
+	for (int i=0; i<4; i++) {
+		for (int j=0; j<mobAmount; j++) {
 			if (currentLevel == 1)
 				mobArray[i][j] = new Enemy(0-(j*200), 190, Random(1,3));
 			else if (currentLevel == 2)
@@ -70,7 +67,7 @@ void InitLevel(int levelValue)
 	}
 	if (!levelSoundBuffer.loadFromFile("sound.wav"))
 		cout << "error loading sound buffer";
-	waveNum = -1;
+	waveNum = 0;
 	bomb = new Bomb(1350.0f, 600.0f,0);
 }
 
@@ -115,7 +112,7 @@ void DrawLevel2D()
 	if (currentLevel == 5) {
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
-				if (mobArray[waveNum][i]->xPos == 280 && mobArray[waveNum][i]->yPos == 360 && mobArray[waveNum][i]->type == 0) {
+				if (mobArray[waveNum][i]->xPos >= 280 && mobArray[waveNum][i]->yPos == 360 && mobArray[waveNum][i]->type == 0) {
 					mobArray[waveNum][i]->setProperties(Random(1,3));
 					mobArray[waveNum][i]->draw();
 				}
@@ -126,7 +123,7 @@ void DrawLevel2D()
 	if (currentLevel == 6) {
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
-				if (mobArray[waveNum][i]->xPos == 1240 && mobArray[waveNum][i]->yPos == 80 && mobArray[waveNum][i]->type == 0) {
+				if (mobArray[waveNum][i]->xPos <= 1240 && mobArray[waveNum][i]->yPos == 80 && mobArray[waveNum][i]->type == 0) {
 					mobArray[waveNum][i]->setProperties(Random(1,3));
 					mobArray[waveNum][i]->draw();
 				}
@@ -137,7 +134,7 @@ void DrawLevel2D()
 	if (currentLevel == 7) {
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
-				if (mobArray[waveNum][i]->xPos == 1240 && mobArray[waveNum][i]->yPos == 150 && mobArray[waveNum][i]->type == 0) {
+				if (mobArray[waveNum][i]->xPos <= 1240 && mobArray[waveNum][i]->yPos == 150 && mobArray[waveNum][i]->type == 0) {
 					mobArray[waveNum][i]->setProperties(Random(1,3));
 					mobArray[waveNum][i]->draw();
 				}
@@ -187,7 +184,7 @@ void DrawLevel2D()
 					}
 				}
 				if(mobArray[waveNum][i]->healthPoints < 1){
-					currencyAmount += 20;
+					currencyAmount += 10;
 					mobAmount--;
 					for (int k=i; k<mobAmount; k++) {
 						mobArray[waveNum][k] = mobArray[waveNum][k+1];
@@ -195,10 +192,11 @@ void DrawLevel2D()
 				}
 			}
 		}
-		if (waveNum != 2 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
+		if (waveNum != 3 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
 			waveActive = false;
-			mobAmount = 10;
-		} else if (waveNum == 2 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
+			mobAmount = 20;
+		} else if (waveNum == 3 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
+			currencyAmount = 100;
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
@@ -249,7 +247,7 @@ void DrawLevel2D()
 
 	//draw wave number
 	std::stringstream waveTextResult;
-	int waveTextTemp1 = waveNum+1;
+	int waveTextTemp1 = waveNum;
 	string waveTextTemp2 = "Current wave: ";
 	waveTextResult << waveTextTemp2 << waveTextTemp1;
 	string waveTextTemp3 = waveTextResult.str();
@@ -316,7 +314,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 				if (!waveActive) {
 					waveNum++;
 					waveActive = true;
-					mobAmount = 10;
+					mobAmount = 20;
 				}
 			}
 

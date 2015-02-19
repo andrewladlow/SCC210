@@ -45,7 +45,7 @@ void Bomb::enemyInRange(Enemy* enemyCheck){
 	if(enemyCheckX>0 && enemyCheckY>0){
 		if( enemyCheck->xPos > (this->x-bombRange) && enemyCheck->xPos < (this->x+bombRange)){
 			if( enemyCheck->yPos > (this->y-bombRange) && enemyCheck->yPos < (this->y+bombRange)){
-				enemyCheck->healthPoints -= 100;
+				enemyCheck->healthPoints -= 200;
 				if(enemyCheck->healthPoints < 1){enemyCheck = NULL;}
 
 			}

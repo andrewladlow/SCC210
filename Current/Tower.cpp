@@ -36,18 +36,18 @@ void Tower::DrawTower(){
 			//std::cout << laserLength << "  ";
 
 			//std::cout << direction << " ";
-			if (direction > 180 && direction < 270){
+			/*if (direction > 180 && direction < 270){
 				this->direction += 10;
-			}
-			else if( direction > 90 && direction < 180){
-				laserLength -= 20;
+			}*/
+			 if( direction > 90 && direction < 180){
+				laserLength -= 40;
 			}
 			else if( direction < 360 && direction > 270 ){
 				laserLength +=70;
 			}
-			else if( direction > 0 && direction < 90){
+			/*else if( direction > 0 && direction < 90){
 				this->direction -= 20;
-			}
+			}*/
 
 			laser.setFillColor(sf::Color(255,0,0));
 			laser.setSize(sf::Vector2f(laserLength, 5));
@@ -451,8 +451,8 @@ void Tower::enemyInRange(Enemy* enemyCheck){
 
 void Tower::workOutAngle(float towerX, float towerY, float targetX, float targetY){
 
-	float deltaX = targetX - towerX;
-	float deltaY = targetY - towerY;
+	float deltaX = (targetX-50) - towerX;
+	float deltaY = (targetY-50) - towerY;
 	float pi = 3.14159;
 
 	int angleInDegrees = (atan2(deltaY, deltaX)) * 180 / pi;
