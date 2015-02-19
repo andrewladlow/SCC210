@@ -221,7 +221,7 @@ switch(currentLevel)
 			if(x>1160)
 				return false;
 
-			if(x>170&&x<1050 && y<410 && y>240)
+			if(x>170&&x<1050 && y<390 && y>240)
 				return false;
 			
 			if(x>870 && x<1050 && y<410 && y>30)
@@ -233,7 +233,7 @@ switch(currentLevel)
 			if(x>30 && x<203 && y<550 && y>30)
 				return false;
 
-			if(x>30 && x<1200 && y<550 && y>390)
+			if(x>30 && x<1200 && y<550 && y>410)
 				return false;
 
 			if(x>1020 && x<1200 && y<550 && y>20)
