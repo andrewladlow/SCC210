@@ -25,6 +25,8 @@ sf::Texture levelBackgroundTexture;
 sf::Texture enemyTexture[4][4];
 sf::Texture basicTowerTexture[2];
 sf::Texture longRangeTowerTexture[2];
+sf::Texture slowingTowerTexture[2];
+sf::Texture economyTowerTexture;
 sf::Texture bombTexture[2];
 sf::Texture padLockTexture;
 sf::Music menuMusic;
@@ -188,6 +190,9 @@ void loadResources()
 	basicTowerTexture[1].loadFromFile("images/Towers/Basic tower/basicTowerTop.png");
 	longRangeTowerTexture[0].loadFromFile("images/Towers/Long Distance tower/longDistanceBase.png");
 	longRangeTowerTexture[1].loadFromFile("images/Towers/Long Distance tower/longDistanceTop.png");
+	slowingTowerTexture[0].loadFromFile("images/Towers/slow tower/slow tower base.png");
+	slowingTowerTexture[1].loadFromFile("images/Towers/slow tower/slow tower r.png");
+	economyTowerTexture.loadFromFile("images/Towers/econmy tower/econTower.png");
 	padLockTexture.loadFromFile("images/LevelSelect/padlock-hi.png");
 	bombTexture[0].loadFromFile("images/bomb/bomb.png");
 }

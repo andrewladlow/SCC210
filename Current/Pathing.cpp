@@ -7,6 +7,12 @@ using namespace std;
 
 
 void GenPath(Enemy *e, int currentLevel) {
+
+	if(e->isSlowed == true){
+		e->speed = e->originalSpeed - 3;
+	}
+	else if(e->isSlowed == false){e->speed = e->originalSpeed;}
+
 	switch(currentLevel) {
 		case 1:
 			if (e->xPos < 590) {

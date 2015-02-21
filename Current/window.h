@@ -32,3 +32,5 @@ extern sf::Texture longRangeTowerTexture[2];
 extern sf::Music menuMusic;
 extern sf::Texture padLockTexture;
 extern sf::Texture bombTexture[2];
+extern sf::Texture slowingTowerTexture[2];
+extern sf::Texture economyTowerTexture;

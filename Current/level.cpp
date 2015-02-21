@@ -348,6 +348,16 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 				}
 			}
 
+			// Slowing Tower button
+			if((x < 1680 && x > 1556) && (y < 310 && y > 170) && currencyAmount >= 150){
+				if(!pickedUpBomb && !pickedUpTower){
+					currencyAmount -= 150;
+					createdTowers[currentTower] = new Tower(1350.0f, 240.0f,3);
+					createdTowers[currentTower]->DrawTower();
+					pickedUpTower = true;
+				}
+			}
+
 			// Bomb button
 			if((x < 1410 && x > 1280) && (y < 720 && y > 550) && currencyAmount >= 50){
 				if(!pickedUpBomb && !pickedUpTower && bomb->timerStarted == false){

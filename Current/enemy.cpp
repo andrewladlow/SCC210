@@ -11,6 +11,7 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		this->type = type;
 		this->timerStarted = false;
 		this->frame = 0;
+		this->isSlowed = false;
 		this->rotateFlagN = false;
 		this->rotateFlagE = false;
 		this->rotateFlagS = false;
@@ -18,22 +19,22 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		// set enemy speed and hp based on type
 		switch (this->type) { 
 			case 0: // invisible type
-				this->speed = 10.0f + (currentLevel * 0.25); // enemies become faster as wave increases
+				this->originalSpeed = 10.0f + (currentLevel * 0.25); // enemies become faster as wave increases
 				this->healthPoints = 150;
 				this->startingHealthPoints = 150;
 				break;
 			case 1: // standard type
-				this->speed = 4.0f + (currentLevel * 0.25);
+				this->originalSpeed = 4.0f + (currentLevel * 0.25);
 				this->healthPoints = 150 + (currentLevel * 30);
 				this->startingHealthPoints = 150 + (currentLevel * 30);
 				break;
 			case 2: // weak + fast
-				this->speed = 5.0f + (currentLevel * 0.25);
+				this->originalSpeed = 5.0f + (currentLevel * 0.25);
 				this->healthPoints = 100 + (currentLevel * 30);
 				this->startingHealthPoints = 100 + (currentLevel * 30);
 				break;
 			case 3: // strong + slow
-				this->speed = 3.0f + (currentLevel * 0.25);
+				this->originalSpeed = 3.0f + (currentLevel * 0.25);
 				this->healthPoints = 250 + (currentLevel * 30);
 				this->startingHealthPoints = 250 + (currentLevel * 30);
 				break;

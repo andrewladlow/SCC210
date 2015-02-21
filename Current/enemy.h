@@ -6,11 +6,13 @@ class Enemy {
 	public:
 		float xPos;
 		float yPos;
+		float originalSpeed;
 		float speed;
 		int healthPoints;
 		int startingHealthPoints;
 		int type;
 		int frame;
+		bool isSlowed;
 		bool end;
 		bool timerStarted;
 		bool rotateFlagN;
