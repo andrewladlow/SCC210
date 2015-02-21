@@ -25,5 +25,6 @@ class Enemy {
 
 		void draw();
 		void setProperties(int);
+		void setSpeed(int);
 };
 #endif

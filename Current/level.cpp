@@ -18,10 +18,11 @@ bool waveActive = false;
 
 int healthAmount = 100;
 int currencyAmount = 100;
-int mobAmount = 20;
+int mobAmount = 30;
+int mobAmountNum = 30;
 int waveNum = 0;
 
-Enemy* mobArray[4][20];
+Enemy* mobArray[4][30];
 Bomb* bomb;
 
 Tower* createdTowers[30];
@@ -34,7 +35,7 @@ sf::SoundBuffer levelSoundBuffer;
 void InitLevel(int levelValue)
 {
 	cout << currentLevel << std::endl;
-	mobAmount = 20;
+	mobAmount = mobAmountNum;
 	healthAmount = 100;
 	for (int i=0; i<30; i++) {
 		createdTowers[i] = NULL;
@@ -194,7 +195,7 @@ void DrawLevel2D()
 		}
 		if (waveNum != 3 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
 			waveActive = false;
-			mobAmount = 20;
+			mobAmount = mobAmountNum;
 		} else if (waveNum == 3 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
 			currencyAmount = 100;
 			window.close();
@@ -314,7 +315,10 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 				if (!waveActive) {
 					waveNum++;
 					waveActive = true;
-					mobAmount = 20;
+					mobAmount = mobAmountNum;
+					for (int i=0; i<mobAmount; i++) {
+						mobArray[waveNum][i]->setSpeed(mobArray[waveNum][i]->type);
+					}
 				}
 			}
 
