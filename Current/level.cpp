@@ -22,7 +22,7 @@ int mobAmount = 30;
 int mobAmountNum = 30;
 int waveNum = 0;
 
-Enemy* mobArray[4][30];
+Enemy* mobArray[11][30];
 Bomb* bomb;
 
 Tower* createdTowers[30];
@@ -42,7 +42,7 @@ void InitLevel(int levelValue)
 	}
 	waveActive = false;
 	currentTower=0;
-	for (int i=0; i<4; i++) {
+	for (int i=0; i<11; i++) {
 		for (int j=0; j<mobAmount; j++) {
 			if (currentLevel == 1)
 				mobArray[i][j] = new Enemy(0-(j*200), 190, Random(1,3));
@@ -193,10 +193,10 @@ void DrawLevel2D()
 				}
 			}
 		}
-		if (waveNum != 3 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
+		if (waveNum != 10 && mobAmount == 0 && healthAmount != 0) { // one wave cleared, player still alive
 			waveActive = false;
 			mobAmount = mobAmountNum;
-		} else if (waveNum == 3 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
+		} else if (waveNum == 10 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
 			currencyAmount = 100;
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
@@ -363,9 +363,9 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			}
 
 			// Bomb button
-			if((x < 1410 && x > 1280) && (y < 720 && y > 550) && currencyAmount >= 50){
+			if((x < 1410 && x > 1280) && (y < 720 && y > 550) && currencyAmount >= 100){
 				if(!pickedUpBomb && !pickedUpTower && bomb->timerStarted == false){
-					currencyAmount -= 50;
+					currencyAmount -= 100;
 					bomb->DrawBomb();
 					pickedUpBomb = true;
 				}

@@ -455,6 +455,7 @@ void Tower::setPos(float newX, float newY){
 }
 
 void Tower::enemyInRange(Enemy* enemyCheck){
+
 	if (enemyCheck->type != 0) { // must not be blank type
 		float enemyCheckX = enemyCheck->xPos;
 		//std::cout << enemyCheckX << "  ";
