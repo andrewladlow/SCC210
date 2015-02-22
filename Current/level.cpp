@@ -181,7 +181,9 @@ void DrawLevel2D()
 
 				for(int j=0; j<30; j++){
 					if(createdTowers[j] != NULL){
-						createdTowers[j]->enemyInRange(mobArray[waveNum][i]);
+						if(createdTowers[j]->placedYet == true){
+							createdTowers[j]->enemyInRange(mobArray[waveNum][i]);
+						}
 					}
 				}
 				if(mobArray[waveNum][i]->healthPoints < 1){
@@ -294,6 +296,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			// In process of placing tower
 			if(pickedUpTower && createdTowers[currentTower]->checkPlacement(currentLevel)){
 					pickedUpTower = false;
+					createdTowers[currentTower]->placedYet = true;
 					towerX = 1350;
 					towerY = 240;
 					currentTower++;

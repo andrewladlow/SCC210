@@ -13,6 +13,7 @@ class Tower {
 	  float direction;
 	  bool isShooting;
 	  bool hasTarget;
+	  bool placedYet;
 	  Enemy* currentTarget;
 	  int type;
 	  sf::Sound sound;

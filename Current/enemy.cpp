@@ -62,7 +62,7 @@ void Enemy::draw()
 
 	if (this->timerStarted) {
 		sf::Time elapsed1 = timer.getElapsedTime();
-		if (elapsed1.asMilliseconds() > 250) { //change enemy texture every 250ms
+		if (elapsed1.asMilliseconds() > 150) { //change enemy texture every 150ms
 			timer.restart();
 			frame++;
 			if (frame == 3) {

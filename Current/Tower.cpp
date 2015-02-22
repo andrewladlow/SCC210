@@ -11,6 +11,7 @@ Tower::Tower(float x, float y, int type)
 	this->y = y;
 	this->direction = 0;
 	this->hasTarget = false;
+	this->placedYet = false;
 	this->type = type;
 
 }
