@@ -12,7 +12,7 @@ bool submitHighScore(int level, int score, string name)
 	request.setHttpVersion(1, 1); // HTTP 1.1
 	request.setField("From", "me");
 	request.setField("Content-Type", "application/x-www-form-urlencoded");
-	request.setBody("level=" + std::to_string(level) + "&score=" + std::to_string(score) + "&name=" + name);
+	request.setBody("level=" + std::to_string(level - 1) + "&score=" + std::to_string(score) + "&name=" + name);
 
 	sf::Http::Response response = http.sendRequest(request);
 	//send a HS up to the DB
@@ -34,7 +34,6 @@ void getHighScores()
 	request.setField("Content-Type", "application/x-www-form-urlencoded");
 
 	sf::Http::Response response = http.sendRequest(request);
-	//std::cout << "body: " <<  << std::endl;
 	string responseString = response.getBody();
 
 	for(int i = 0; i < 10; i++)
@@ -43,7 +42,7 @@ void getHighScores()
 	string temp;
 	int last = 0; int next = 0;
 	int level = 0; int scoreNumber = 0; int field = 0;
-	while ((next = responseString.find(',', last)) != string::npos) //this is really disgusting code but works
+	while ((next = responseString.find(',', last)) != string::npos)
 	{
 		temp = responseString.substr(last, next-last);
 		if(field == 1 || field == 2)
@@ -56,8 +55,6 @@ void getHighScores()
 		else if(field == 2)
 		{
 			highScoreCount[level]++;
-			if(highScoreCount[level] > 10) //we don't want more than the 10 highest scores for each level (althought the DB shouldn't ever return more - check anyway)
-				break; //this stops a potential overflow crash but will stop loading scores
 			field = 0;
 		}
 		else 
@@ -70,30 +67,4 @@ void getHighScores()
 			break;
 		}
 	}
-
-	//debug info, not needed
-
-	//for(int i = 0; i < 10; i++)
-	//{
-	//	for(int j = 0; j < highScoreInfo.highScoreCount[i]; j++)
-	//	{
-	//		cout << "Level: " + std::to_string(i) + "\tScore Number: "  + std::to_string(j);
-	//		for(int k = 0; k < 2; k++)
-	//		{
-	//			switch(k)
-	//			{
-	//				case 0:
-	//					cout << "\tScore: ";
-	//					break;
-	//				case 1:
-	//					cout << "\tName: ";
-	//					break;
-	//			}
-	//			cout << highScoreInfo.highScores[i][j][k];
-	//		}
-	//		cout <<  "\n";
-	//	}
-	//}
-	//cout << responseString.substr(last) << endl;
-
 }
