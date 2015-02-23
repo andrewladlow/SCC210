@@ -16,29 +16,6 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		this->rotateFlagE = false;
 		this->rotateFlagS = false;
 		this->rotateFlagW = false;
-		// set enemy originalSpeed and hp based on type
-		switch (this->type) { 
-			case 0: // invisible type
-				this->originalSpeed = 10.0f;
-				this->healthPoints = 250 + (currentLevel * 30); // enemies become stronger as level increases
-				this->startingHealthPoints = 250 + (currentLevel * 30);
-				break;
-			case 1: // standard type
-				this->originalSpeed = 5.0f;
-				this->healthPoints = 250 + (currentLevel * 30);
-				this->startingHealthPoints = 250 + (currentLevel * 30);
-				break;
-			case 2: // weak + fast
-				this->originalSpeed = 6.0f;
-				this->healthPoints = 200 + (currentLevel * 30);
-				this->startingHealthPoints = 200 + (currentLevel * 30);
-				break;
-			case 3: // strong + slow
-				this->originalSpeed = 4.0f;
-				this->healthPoints = 350 + (currentLevel * 30);
-				this->startingHealthPoints = 350 + (currentLevel * 30);
-				break;
-		}
 		this->end = false;
 }
 //
@@ -72,41 +49,36 @@ void Enemy::draw()
 	}
 }
 
-// call when an enemy becomes visible to redefine originalSpeed and hp
+// call when an enemy becomes visible to redefine type
 void Enemy::setProperties(int typeVal) {
-	switch (typeVal) { 
-		case 1: // standard type
-			this->type = typeVal;
-			this->originalSpeed = 5.0f;
-			this->healthPoints = 250 + (currentLevel * 30);
-			this->startingHealthPoints = 250 + (currentLevel * 30);
-			break;
-		case 2: // weak + fast
-			this->type = typeVal;
-			this->originalSpeed = 6.0f;
-			this->healthPoints = 200 + (currentLevel * 30);
-			this->startingHealthPoints = 200 + (currentLevel * 30);
-			break;
-		case 3: // strong + slow
-			this->type = typeVal;
-			this->originalSpeed = 4.0f;
-			this->healthPoints = 350 + (currentLevel * 30);
-			this->startingHealthPoints = 350 + (currentLevel * 30);
-			break;
-	}
+	this->type = typeVal;
 }
 
 // call to set an enemy's speed value
 void Enemy::setSpeed(int typeVal) {
 	switch(typeVal) {
 		case 1:
-			this->originalSpeed = 5.0f + (waveNum * 0.5); // enemies become faster as wave increases
+			this->originalSpeed = 5.0f + (waveNum * 0.75); // enemies become faster as wave increases
 			break;
 		case 2:
-			this->originalSpeed = 6.0f + (waveNum * 0.5);
+			this->originalSpeed = 6.0f + (waveNum * 0.75);
 			break;
 		case 3:
-			this->originalSpeed = 4.0f + (waveNum * 0.5);
+			this->originalSpeed = 4.0f + (waveNum * 0.75);
 			break;
+	}
+}
+
+void Enemy::setHealth(int typeVal) {
+	switch(typeVal) {
+		case 1:
+			this->healthPoints = 275 + (currentLevel * 35) + (waveNum * 5.0); // enemies become stronger as level and wave increases
+			this->startingHealthPoints = 275 + (currentLevel * 35) + (waveNum * 5.0);
+		case 2:
+			this->healthPoints = 225 + (currentLevel * 35) + (waveNum * 5.0);
+			this->startingHealthPoints = 225 + (currentLevel * 35) + (waveNum * 5.0);
+		case 3:
+			this->healthPoints = 375 + (currentLevel * 35) + (waveNum * 5.0);
+			this->startingHealthPoints = 375 + (currentLevel * 35) + (waveNum * 5.0);
 	}
 }

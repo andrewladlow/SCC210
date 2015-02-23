@@ -475,8 +475,8 @@ void Tower::enemyInRange(Enemy* enemyCheck){
 					this->hasTarget = true;
 					this->currentTarget = enemyCheck;
 					workOutAngle(this->x,this->y,enemyCheckX,enemyCheckY);
-					if(this->type == 1){enemyCheck->healthPoints -= 2;}
-					else if(this->type == 2){enemyCheck->healthPoints -= 1;}
+					if(this->type == 1){enemyCheck->healthPoints -= 1.5;}
+					else if(this->type == 2){enemyCheck->healthPoints -= 1.25;}
 					else if(this->type == 3){
 						enemyCheck->healthPoints -= 1;
 						enemyCheck->isSlowed = true;
@@ -491,8 +491,8 @@ void Tower::enemyInRange(Enemy* enemyCheck){
 					
 					workOutAngle(this->x,this->y,currentTarget->xPos,currentTarget->yPos);
 					
-					if(this->type == 1){currentTarget->healthPoints -= 2;}
-					else if(this->type == 2){currentTarget->healthPoints -= 1;}
+					if(this->type == 1){currentTarget->healthPoints -= 1.5;}
+					else if(this->type == 2){currentTarget->healthPoints -= 1.25;}
 					else if(this->type == 3){
 						currentTarget->healthPoints -= 1;
 						currentTarget->isSlowed = true;

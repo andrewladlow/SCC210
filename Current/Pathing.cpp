@@ -9,7 +9,7 @@ using namespace std;
 void GenPath(Enemy *e, int currentLevel) {
 
 	if(e->isSlowed == true){
-		e->speed = e->originalSpeed - 2.5;
+		e->speed = e->originalSpeed - 2.0;
 	}
 	else if(e->isSlowed == false){e->speed = e->originalSpeed;}
 

@@ -17,7 +17,7 @@ using namespace std;
 bool waveActive = false;
 
 int healthAmount = 100;
-int currencyAmount = 100;
+int currencyAmount = 200;
 int mobAmount = 30;
 int mobAmountNum = 30;
 int waveNum = 0;
@@ -25,7 +25,7 @@ int waveNum = 0;
 Enemy* mobArray[11][30];
 Bomb* bomb;
 
-Tower* createdTowers[30];
+Tower* createdTowers[50];
 int currentTower = 0;
 bool pickedUpTower = false;
 bool pickedUpBomb = false;
@@ -187,7 +187,7 @@ void DrawLevel2D()
 					}
 				}
 				if(mobArray[waveNum][i]->healthPoints < 1){
-					currencyAmount += 10;
+					currencyAmount += 2;
 					mobAmount--;
 					for (int k=i; k<mobAmount; k++) {
 						mobArray[waveNum][k] = mobArray[waveNum][k+1];
@@ -199,7 +199,7 @@ void DrawLevel2D()
 			waveActive = false;
 			mobAmount = mobAmountNum;
 		} else if (waveNum == 10 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
-			currencyAmount = 100;
+			currencyAmount = 200;
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
@@ -329,6 +329,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 					mobAmount = mobAmountNum;
 					for (int i=0; i<mobAmount; i++) {
 						mobArray[waveNum][i]->setSpeed(mobArray[waveNum][i]->type);
+						mobArray[waveNum][i]->setHealth(mobArray[waveNum][i]->type);
 					}
 				}
 			}
@@ -336,7 +337,7 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			// Exit button
 			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
 
-				currencyAmount = 100;
+				currencyAmount = 200;
 				window.close();
 				window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 				window.setFramerateLimit(60);
