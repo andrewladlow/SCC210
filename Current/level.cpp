@@ -259,7 +259,10 @@ void DrawLevel2D()
 	sf::Text waveText(waveTextTemp3, font, 20);
 	waveText.setPosition(10, 685);
 	waveText.setStyle(sf::Text::Regular);
-	waveText.setColor(sf::Color::Black);
+	if(currentLevel == 5)
+		waveText.setColor(sf::Color::White);
+	else 
+		waveText.setColor(sf::Color::Black);
 	window.draw(waveText);
 
 	//draw wave status
@@ -270,7 +273,10 @@ void DrawLevel2D()
 	sf::Text waveActiveText(waveActiveTemp1, font, 20);
 	waveActiveText.setPosition(10, 655);
 	waveActiveText.setStyle(sf::Text::Regular);
-	waveActiveText.setColor(sf::Color::Black);
+	if(currentLevel == 5)
+		waveActiveText.setColor(sf::Color::White);
+	else 
+		waveActiveText.setColor(sf::Color::Black);;
 	window.draw(waveActiveText);
 
 
