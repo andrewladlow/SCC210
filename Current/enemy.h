@@ -13,6 +13,7 @@ class Enemy {
 		int type;
 		int frame;
 		bool isSlowed;
+		bool isFrozen; 
 		bool end;
 		bool timerStarted;
 		bool rotateFlagN;
@@ -21,6 +22,7 @@ class Enemy {
 		bool rotateFlagW;
 		sf::RectangleShape enemyRect;
 		sf::Clock timer;
+		sf::Clock frozenTimer;
 		Enemy(float, float, int);
 
 		void draw();

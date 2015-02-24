@@ -16,31 +16,43 @@ Bomb::Bomb(float x, float y, int type)
 void Bomb::DrawBomb(){
 	if (this->timerStarted) {
 		sf::Time elapsed1 = timer.getElapsedTime();
-		sf::RectangleShape healthRect; 	
-		healthRect.setPosition(sf::Vector2f(x, y - 20));
+		sf::RectangleShape timerRect; 	
+		timerRect.setPosition(sf::Vector2f(x, y - 20));
 		float a, b;
 		a = (float) elapsed1.asMilliseconds();
-		b = (float) 1500;
-		healthRect.setSize(sf::Vector2f((a / b) * 140.0f, 10));
-		healthRect.setFillColor(sf::Color::Red);
-		window.draw(healthRect);
+		if(type == 0)
+			timerRect.setFillColor(sf::Color::Red);
+		else 
+			timerRect.setFillColor(sf::Color::Blue);
+		timerRect.setSize(sf::Vector2f((a / 1500.0f) * 140.0f, 10));
+
+		window.draw(timerRect);
 	}
 
 
 	bombRect.setPosition(x,y);
-	bombRect.setTexture(&bombTexture[0]);
+	bombRect.setTexture(&bombTexture[type]);
 	bombRect.setSize(sf::Vector2f(140, 140));
 	window.draw(bombRect);
 }
 
 
 void Bomb::enemyInRange(Enemy* enemyCheck){
-
-	if(enemyCheck->xPos >0 && enemyCheck->yPos >0)
+	
+	if(enemyCheck->xPos > 0 && enemyCheck->yPos >0)
 	{
-		enemyCheck->healthPoints -= 400;
-		if(enemyCheck->healthPoints < 1)
-			enemyCheck = NULL;
+		switch(type)
+		{
+			case 0:
+				enemyCheck->healthPoints -= 400;
+				if(enemyCheck->healthPoints < 1)
+					enemyCheck = NULL;
+				break;
+			case 1:
+				enemyCheck->isFrozen = true;
+				enemyCheck->frozenTimer.restart();
+				break;
+		}
 	}
 }
 

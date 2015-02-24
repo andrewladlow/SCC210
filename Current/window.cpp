@@ -29,6 +29,7 @@ sf::Texture slowingTowerTexture[2];
 sf::Texture economyTowerTexture;
 sf::Texture bombTexture[2];
 sf::Texture padLockTexture;
+sf::Texture iceTexture;
 sf::Music menuMusic;
 
 //we call this function when switching screens, it will initialise whatever screen we are calling
@@ -195,6 +196,8 @@ void loadResources()
 	economyTowerTexture.loadFromFile("images/Towers/econmy tower/econTower.png");
 	padLockTexture.loadFromFile("images/LevelSelect/padlock-hi.png");
 	bombTexture[0].loadFromFile("images/bomb/bomb.png");
+	bombTexture[1].loadFromFile("images/bomb/bomb_ice.png");
+	iceTexture.loadFromFile("images/bomb/ice.png");
 }
 
 void initialiseWindow(int argc,char **argv){

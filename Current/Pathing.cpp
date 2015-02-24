@@ -8,10 +8,14 @@ using namespace std;
 
 void GenPath(Enemy *e, int currentLevel) {
 
-	if(e->isSlowed == true){
+	if(e->isSlowed)
 		e->speed = e->originalSpeed - 2.0;
-	}
-	else if(e->isSlowed == false){e->speed = e->originalSpeed;}
+	else if(!e->isSlowed)
+		e->speed = e->originalSpeed;
+
+	if(e->isFrozen)
+		e->speed = 0.0;
+
 
 	switch(currentLevel) {
 		case 1:

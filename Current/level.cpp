@@ -171,13 +171,19 @@ void DrawLevel2D()
 	{
 		sf::Time elapsed1 = bomb->timer.getElapsedTime();
 		sf::RectangleShape explosion(sf::Vector2f(1280, 720));
-		explosion.setFillColor(sf::Color(255, 255, 0, elapsed1.asMilliseconds()));
+		switch(bomb->type)
+		{
+			case 0:
+				explosion.setFillColor(sf::Color(255, 255, 0, elapsed1.asMilliseconds()));
+				break;
+			case 1:
+				explosion.setFillColor(sf::Color(0, 0, 255, elapsed1.asMilliseconds()));
+				break;
+		}
 		explosion.setPosition(sf::Vector2f(0, 0));
 		window.draw(explosion);
 		if(elapsed1.asMilliseconds() > 255)
-		{
 			explosionFading = false;
-		}
 	}
 
 
@@ -395,6 +401,17 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			if((x < 1410 && x > 1280) && (y < 720 && y > 550) && currencyAmount >= 100){
 				if(!pickedUpBomb && !pickedUpTower && bomb->timerStarted == false){
 					currencyAmount -= 100;
+					bomb->type = 0;
+					bomb->DrawBomb();
+					pickedUpBomb = true;
+				}
+			}
+
+			// Bomb button
+			if((x < 1555 && x > 1430) && (y < 720 && y > 550) && currencyAmount >= 100){
+				if(!pickedUpBomb && !pickedUpTower && bomb->timerStarted == false){
+					currencyAmount -= 100;
+					bomb->type = 1;
 					bomb->DrawBomb();
 					pickedUpBomb = true;
 				}

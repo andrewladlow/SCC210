@@ -12,6 +12,7 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		this->timerStarted = false;
 		this->frame = 0;
 		this->isSlowed = false;
+		this->isFrozen = false;
 		this->rotateFlagN = false;
 		this->rotateFlagE = false;
 		this->rotateFlagS = false;
@@ -32,10 +33,23 @@ void Enemy::draw()
 		window.draw(healthRect);
 	}
 
-		enemyRect.setTexture(&enemyTexture[this->type][this->frame], true);
-		enemyRect.setSize(sf::Vector2f(50, 50));
-		enemyRect.setPosition(xPos, yPos);
-		window.draw(enemyRect);
+	enemyRect.setTexture(&enemyTexture[this->type][this->frame], true);
+	enemyRect.setSize(sf::Vector2f(50, 50));
+	enemyRect.setPosition(xPos, yPos);
+	window.draw(enemyRect);
+
+	if(isFrozen)
+	{
+		sf::RectangleShape ice; 	
+		ice.setPosition(sf::Vector2f(xPos, yPos));
+		ice.setSize(sf::Vector2f(50, 50));
+		ice.setTexture(&iceTexture);
+		window.draw(ice);
+
+		sf::Time elapsedFrozen = frozenTimer.getElapsedTime();
+		if(elapsedFrozen.asSeconds() > 2)
+			isFrozen = false;
+	}
 
 	if (this->timerStarted) {
 		sf::Time elapsed1 = timer.getElapsedTime();
