@@ -35,21 +35,12 @@ void Bomb::DrawBomb(){
 
 
 void Bomb::enemyInRange(Enemy* enemyCheck){
-	float enemyCheckX = enemyCheck->xPos;
-	//std::cout << enemyCheckX << "  ";
-	float enemyCheckY = enemyCheck->yPos;
-	//std::cout << enemyCheckY << "  ";
 
-	int bombRange = 200;
-	
-	if(enemyCheckX>0 && enemyCheckY>0){
-		if( enemyCheck->xPos > (this->x-bombRange) && enemyCheck->xPos < (this->x+bombRange)){
-			if( enemyCheck->yPos > (this->y-bombRange) && enemyCheck->yPos < (this->y+bombRange)){
-				enemyCheck->healthPoints -= 200;
-				if(enemyCheck->healthPoints < 1){enemyCheck = NULL;}
-
-			}
-		}
+	if(enemyCheck->xPos >0 && enemyCheck->yPos >0)
+	{
+		enemyCheck->healthPoints -= 400;
+		if(enemyCheck->healthPoints < 1)
+			enemyCheck = NULL;
 	}
 }
 

@@ -24,7 +24,8 @@ int waveNum = 0;
 
 Enemy* mobArray[11][30];
 Bomb* bomb;
-
+sf::Clock explosionFadeTimer;
+bool explosionFading = false;
 Tower* createdTowers[50];
 int currentTower = 0;
 bool pickedUpTower = false;
@@ -160,9 +161,25 @@ void DrawLevel2D()
 		if (elapsed1.asSeconds() > 1.5) { //bomb explodes after one second
 			bomb->timer.restart();
 			exploded = true;
+			explosionFadeTimer.restart();
+			explosionFading = true;
 			bomb->timerStarted = false;
 		}
 	}
+
+	if(explosionFading)
+	{
+		sf::Time elapsed1 = bomb->timer.getElapsedTime();
+		sf::RectangleShape explosion(sf::Vector2f(1280, 720));
+		explosion.setFillColor(sf::Color(255, 255, 0, elapsed1.asMilliseconds()));
+		explosion.setPosition(sf::Vector2f(0, 0));
+		window.draw(explosion);
+		if(elapsed1.asMilliseconds() > 255)
+		{
+			explosionFading = false;
+		}
+	}
+
 
 	// draw enemy
 	if (waveActive) {
