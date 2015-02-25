@@ -17,12 +17,14 @@ string creatingNewProfileString = "";
 int deletePressed = 0;
 bool rescourcesLoaded = false;
 int levelsUnlocked = 1;
+int upgradeMoney = 0;
 
 bool newProfile(string name){
 	ofstream newProfileFile ("saves/" + name + ".towerdefence");
 	if (newProfileFile.is_open())
 	{
 		newProfileFile <<  std::to_string(levelsUnlocked) + "\n";
+		newProfileFile <<  std::to_string(upgradeMoney) + "\n";
 		newProfileFile.close();
 		profileList[creatingProfileNumber] = name;
 		creatingNewProfileString = "";
@@ -52,8 +54,12 @@ void loadCurrentProfile()
 	if (profileFile.is_open())
 	{
 		getline (profileFile,currentLine);
-		cout << currentLine;
+		//cout << currentLine;
 		levelsUnlocked = stoi(currentLine);
+
+		getline (profileFile,currentLine);
+		upgradeMoney = stoi(currentLine);
+
 		profileFile.close();
 	}
 	else cout << "Unable to open file";

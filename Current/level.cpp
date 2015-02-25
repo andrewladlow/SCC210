@@ -22,6 +22,7 @@ int mobAmount = 30;
 int mobAmountNum = 30;
 int waveNum = 0;
 
+
 Enemy* mobArray[11][30];
 Bomb* bomb;
 sf::Clock explosionFadeTimer;
@@ -222,6 +223,7 @@ void DrawLevel2D()
 			waveActive = false;
 			mobAmount = mobAmountNum;
 		} else if (waveNum == 10 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
+			upgradeMoney += currencyAmount;
 			currencyAmount = 200;
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);

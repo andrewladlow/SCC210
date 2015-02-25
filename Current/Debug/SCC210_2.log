@@ -1,10 +1,21 @@
-﻿Build started 23/02/2015 13:45:48.
-     1>Project "H:\My Desktop\SCC210\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
+﻿Build started 25/02/2015 18:47:19.
+     1>Project "C:\Users\Munkys\Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /wd4244 /wd4385 /wd4305 /analyze- /errorReport:prompt level.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /wd4244 /wd4385 /wd4305 /analyze- /errorReport:prompt LevelSelect.cpp Tower.cpp enemy.cpp highscore.cpp level.cpp losescreen.cpp window.cpp winscreen.cpp
+         Tower.cpp
+         LevelSelect.cpp
+         Generating Code...
+     1>c:\users\munkys\documents\github\scc210\current\tower.cpp(450): warning C4715: 'Tower::checkPlacement' : not all control paths return a value
+         Compiling...
+         winscreen.cpp
+         window.cpp
+         losescreen.cpp
          level.cpp
+         highscore.cpp
+         enemy.cpp
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\My Desktop\SCC210\Current\Debug\SCC210_2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"SFML-2.2\lib" "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\My Desktop\SCC210\Current\Debug\SCC210_2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\My Desktop\SCC210\Current\Debug\SCC210_2.lib" /MACHINE:X86 Debug\SCC210_2.res
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Munkys\Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"SFML-2.2\lib" "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Munkys\Documents\GitHub\SCC210\Current\Debug\SCC210_2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Munkys\Documents\GitHub\SCC210\Current\Debug\SCC210_2.lib" /MACHINE:X86 Debug\SCC210_2.res
          Debug\bomb.obj
          Debug\enemy.obj
          Debug\highscore.obj
@@ -18,9 +29,9 @@
          Debug\Tower.obj
          Debug\window.obj
          Debug\winscreen.obj
-         SCC210_2.vcxproj -> H:\My Desktop\SCC210\Current\Debug\SCC210_2.exe
-     1>Done Building Project "H:\My Desktop\SCC210\Current\SCC210_2.vcxproj" (Build target(s)).
+         SCC210_2.vcxproj -> C:\Users\Munkys\Documents\GitHub\SCC210\Current\Debug\SCC210_2.exe
+     1>Done Building Project "C:\Users\Munkys\Documents\GitHub\SCC210\Current\SCC210_2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:11.27
+Time Elapsed 00:00:05.57

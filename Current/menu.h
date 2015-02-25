@@ -13,3 +13,4 @@ bool newProfile(string name);
 extern int levelsUnlocked;
 extern string profileList[5];
 extern int currentProfile;
+extern int upgradeMoney;

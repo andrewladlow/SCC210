@@ -4,6 +4,7 @@
 #include <math.h>
 #include "tower.h"
 #include "enemy.h"
+#include "LevelSelect.h"
 
 Tower::Tower(float x, float y, int type)
 {
@@ -475,10 +476,25 @@ void Tower::enemyInRange(Enemy* enemyCheck){
 					this->hasTarget = true;
 					this->currentTarget = enemyCheck;
 					workOutAngle(this->x,this->y,enemyCheckX,enemyCheckY);
-					if(this->type == 1){enemyCheck->healthPoints -= 1.5;}
-					else if(this->type == 2){enemyCheck->healthPoints -= 1.25;}
+					if(this->type == 1){
+						
+						int damage = 1.5;
+						if(t1l1 == true){damage += 0.5;}
+						if(t1l2 == true){damage += 1;}
+
+						enemyCheck->healthPoints -= damage;
+					}
+					else if(this->type == 2){
+						int damage = 1.25;
+						if(t2l1 == true){damage += 0.25;}
+						if(t2l2 == true){damage += 0.5;}
+						enemyCheck->healthPoints -= damage;
+					}
 					else if(this->type == 3){
-						enemyCheck->healthPoints -= 1;
+						int damage = 1;
+						if(t3l1 == true){damage += 0.5;}
+						if(t3l2 == true){damage += 1;}
+						enemyCheck->healthPoints -= damage;
 						enemyCheck->isSlowed = true;
 					}
 				}

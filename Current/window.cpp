@@ -20,6 +20,9 @@ sf::Font font;
 sf::Texture menubackTexture;
 sf::Texture playButtonTexture;
 sf::Texture exitButtonTexture;
+sf::Texture upgradeBoxTexture;
+sf::Texture upgradeMenuTexture;
+sf::Texture soldTexture;
 sf::Texture sideMenuTexture;
 sf::Texture levelBackgroundTexture;
 sf::Texture enemyTexture[4][4];
@@ -167,6 +170,9 @@ void loadResources()
 	exitButtonTexture.loadFromFile("images/Shared/exitbut.png");
 	levelSelectBackgroundTexture.loadFromFile("Images/LevelSelect/background.png");
 	exitButtonLSTexture.loadFromFile("images/Shared/exitbut.png");
+	upgradeBoxTexture.loadFromFile("images/LevelSelect/upgradesBut.png");
+	upgradeMenuTexture.loadFromFile("images/LevelSelect/upgrades/upgradeMenu.png");
+	soldTexture.loadFromFile("images/LevelSelect/upgrades/sold.png");
 	for(int i = 0; i < 12; i++)
 		levelsTextures[i].loadFromFile("Images/LevelSelect/Level" + std::to_string(i) + ".png");
 	sideMenuTexture.loadFromFile("Images/Levels/UI/LevelUI.png");

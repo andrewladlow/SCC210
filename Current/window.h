@@ -35,3 +35,6 @@ extern sf::Texture bombTexture[2];
 extern sf::Texture iceTexture;
 extern sf::Texture slowingTowerTexture[2];
 extern sf::Texture economyTowerTexture;
+extern sf::Texture upgradeBoxTexture;
+extern sf::Texture upgradeMenuTexture;
+extern sf::Texture soldTexture;
