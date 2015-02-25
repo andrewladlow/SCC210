@@ -170,6 +170,36 @@ void DrawLevelSelect2D()
 			t1L1.setPosition(sf::Vector2f(118+50, 129+50));
 			window.draw(t1L1);
 		}
+		if(t2l1 == true){
+			sf::Sprite t2L1;
+			t2L1.setTexture(soldTexture);
+			t2L1.setPosition(sf::Vector2f(473+50, 129+50));
+			window.draw(t2L1);
+		}
+		if(t2l1 == true){
+			sf::Sprite t3L1;
+			t3L1.setTexture(soldTexture);
+			t3L1.setPosition(sf::Vector2f(822+50, 129+50));
+			window.draw(t3L1);
+		}
+		if(t1l2 == true){
+			sf::Sprite t1L2;
+			t1L2.setTexture(soldTexture);
+			t1L2.setPosition(sf::Vector2f(118+50, 371+50));
+			window.draw(t1L2);
+		}
+		if(t2l2 == true){
+			sf::Sprite t2L2;
+			t2L2.setTexture(soldTexture);
+			t2L2.setPosition(sf::Vector2f(473+50, 371+50));
+			window.draw(t2L2);
+		}
+		if(t2l2 == true){
+			sf::Sprite t3L2;
+			t3L2.setTexture(soldTexture);
+			t3L2.setPosition(sf::Vector2f(822+50, 371+50));
+			window.draw(t3L2);
+		}
 
 	}
 
