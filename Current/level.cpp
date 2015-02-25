@@ -116,8 +116,9 @@ void DrawLevel2D()
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
 				if (mobArray[waveNum][i]->xPos >= 280 && mobArray[waveNum][i]->yPos == 360 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(Random(1,3));
-					mobArray[waveNum][i]->draw();
+					mobArray[waveNum][i]->setType(Random(1,3));
+					mobArray[waveNum][i]->setSpeed(mobArray[waveNum][i]->type);
+					mobArray[waveNum][i]->setHealth(mobArray[waveNum][i]->type);
 				}
 			}
 		}
@@ -127,8 +128,9 @@ void DrawLevel2D()
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
 				if (mobArray[waveNum][i]->xPos <= 1240 && mobArray[waveNum][i]->yPos == 80 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(Random(1,3));
-					mobArray[waveNum][i]->draw();
+					mobArray[waveNum][i]->setType(Random(1,3));
+					mobArray[waveNum][i]->setSpeed(mobArray[waveNum][i]->type);
+					mobArray[waveNum][i]->setHealth(mobArray[waveNum][i]->type);
 				}
 			}
 		}
@@ -138,8 +140,9 @@ void DrawLevel2D()
 		for (int i=0; i<mobAmount; i++) {
 			if(mobArray[waveNum][i] != NULL) {
 				if (mobArray[waveNum][i]->xPos <= 1240 && mobArray[waveNum][i]->yPos == 150 && mobArray[waveNum][i]->type == 0) {
-					mobArray[waveNum][i]->setProperties(Random(1,3));
-					mobArray[waveNum][i]->draw();
+					mobArray[waveNum][i]->setType(Random(1,3));
+					mobArray[waveNum][i]->setSpeed(mobArray[waveNum][i]->type);
+					mobArray[waveNum][i]->setHealth(mobArray[waveNum][i]->type);
 				}
 			}
 		}
@@ -349,19 +352,18 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			if((x < 1460 && x > 1315) && (y < 165 && y > 100)){
 				//cout << "Clicked start "<<std::endl;
 				if (!waveActive) {
-					waveNum++;
-					waveActive = true;
 					mobAmount = mobAmountNum;
 					for (int i=0; i<mobAmount; i++) {
 						mobArray[waveNum][i]->setSpeed(mobArray[waveNum][i]->type);
 						mobArray[waveNum][i]->setHealth(mobArray[waveNum][i]->type);
 					}
+					waveNum++;
+					waveActive = true;
 				}
 			}
 
 			// Exit button
-			if((x < 1650 && x > 1505) && (y < 165 && y > 100)){
-
+			if((x < 1650 && x > 1505) && (y < 165 && y > 100)) {
 				currencyAmount = 200;
 				window.close();
 				window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);

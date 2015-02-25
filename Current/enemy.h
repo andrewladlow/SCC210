@@ -26,7 +26,7 @@ class Enemy {
 		Enemy(float, float, int);
 
 		void draw();
-		void setProperties(int);
+		void setType(int);
 		void setSpeed(int);
 		void setHealth(int);
 };

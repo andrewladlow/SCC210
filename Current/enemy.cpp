@@ -6,9 +6,24 @@ Enemy::Enemy(float xPos, float yPos, int type)
 		sf::RectangleShape enemyRect; 
 		this->xPos = xPos;
 		this->yPos = yPos;
-		this->healthPoints;
-		this->startingHealthPoints;
+		this->healthPoints = 100;
+		this->startingHealthPoints = 100;
 		this->type = type;
+		switch(this->type) {
+			case 0: // invisible type
+				this->originalSpeed = 10.0f;
+				break;
+			case 1: // standard type
+				this->originalSpeed = 5.0f;
+				break;
+			case 2: // fast type
+				this->originalSpeed = 6.0f;
+				break;
+			case 3: // slow type
+				this->originalSpeed = 4.0f;
+				break;
+		}
+		this->speed = 0;
 		this->timerStarted = false;
 		this->frame = 0;
 		this->isSlowed = false;
@@ -63,36 +78,45 @@ void Enemy::draw()
 	}
 }
 
-// call when an enemy becomes visible to redefine type
-void Enemy::setProperties(int typeVal) {
+// call to set an enemy's type
+void Enemy::setType(int typeVal) {
 	this->type = typeVal;
 }
 
 // call to set an enemy's speed value
 void Enemy::setSpeed(int typeVal) {
 	switch(typeVal) {
+		case 0:
+			this->originalSpeed = 10.0f + (waveNum * 0.1); // enemies become faster as wave increases
+			break;
 		case 1:
-			this->originalSpeed = 5.0f + (waveNum * 0.75); // enemies become faster as wave increases
+			this->originalSpeed = 5.0f + (waveNum * 0.1);
 			break;
 		case 2:
-			this->originalSpeed = 6.0f + (waveNum * 0.75);
+			this->originalSpeed = 6.0f + (waveNum * 0.1);
 			break;
 		case 3:
-			this->originalSpeed = 4.0f + (waveNum * 0.75);
+			this->originalSpeed = 4.0f + (waveNum * 0.1);
 			break;
 	}
 }
 
+// call to set an enemy's health
 void Enemy::setHealth(int typeVal) {
 	switch(typeVal) {
+		case 0:
+			break;
 		case 1:
-			this->healthPoints = 275 + (currentLevel * 35) + (waveNum * 5.0); // enemies become stronger as level and wave increases
+			this->healthPoints = 250 + (currentLevel * 35) + (waveNum * 5.0); // enemies become stronger as level and wave increases
 			this->startingHealthPoints = 275 + (currentLevel * 35) + (waveNum * 5.0);
+			break;
 		case 2:
-			this->healthPoints = 225 + (currentLevel * 35) + (waveNum * 5.0);
+			this->healthPoints = 200 + (currentLevel * 35) + (waveNum * 5.0);
 			this->startingHealthPoints = 225 + (currentLevel * 35) + (waveNum * 5.0);
+			break;
 		case 3:
-			this->healthPoints = 375 + (currentLevel * 35) + (waveNum * 5.0);
+			this->healthPoints = 350 + (currentLevel * 35) + (waveNum * 5.0);
 			this->startingHealthPoints = 375 + (currentLevel * 35) + (waveNum * 5.0);
+			break;
 	}
 }
