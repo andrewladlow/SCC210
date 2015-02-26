@@ -14,10 +14,9 @@ class Bomb {
 	  sf::Sound sound;
 	  Bomb(float, float, int);
 	  void DrawBomb();
-	 // bool checkPlacement(int currentLevel);
 	  void setPos(float newX, float newY);
 	  void enemyInRange(Enemy* enemyCheck);
-		sf::Clock timer;
+	  sf::Clock timer;
 	  sf::RectangleShape bombRect;
 	  bool timerStarted;
 };

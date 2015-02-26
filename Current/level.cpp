@@ -226,17 +226,17 @@ void DrawLevel2D()
 			waveActive = false;
 			mobAmount = mobAmountNum;
 		} else if (waveNum == 10 && mobAmount == 0 && healthAmount != 0) { // all waves cleared, player still alive
-			upgradeMoney += currencyAmount;
+			profile->upgradeMoney += currencyAmount;
 			currencyAmount = 200;
 			window.close();
 			window.create(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
 			window.setFramerateLimit(60);
 			submitHighScore(currentLevel, (healthAmount * 10) + currencyAmount, profileList[currentProfile]);
-			if(currentLevel == levelsUnlocked)
+			if(currentLevel == profile->levelsUnlocked)
 			{
-				levelsUnlocked = levelsUnlocked + 1;
-				newProfile(profileList[currentProfile]);
+				profile->levelsUnlocked = profile->levelsUnlocked + 1;
 			}
+			profile->writeProfile();
 			getHighScores();
 			switchToWinScreen();
 

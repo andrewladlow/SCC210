@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <Windows.h>
 #include <cstdio>
+#include "Profile.h"
 using namespace std;
 
 string profileList[5];
@@ -16,15 +17,15 @@ int creatingProfileNumber = -1;
 string creatingNewProfileString = "";
 int deletePressed = 0;
 bool rescourcesLoaded = false;
-int levelsUnlocked = 1;
-int upgradeMoney = 0;
+Profile * profile;
 
 bool newProfile(string name){
 	ofstream newProfileFile ("saves/" + name + ".towerdefence");
 	if (newProfileFile.is_open())
 	{
-		newProfileFile <<  std::to_string(levelsUnlocked) + "\n";
-		newProfileFile <<  std::to_string(upgradeMoney) + "\n";
+		newProfileFile <<  "1\n";
+		newProfileFile <<  "0\n";
+		//newProfileFile <<  std::to_string(t1l1) + "\n";
 		newProfileFile.close();
 		profileList[creatingProfileNumber] = name;
 		creatingNewProfileString = "";
@@ -45,24 +46,6 @@ bool newProfile(string name){
 	}
 	else cout << "Error accessing files";
 	return 0;
-}
-
-void loadCurrentProfile()
-{
-	string currentLine;
-	ifstream profileFile ("saves/" + profileList[currentProfile] + ".towerdefence");
-	if (profileFile.is_open())
-	{
-		getline (profileFile,currentLine);
-		//cout << currentLine;
-		levelsUnlocked = stoi(currentLine);
-
-		getline (profileFile,currentLine);
-		upgradeMoney = stoi(currentLine);
-
-		profileFile.close();
-	}
-	else cout << "Unable to open file";
 }
 
 void loadProfiles()
@@ -179,6 +162,7 @@ void InitMenu()
 	//menuMusic.play();
 	//menuMusic.setLoop(true);
 	loadProfiles();
+
 }
 
 void DrawMenu2D()
@@ -277,7 +261,7 @@ void MenuOnMouseClick(int button,int x,int y)
 	if(button == sf::Mouse::Left)
 	{
 		if((x < 540 && x > 340) && (y < 450 && y > 350) && profileList[currentProfile] != "null"){
-			loadCurrentProfile();
+			profile = new Profile(profileList[currentProfile]);
 			menuMusic.stop();
 			switchToLevelSelect();
 		}

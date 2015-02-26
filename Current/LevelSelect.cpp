@@ -62,7 +62,7 @@ void DrawLevelSelect2D()
 	levelSprites[0].setTexture(&levelsTextures[currentLevel]);
 	window.draw(levelSprites[0]);
 
-	if(levelsUnlocked < currentLevel)
+	if(profile->levelsUnlocked < currentLevel)
 	{
 		sf::RectangleShape padlock;
 		padlock.setSize(sf::Vector2f(105, 150));
@@ -146,7 +146,7 @@ void DrawLevelSelect2D()
 	window.draw(upgradeBox);
 
 	// upgrade box money
-	sf::Text currencyText(std::to_string(upgradeMoney), font, 20);
+	sf::Text currencyText(std::to_string(profile->upgradeMoney), font, 20);
 	currencyText.setPosition(1190, 150);
 	currencyText.setStyle(sf::Text::Regular);
 	currencyText.setColor(sf::Color::Black);
@@ -158,7 +158,7 @@ void DrawLevelSelect2D()
 		upgradeMenu.setPosition(sf::Vector2f(50, 50));
 		window.draw(upgradeMenu);
 
-		sf::Text upgradeCurrency(std::to_string(upgradeMoney), font, 30);
+		sf::Text upgradeCurrency(std::to_string(profile->upgradeMoney), font, 30);
 		upgradeCurrency.setPosition(250, 68);
 		upgradeCurrency.setStyle(sf::Text::Regular);
 		upgradeCurrency.setColor(sf::Color::Black);
@@ -202,8 +202,6 @@ void DrawLevelSelect2D()
 		}
 
 	}
-
-	//submitScore(0, 9999, "Jack");
 }
 
 // This is called when keyboard presses are detected.
@@ -240,7 +238,7 @@ void LevelSelectOnMouseClick(int button,int x,int y){
 
 			// Play Level
 			if((x < 837 && x > 410) && (y < 520 && y > 280)){
-				if(currentLevel <= levelsUnlocked)
+				if(currentLevel <= profile->levelsUnlocked)
 					switchToLevel();
 			}
 
@@ -264,53 +262,54 @@ void LevelSelectOnMouseClick(int button,int x,int y){
 		else if (upgradeMenuShowing == true){
 
 			if((x < 1171+50 && x > 989+50) && (y < 85+50 && y > 8+50)){
+				profile->writeProfile();
 				upgradeMenuShowing = false;
 			}
 
 			if((x < 360+50 && x > 118+50) && (y < 350+50 && y > 129+50) && t1l1 == false){
 				cout << "t1l1";
-				if(upgradeMoney >= 500){
-					upgradeMoney -= 500;
+				if(profile->upgradeMoney >= 500){
+					profile->upgradeMoney -= 500;
 					t1l1 = true;
 				}
 			}
 
 			if((x < 714+50 && x > 473+50) && (y < 350+50 && y > 129+50) && t2l1 == false){
 				cout << "t2l1";
-				if(upgradeMoney >= 700){
-					upgradeMoney -= 700;
+				if(profile->upgradeMoney >= 700){
+					profile->upgradeMoney -= 700;
 					t2l1 = true;
 				}
 			}
 			
 			if((x < 1063+50 && x > 822+50) && (y < 350+50 && y > 129+50) && t3l1 == false){
 				cout << "t3l1";
-				if(upgradeMoney >= 800){
-					upgradeMoney -= 800;
+				if(profile->upgradeMoney >= 800){
+					profile->upgradeMoney -= 800;
 					t3l1 = true;
 				}
 			}
 
 			if((x < 360+50 && x > 118+50) && (y < 591+50 && y > 371+50) && t1l2 == false){
 				cout << "t1l2";
-				if(upgradeMoney >= 1000){
-					upgradeMoney -= 500;
+				if(profile->upgradeMoney >= 1000){
+					profile->upgradeMoney -= 500;
 					t1l1 = true;
 				}
 			}
 
 			if((x < 714+50 && x > 473+50) && (y < 591+50 && y > 371+50) && t2l2 == false){
 				cout << "t2l2";
-				if(upgradeMoney >= 1400){
-					upgradeMoney -= 700;
+				if(profile->upgradeMoney >= 1400){
+					profile->upgradeMoney -= 700;
 					t2l1 = true;
 				}
 			}
 			
 			if((x < 1063+50 && x > 822+50) && (y < 591+50 && y > 371+50) && t3l2 == false){
 				cout << "t3l2";
-				if(upgradeMoney >= 1600){
-					upgradeMoney -= 800;
+				if(profile->upgradeMoney >= 1600){
+					profile->upgradeMoney -= 800;
 					t3l1 = true;
 				}
 			}
