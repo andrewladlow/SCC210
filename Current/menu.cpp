@@ -25,7 +25,8 @@ bool newProfile(string name){
 	{
 		newProfileFile <<  "1\n";
 		newProfileFile <<  "0\n";
-		//newProfileFile <<  std::to_string(t1l1) + "\n";
+		for(int i = 0; i < 6; i++)
+			newProfileFile <<  std::to_string(false) + "\n";
 		newProfileFile.close();
 		profileList[creatingProfileNumber] = name;
 		creatingNewProfileString = "";

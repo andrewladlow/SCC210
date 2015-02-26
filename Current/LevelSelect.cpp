@@ -17,12 +17,6 @@ sf::Music levelMusic;
 sf::SoundBuffer lsSoundBuffer;
 sf::Sound sound;
 
-bool t1l1 = false;
-bool t2l1 = false;
-bool t3l1 = false;
-bool t1l2 = false;
-bool t2l2 = false;
-bool t3l2 = false;
 
 bool upgradeMenuShowing = false;
 //int highScoreCount[10]; //we use this to store the number of highscore that were loaded for each level
@@ -164,37 +158,37 @@ void DrawLevelSelect2D()
 		upgradeCurrency.setColor(sf::Color::Black);
 		window.draw(upgradeCurrency);
 
-		if(t1l1 == true){
+		if(profile->t1l1 == true){
 			sf::Sprite t1L1;
 			t1L1.setTexture(soldTexture);
 			t1L1.setPosition(sf::Vector2f(118+50, 129+50));
 			window.draw(t1L1);
 		}
-		if(t2l1 == true){
+		if(profile->t2l1 == true){
 			sf::Sprite t2L1;
 			t2L1.setTexture(soldTexture);
 			t2L1.setPosition(sf::Vector2f(473+50, 129+50));
 			window.draw(t2L1);
 		}
-		if(t2l1 == true){
+		if(profile->t2l1 == true){
 			sf::Sprite t3L1;
 			t3L1.setTexture(soldTexture);
 			t3L1.setPosition(sf::Vector2f(822+50, 129+50));
 			window.draw(t3L1);
 		}
-		if(t1l2 == true){
+		if(profile->t1l2 == true){
 			sf::Sprite t1L2;
 			t1L2.setTexture(soldTexture);
 			t1L2.setPosition(sf::Vector2f(118+50, 371+50));
 			window.draw(t1L2);
 		}
-		if(t2l2 == true){
+		if(profile->t2l2 == true){
 			sf::Sprite t2L2;
 			t2L2.setTexture(soldTexture);
 			t2L2.setPosition(sf::Vector2f(473+50, 371+50));
 			window.draw(t2L2);
 		}
-		if(t2l2 == true){
+		if(profile->t3l2 == true){
 			sf::Sprite t3L2;
 			t3L2.setTexture(soldTexture);
 			t3L2.setPosition(sf::Vector2f(822+50, 371+50));
@@ -266,51 +260,51 @@ void LevelSelectOnMouseClick(int button,int x,int y){
 				upgradeMenuShowing = false;
 			}
 
-			if((x < 360+50 && x > 118+50) && (y < 350+50 && y > 129+50) && t1l1 == false){
+			if((x < 360+50 && x > 118+50) && (y < 350+50 && y > 129+50) && profile->t1l1 == false){
 				cout << "t1l1";
 				if(profile->upgradeMoney >= 500){
 					profile->upgradeMoney -= 500;
-					t1l1 = true;
+					profile->t1l1 = true;
 				}
 			}
 
-			if((x < 714+50 && x > 473+50) && (y < 350+50 && y > 129+50) && t2l1 == false){
+			if((x < 714+50 && x > 473+50) && (y < 350+50 && y > 129+50) && profile->t2l1 == false){
 				cout << "t2l1";
 				if(profile->upgradeMoney >= 700){
 					profile->upgradeMoney -= 700;
-					t2l1 = true;
+					profile->t2l1 = true;
 				}
 			}
 			
-			if((x < 1063+50 && x > 822+50) && (y < 350+50 && y > 129+50) && t3l1 == false){
+			if((x < 1063+50 && x > 822+50) && (y < 350+50 && y > 129+50) && profile->t3l1 == false){
 				cout << "t3l1";
 				if(profile->upgradeMoney >= 800){
 					profile->upgradeMoney -= 800;
-					t3l1 = true;
+					profile->t3l1 = true;
 				}
 			}
 
-			if((x < 360+50 && x > 118+50) && (y < 591+50 && y > 371+50) && t1l2 == false){
+			if((x < 360+50 && x > 118+50) && (y < 591+50 && y > 371+50) && profile->t1l2 == false){
 				cout << "t1l2";
 				if(profile->upgradeMoney >= 1000){
 					profile->upgradeMoney -= 500;
-					t1l1 = true;
+					profile->t1l2 = true;
 				}
 			}
 
-			if((x < 714+50 && x > 473+50) && (y < 591+50 && y > 371+50) && t2l2 == false){
+			if((x < 714+50 && x > 473+50) && (y < 591+50 && y > 371+50) && profile->t2l2 == false){
 				cout << "t2l2";
 				if(profile->upgradeMoney >= 1400){
 					profile->upgradeMoney -= 700;
-					t2l1 = true;
+					profile->t2l2 = true;
 				}
 			}
 			
-			if((x < 1063+50 && x > 822+50) && (y < 591+50 && y > 371+50) && t3l2 == false){
+			if((x < 1063+50 && x > 822+50) && (y < 591+50 && y > 371+50) && profile->t3l2 == false){
 				cout << "t3l2";
 				if(profile->upgradeMoney >= 1600){
 					profile->upgradeMoney -= 800;
-					t3l1 = true;
+					profile->t3l2 = true;
 				}
 			}
 		}

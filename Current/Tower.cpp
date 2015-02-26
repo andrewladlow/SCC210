@@ -5,6 +5,7 @@
 #include "tower.h"
 #include "enemy.h"
 #include "LevelSelect.h"
+#include "menu.h"
 
 Tower::Tower(float x, float y, int type)
 {
@@ -459,21 +460,21 @@ void Tower::enemyInRange(Enemy* enemyCheck){
 					if(this->type == 1){
 						
 						int damage = 1.5;
-						if(t1l1 == true){damage += 0.5;}
-						if(t1l2 == true){damage += 1;}
+						if(profile->t1l1 == true){damage += 0.5;}
+						if(profile->t1l2 == true){damage += 1;}
 
 						enemyCheck->healthPoints -= damage;
 					}
 					else if(this->type == 2){
 						int damage = 1.25;
-						if(t2l1 == true){damage += 0.25;}
-						if(t2l2 == true){damage += 0.5;}
+						if(profile->t2l1 == true){damage += 0.25;}
+						if(profile->t2l2 == true){damage += 0.5;}
 						enemyCheck->healthPoints -= damage;
 					}
 					else if(this->type == 3){
 						int damage = 1;
-						if(t3l1 == true){damage += 0.5;}
-						if(t3l2 == true){damage += 1;}
+						if(profile->t3l1 == true){damage += 0.5;}
+						if(profile->t3l2 == true){damage += 1;}
 						enemyCheck->healthPoints -= damage;
 						enemyCheck->isSlowed = true;
 					}
