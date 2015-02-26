@@ -360,7 +360,7 @@ void GenPath(Enemy *e, int currentLevel) {
 				e->yPos -= e->speed;
 				break;
 			}
-			else if (e->yPos >= 80 && e->xPos < 930) {
+			else if (e->yPos <= 80 && e->xPos < 930) {
 				if (!e->rotateFlagE) {
 					e->enemyRect.setOrigin(0,0);
 					e->enemyRect.rotate(90);
@@ -449,7 +449,7 @@ void GenPath(Enemy *e, int currentLevel) {
 				e->xPos -= e->speed;
 				break;
 			}
-			else if (e->xPos >= 80 && e->yPos < 505) {
+			else if (e->xPos <= 80 && e->yPos < 505) {
 				if (!e->rotateFlagS) {
 					e->enemyRect.setOrigin(0,50);
 					e->enemyRect.rotate(-90);
