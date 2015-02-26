@@ -114,7 +114,6 @@ void MenuKeyboard(sf::Event e)
 void enteringText(sf::Event e){
 	if((e.text.unicode >= 65 && e.text.unicode <= 90) ||  (e.text.unicode >= 97 && e.text.unicode <= 122))
 	{
-		cout << "ayyy lmao";
 		if(profileList[currentProfile] == "null"  && creatingNewProfileString.length() < 5)
 		{
 			creatingProfileNumber = currentProfile;
@@ -125,18 +124,10 @@ void enteringText(sf::Event e){
 		creatingNewProfileString = creatingNewProfileString.substr(0, creatingNewProfileString.size()-1);
 	else if(e.text.unicode == 13 && creatingNewProfileString != "null")
 		newProfile(creatingNewProfileString);
-	//else if(e.text.unicode == 127 && profileList[currentProfile] != "null" && creatingProfileNumber == -1)
-	//{
-	//	if(deletePressed == 0)
-	//		deletePressed++;
-	//	else 
-	//		deleteProfile(currentProfile);
-	//}
 }
 
 void InitMenu()
 {
-	//newProfile("Jack");#
 	if(!rescourcesLoaded)
 	{
 			font.loadFromFile("SPACEMAN.ttf");
@@ -160,8 +151,8 @@ void InitMenu()
 	}
 	if (!menuMusic.openFromFile("audio/Fanfare for Space.ogg"))
 		cout << "error loading audio"; // error
-	//menuMusic.play();
-	//menuMusic.setLoop(true);
+	menuMusic.play();
+	menuMusic.setLoop(true);
 	loadProfiles();
 
 }

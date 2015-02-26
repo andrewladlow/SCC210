@@ -400,11 +400,11 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 				//cout << "Clicked start "<<std::endl;
 				if (!waveActive) {
 					mobAmount = mobAmountNum;
+					waveNum++;
 					for (int i=0; i<mobAmount; i++) {
 						mobArray[waveNum][i]->setSpeed(mobArray[waveNum][i]->type);
 						mobArray[waveNum][i]->setHealth(mobArray[waveNum][i]->type);
 					}
-					waveNum++;
 					waveActive = true;
 				}
 			}

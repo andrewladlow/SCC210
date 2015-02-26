@@ -107,16 +107,16 @@ void Enemy::setHealth(int typeVal) {
 		case 0:
 			break;
 		case 1:
-			this->healthPoints = 250 + (currentLevel * 35) + (waveNum * 5.0); // enemies become stronger as level and wave increases
-			this->startingHealthPoints = 275 + (currentLevel * 35) + (waveNum * 5.0);
+			this->healthPoints = 350 + (currentLevel * 35) + (waveNum * 10.0); // enemies become stronger as level and wave increases
+			this->startingHealthPoints = 350 + (currentLevel * 35) + (waveNum * 10.0);
 			break;
 		case 2:
-			this->healthPoints = 200 + (currentLevel * 35) + (waveNum * 5.0);
-			this->startingHealthPoints = 225 + (currentLevel * 35) + (waveNum * 5.0);
+			this->healthPoints = 300 + (currentLevel * 35) + (waveNum * 10.0);
+			this->startingHealthPoints = 300 + (currentLevel * 35) + (waveNum * 10.0);
 			break;
 		case 3:
-			this->healthPoints = 350 + (currentLevel * 35) + (waveNum * 5.0);
-			this->startingHealthPoints = 375 + (currentLevel * 35) + (waveNum * 5.0);
+			this->healthPoints = 450 + (currentLevel * 35) + (waveNum * 10.0);
+			this->startingHealthPoints = 450 + (currentLevel * 35) + (waveNum * 10.0);
 			break;
 	}
 }

@@ -140,7 +140,7 @@ void DrawLevelSelect2D()
 	window.draw(upgradeBox);
 
 	// upgrade box money
-	sf::Text currencyText(std::to_string(profile->upgradeMoney), font, 20);
+	sf::Text currencyText(std::to_string(profile->upgradeMoney), font, 15);
 	currencyText.setPosition(1190, 150);
 	currencyText.setStyle(sf::Text::Regular);
 	currencyText.setColor(sf::Color::Black);
