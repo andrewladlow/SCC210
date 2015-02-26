@@ -14,8 +14,6 @@ void switchToWinScreen();
 void switchToLoseScreen();
 void loadResources();
 
-extern float towerX;
-extern float towerY;
 extern sf::RenderWindow window;
 extern sf::Texture exitButtonLSTexture;
 extern sf::Texture levelSelectBackgroundTexture;

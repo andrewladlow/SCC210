@@ -189,8 +189,6 @@ switch(currentLevel)
 			if(x>534 && x<1225 && y<525 && y>378)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 	
@@ -216,8 +214,6 @@ switch(currentLevel)
 			if(x>730 && x<1280 && y<560 && y>380)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 		
@@ -246,8 +242,6 @@ switch(currentLevel)
 			if(x>300 && x<490 && y<422 && y>100)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 
@@ -264,8 +258,6 @@ switch(currentLevel)
 			 if(x<1125 && y<553 && y>380)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 
@@ -292,8 +284,6 @@ switch(currentLevel)
 				return false;
 
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 
@@ -317,8 +307,6 @@ switch(currentLevel)
 				return false;
 
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 
@@ -335,8 +323,6 @@ switch(currentLevel)
 			 if(x>25 && y<555 && y>390)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 		case 8:
@@ -370,8 +356,6 @@ switch(currentLevel)
 			if(x>1020 && x<1197 && y<625)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 
@@ -400,8 +384,6 @@ switch(currentLevel)
 			if(x>350 && x<555 && y>390)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 
@@ -442,8 +424,6 @@ switch(currentLevel)
 			if(x>1020 && y<625)
 				return false;
 			else{
-				towerX=this->x;
-				towerY=this->y;
 				return true;
 			}
 	}

@@ -31,8 +31,8 @@ Tower* createdTowers[50];
 int currentTower = 0;
 bool pickedUpTower = false;
 bool pickedUpBomb = false;
+float mouseX, mouseY;
 
-sf::SoundBuffer levelSoundBuffer;
 
 void InitLevel(int levelValue)
 {
@@ -68,8 +68,7 @@ void InitLevel(int levelValue)
 				mobArray[i][j] = new Enemy(220, 0-(j*200), Random(1,3));
 		}
 	}
-	if (!levelSoundBuffer.loadFromFile("sound.wav"))
-		cout << "error loading sound buffer";
+
 	waveNum = 0;
 	bomb = new Bomb(1350.0f, 600.0f,0);
 }
@@ -101,7 +100,7 @@ void DrawLevel2D()
 
 	// Follow mouse is tower picked up
 	if(pickedUpTower){
-		createdTowers[currentTower]->setPos(towerX,towerY);
+		createdTowers[currentTower]->setPos(mouseX, mouseY);
 	}
 
 	// draw towers
@@ -151,7 +150,7 @@ void DrawLevel2D()
 		//bomb handling 
 	if(pickedUpBomb)
 	{
-		bomb->setPos(towerX, towerY);
+		bomb->setPos(mouseX, mouseY);
 		bomb->DrawBomb();
 	}
 	else if(bomb->timerStarted)
@@ -333,8 +332,8 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 			if(pickedUpTower && createdTowers[currentTower]->checkPlacement(currentLevel)){
 					pickedUpTower = false;
 					createdTowers[currentTower]->placedYet = true;
-					towerX = 1350;
-					towerY = 240;
+					mouseX = 1350;
+					mouseY = 240;
 					currentTower++;
 			}
 
@@ -427,8 +426,8 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 void MouseMotion(int x, int y)
 {
 	if (pickedUpTower || pickedUpBomb) {
-		towerX = x;
-		towerY = y;
+		mouseX = x;
+		mouseY = y;
 	}
 
 }

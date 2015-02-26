@@ -9,10 +9,8 @@
 #include <vector>
 using namespace std;
 sf::RenderWindow window(sf::VideoMode(1280, 720), "Space Tower Defence", sf::Style::Close);
-float towerX = 1280.0f;
-float towerY = 170.0f;
 int screen = 0;
-//
+
 sf::Texture exitButtonLSTexture;
 sf::Texture levelSelectBackgroundTexture;
 sf::Texture levelsTextures[13];
