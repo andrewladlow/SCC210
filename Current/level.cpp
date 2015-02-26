@@ -306,6 +306,54 @@ void DrawLevel2D()
 		waveActiveText.setColor(sf::Color::Black);;
 	window.draw(waveActiveText);
 
+	//Not enough gold text
+	if(!pickedUpBomb && !pickedUpTower)
+	{
+		if((mouseX < 1410 && mouseX > 1280) && (mouseY < 310 && mouseY > 170) && currencyAmount < 50)
+		{
+			sf::Text alertText("Not enough gold!", font, 20);
+			alertText.setPosition(mouseX, mouseY + 20);
+			alertText.setStyle(sf::Text::Bold);
+			alertText.setColor(sf::Color::Red);
+			window.draw(alertText);
+		}
+		// Long range Tower button
+		else if((mouseX < 1555 && mouseX > 1430) && (mouseY < 310 && mouseY > 170) && currencyAmount < 100){
+			sf::Text alertText("Not enough gold!", font, 20);
+			alertText.setPosition(mouseX - 200, mouseY + 20);
+			alertText.setStyle(sf::Text::Bold);
+			alertText.setColor(sf::Color::Red);
+			window.draw(alertText);
+		}
+
+		// Slowing Tower button
+		else if((mouseX < 1680 && mouseX > 1556) && (mouseY < 310 && mouseY > 170) && currencyAmount < 150){
+			sf::Text alertText("Not enough gold!", font, 20);
+			alertText.setPosition(mouseX - 300, mouseY + 20);
+			alertText.setStyle(sf::Text::Bold);
+			alertText.setColor(sf::Color::Red);
+			window.draw(alertText);
+		}
+
+		// Bomb button
+		else if((mouseX < 1410 && mouseX > 1280) && (mouseY < 720 && mouseY > 550) && currencyAmount < 100){
+			sf::Text alertText("Not enough gold!", font, 20);
+			alertText.setPosition(mouseX, mouseY + 20);
+			alertText.setStyle(sf::Text::Bold);
+			alertText.setColor(sf::Color::Red);
+			window.draw(alertText);
+		}
+
+		else // Slowing Bomb button
+		if((mouseX < 1555 && mouseX > 1430) && (mouseY < 720 && mouseY > 550) && currencyAmount < 100){
+			sf::Text alertText("Not enough gold!", font, 20);
+			alertText.setPosition(mouseX - 200, mouseY + 20);
+			alertText.setStyle(sf::Text::Bold);
+			alertText.setColor(sf::Color::Red);
+			window.draw(alertText);
+		}
+	}
+
 
 
 
@@ -425,11 +473,8 @@ void LevelOnMouseClick(int button, int type, int x, int y){
 
 void MouseMotion(int x, int y)
 {
-	if (pickedUpTower || pickedUpBomb) {
 		mouseX = x;
 		mouseY = y;
-	}
-
 }
 
 int Random(int min, int max)
